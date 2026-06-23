@@ -2,6 +2,7 @@ import { SplineSceneBasic } from '@/components/demo'
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card'
 import { Github, ExternalLink, Code2, Smartphone, Monitor, Database } from 'lucide-react'
 import { InteractiveBg } from '@/components/ui/interactive-bg'
+import { InteractiveFolder } from '@/components/ui/folder'
 
 const projects = [
   {
@@ -58,36 +59,108 @@ function App() {
           
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             <Card className="bg-zinc-950/30 backdrop-blur-md border-zinc-800/40 hover:border-blue-500/50 hover:bg-zinc-950/50 transition-all duration-300">
-              <CardHeader className="items-center text-center pb-2">
-                <Monitor className="w-8 h-8 text-blue-400 mb-2" />
-                <CardTitle className="text-lg">Frontend</CardTitle>
+              <CardHeader className="items-center text-center pb-2 pt-6">
+                <InteractiveFolder 
+                  size={0.9} 
+                  color="#3b82f6" 
+                  label="FRONTEND"
+                  items={[
+                    <div key="react" className="flex flex-col items-center justify-center text-blue-400 p-1">
+                      <Code2 className="w-5 h-5 mb-0.5" />
+                      <span className="text-[8px] font-bold text-zinc-600 dark:text-zinc-400">React</span>
+                    </div>,
+                    <div key="tailwind" className="flex flex-col items-center justify-center text-cyan-400 p-1">
+                      <Monitor className="w-5 h-5 mb-0.5" />
+                      <span className="text-[8px] font-bold text-zinc-600 dark:text-zinc-400">Tailwind</span>
+                    </div>,
+                    <div key="nextjs" className="flex flex-col items-center justify-center text-zinc-800 dark:text-zinc-200 p-1">
+                      <ExternalLink className="w-5 h-5 mb-0.5" />
+                      <span className="text-[8px] font-bold text-zinc-600 dark:text-zinc-400">Next.js</span>
+                    </div>
+                  ]}
+                />
+                <CardTitle className="text-lg mt-3">Frontend</CardTitle>
               </CardHeader>
               <CardContent className="text-center text-sm text-zinc-400">
                 React, Tailwind CSS, Next.js, Framer Motion
               </CardContent>
             </Card>
             <Card className="bg-zinc-950/30 backdrop-blur-md border-zinc-800/40 hover:border-emerald-500/50 hover:bg-zinc-950/50 transition-all duration-300">
-              <CardHeader className="items-center text-center pb-2">
-                <Database className="w-8 h-8 text-emerald-400 mb-2" />
-                <CardTitle className="text-lg">Backend</CardTitle>
+              <CardHeader className="items-center text-center pb-2 pt-6">
+                <InteractiveFolder 
+                  size={0.9} 
+                  color="#10b981" 
+                  label="BACKEND"
+                  items={[
+                    <div key="nodejs" className="flex flex-col items-center justify-center text-emerald-400 p-1">
+                      <Code2 className="w-5 h-5 mb-0.5" />
+                      <span className="text-[8px] font-bold text-zinc-600 dark:text-zinc-400">Node.js</span>
+                    </div>,
+                    <div key="express" className="flex flex-col items-center justify-center text-zinc-400 p-1">
+                      <Database className="w-5 h-5 mb-0.5" />
+                      <span className="text-[8px] font-bold text-zinc-600 dark:text-zinc-400">Express</span>
+                    </div>,
+                    <div key="mongodb" className="flex flex-col items-center justify-center text-green-500 p-1">
+                      <Database className="w-5 h-5 mb-0.5" />
+                      <span className="text-[8px] font-bold text-zinc-600 dark:text-zinc-400">MongoDB</span>
+                    </div>
+                  ]}
+                />
+                <CardTitle className="text-lg mt-3">Backend</CardTitle>
               </CardHeader>
               <CardContent className="text-center text-sm text-zinc-400">
                 Node.js, Express, MongoDB, AWS
               </CardContent>
             </Card>
             <Card className="bg-zinc-950/30 backdrop-blur-md border-zinc-800/40 hover:border-purple-500/50 hover:bg-zinc-950/50 transition-all duration-300">
-              <CardHeader className="items-center text-center pb-2">
-                <Smartphone className="w-8 h-8 text-purple-400 mb-2" />
-                <CardTitle className="text-lg">Mobile</CardTitle>
+              <CardHeader className="items-center text-center pb-2 pt-6">
+                <InteractiveFolder 
+                  size={0.9} 
+                  color="#8b5cf6" 
+                  label="MOBILE"
+                  items={[
+                    <div key="rn" className="flex flex-col items-center justify-center text-purple-400 p-1">
+                      <Smartphone className="w-5 h-5 mb-0.5" />
+                      <span className="text-[8px] font-bold text-zinc-600 dark:text-zinc-400">R-Native</span>
+                    </div>,
+                    <div key="flutter" className="flex flex-col items-center justify-center text-sky-400 p-1">
+                      <Smartphone className="w-5 h-5 mb-0.5" />
+                      <span className="text-[8px] font-bold text-zinc-600 dark:text-zinc-400">Flutter</span>
+                    </div>,
+                    <div key="firebase" className="flex flex-col items-center justify-center text-amber-500 p-1">
+                      <Database className="w-5 h-5 mb-0.5" />
+                      <span className="text-[8px] font-bold text-zinc-600 dark:text-zinc-400">Firebase</span>
+                    </div>
+                  ]}
+                />
+                <CardTitle className="text-lg mt-3">Mobile</CardTitle>
               </CardHeader>
               <CardContent className="text-center text-sm text-zinc-400">
                 React Native, Flutter, Firebase
               </CardContent>
             </Card>
             <Card className="bg-zinc-950/30 backdrop-blur-md border-zinc-800/40 hover:border-amber-500/50 hover:bg-zinc-950/50 transition-all duration-300">
-              <CardHeader className="items-center text-center pb-2">
-                <Code2 className="w-8 h-8 text-amber-400 mb-2" />
-                <CardTitle className="text-lg">Languages</CardTitle>
+              <CardHeader className="items-center text-center pb-2 pt-6">
+                <InteractiveFolder 
+                  size={0.9} 
+                  color="#f59e0b" 
+                  label="LANGS"
+                  items={[
+                    <div key="ts" className="flex flex-col items-center justify-center text-blue-400 p-1">
+                      <Code2 className="w-5 h-5 mb-0.5" />
+                      <span className="text-[8px] font-bold text-zinc-600 dark:text-zinc-400">TS</span>
+                    </div>,
+                    <div key="js" className="flex flex-col items-center justify-center text-yellow-400 p-1">
+                      <Code2 className="w-5 h-5 mb-0.5" />
+                      <span className="text-[8px] font-bold text-zinc-600 dark:text-zinc-400">JS</span>
+                    </div>,
+                    <div key="htmlcss" className="flex flex-col items-center justify-center text-orange-500 p-1">
+                      <Code2 className="w-5 h-5 mb-0.5" />
+                      <span className="text-[8px] font-bold text-zinc-600 dark:text-zinc-400">HTML/CSS</span>
+                    </div>
+                  ]}
+                />
+                <CardTitle className="text-lg mt-3">Languages</CardTitle>
               </CardHeader>
               <CardContent className="text-center text-sm text-zinc-400">
                 TypeScript, JavaScript, HTML, CSS
