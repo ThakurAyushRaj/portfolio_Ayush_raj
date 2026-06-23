@@ -1,8 +1,7 @@
-import React from 'react'
 import { SplineSceneBasic } from '@/components/demo'
-import { LampDemo } from '@/components/ui/lamp'
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card'
 import { Github, ExternalLink, Code2, Smartphone, Monitor, Database } from 'lucide-react'
+import { InteractiveBg } from '@/components/ui/interactive-bg'
 
 const projects = [
   {
@@ -37,8 +36,9 @@ const projects = [
 
 function App() {
   return (
-    <div className="min-h-screen bg-black text-zinc-50 font-sans selection:bg-blue-500/30">
-      <main className="container mx-auto px-4 py-8 md:py-16 max-w-6xl space-y-24">
+    <div className="min-h-screen bg-gradient-to-b from-neutral-950 via-black to-neutral-950 text-zinc-50 font-sans selection:bg-blue-500/30 relative overflow-x-hidden">
+      <InteractiveBg />
+      <main className="container mx-auto px-4 py-8 md:py-16 max-w-6xl space-y-24 relative z-10">
         
         {/* Spline 3D Scene Section */}
         <section>
@@ -57,7 +57,7 @@ function App() {
           </div>
           
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-            <Card className="bg-zinc-950/50 border-zinc-800/50 hover:border-blue-500/50 transition-colors">
+            <Card className="bg-zinc-950/30 backdrop-blur-md border-zinc-800/40 hover:border-blue-500/50 hover:bg-zinc-950/50 transition-all duration-300">
               <CardHeader className="items-center text-center pb-2">
                 <Monitor className="w-8 h-8 text-blue-400 mb-2" />
                 <CardTitle className="text-lg">Frontend</CardTitle>
@@ -66,7 +66,7 @@ function App() {
                 React, Tailwind CSS, Next.js, Framer Motion
               </CardContent>
             </Card>
-            <Card className="bg-zinc-950/50 border-zinc-800/50 hover:border-emerald-500/50 transition-colors">
+            <Card className="bg-zinc-950/30 backdrop-blur-md border-zinc-800/40 hover:border-emerald-500/50 hover:bg-zinc-950/50 transition-all duration-300">
               <CardHeader className="items-center text-center pb-2">
                 <Database className="w-8 h-8 text-emerald-400 mb-2" />
                 <CardTitle className="text-lg">Backend</CardTitle>
@@ -75,7 +75,7 @@ function App() {
                 Node.js, Express, MongoDB, AWS
               </CardContent>
             </Card>
-            <Card className="bg-zinc-950/50 border-zinc-800/50 hover:border-purple-500/50 transition-colors">
+            <Card className="bg-zinc-950/30 backdrop-blur-md border-zinc-800/40 hover:border-purple-500/50 hover:bg-zinc-950/50 transition-all duration-300">
               <CardHeader className="items-center text-center pb-2">
                 <Smartphone className="w-8 h-8 text-purple-400 mb-2" />
                 <CardTitle className="text-lg">Mobile</CardTitle>
@@ -84,7 +84,7 @@ function App() {
                 React Native, Flutter, Firebase
               </CardContent>
             </Card>
-            <Card className="bg-zinc-950/50 border-zinc-800/50 hover:border-amber-500/50 transition-colors">
+            <Card className="bg-zinc-950/30 backdrop-blur-md border-zinc-800/40 hover:border-amber-500/50 hover:bg-zinc-950/50 transition-all duration-300">
               <CardHeader className="items-center text-center pb-2">
                 <Code2 className="w-8 h-8 text-amber-400 mb-2" />
                 <CardTitle className="text-lg">Languages</CardTitle>
@@ -118,7 +118,7 @@ function App() {
 
           <div className="grid md:grid-cols-2 gap-6">
             {projects.map((project, idx) => (
-              <Card key={idx} className="bg-zinc-950/80 border-zinc-800/80 overflow-hidden flex flex-col group hover:border-zinc-700 transition-colors">
+              <Card key={idx} className="bg-zinc-950/30 backdrop-blur-md border-zinc-800/40 overflow-hidden flex flex-col group hover:border-zinc-700/60 hover:bg-zinc-950/50 transition-all duration-300">
                 <div className="relative h-48 overflow-hidden">
                   <img 
                     src={project.image} 
