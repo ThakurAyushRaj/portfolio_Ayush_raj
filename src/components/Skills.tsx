@@ -1,0 +1,325 @@
+import React, { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Code2, Server, Database, Smartphone, Cloud, Wrench, Sparkles, CheckCircle2, Terminal, RotateCw } from 'lucide-react';
+import { GlassIcons, GlassIconsItem } from '@/components/ui/glass-icons';
+
+interface SkillCategory {
+  title: string;
+  category: 'Frontend' | 'Backend' | 'Database' | 'Mobile' | 'Cloud & DevOps' | 'Tools & Methods';
+  icon: React.ReactNode;
+  topBorderClass: string;
+  badgeBg: string;
+  description: string;
+  skills: { name: string; level: string; highlight?: boolean }[];
+}
+
+export const Skills: React.FC = () => {
+  const [selectedCategory, setSelectedCategory] = useState<string>('All');
+  const [flippedCardTitle, setFlippedCardTitle] = useState<string | null>(null);
+
+  const glassItems: GlassIconsItem[] = [
+    {
+      icon: <Code2 className="w-6 h-6 text-white" />,
+      color: 'blue',
+      label: 'Frontend',
+      onClick: () => setSelectedCategory('Frontend')
+    },
+    {
+      icon: <Server className="w-6 h-6 text-white" />,
+      color: 'green',
+      label: 'Backend',
+      onClick: () => setSelectedCategory('Backend')
+    },
+    {
+      icon: <Database className="w-6 h-6 text-white" />,
+      color: 'orange',
+      label: 'Databases',
+      onClick: () => setSelectedCategory('Database')
+    },
+    {
+      icon: <Smartphone className="w-6 h-6 text-white" />,
+      color: 'purple',
+      label: 'Mobile Apps',
+      onClick: () => setSelectedCategory('Mobile')
+    },
+    {
+      icon: <Cloud className="w-6 h-6 text-white" />,
+      color: 'indigo',
+      label: 'Cloud',
+      onClick: () => setSelectedCategory('Cloud & DevOps')
+    },
+    {
+      icon: <Terminal className="w-6 h-6 text-white" />,
+      color: 'red',
+      label: 'Engineering',
+      onClick: () => setSelectedCategory('Tools & Methods')
+    }
+  ];
+
+  const categories: SkillCategory[] = [
+    {
+      title: 'Frontend Engineering',
+      category: 'Frontend',
+      icon: <Code2 className="w-6 h-6 text-blue-400" />,
+      topBorderClass: 'border-t-2 border-t-blue-500',
+      badgeBg: 'bg-blue-500/10 text-blue-400 border-blue-500/20',
+      description: 'Building responsive, accessible, and high-performance user interfaces with modern React ecosystem.',
+      skills: [
+        { name: 'React.js', level: 'Advanced', highlight: true },
+        { name: 'TypeScript', level: 'Advanced', highlight: true },
+        { name: 'Tailwind CSS', level: 'Advanced', highlight: true },
+        { name: 'Next.js', level: 'Proficient' },
+        { name: 'Framer Motion', level: 'Proficient' },
+        { name: 'HTML5 & CSS3', level: 'Advanced' },
+        { name: 'State Management (Redux/Zustand)', level: 'Proficient' }
+      ]
+    },
+    {
+      title: 'Backend & APIs',
+      category: 'Backend',
+      icon: <Server className="w-6 h-6 text-emerald-400" />,
+      topBorderClass: 'border-t-2 border-t-emerald-500',
+      badgeBg: 'bg-emerald-500/10 text-emerald-400 border-emerald-500/20',
+      description: 'Designing scalable microservices, RESTful APIs, auth pipelines, and third-party integrations.',
+      skills: [
+        { name: 'Node.js', level: 'Advanced', highlight: true },
+        { name: 'Express.js', level: 'Advanced', highlight: true },
+        { name: 'RESTful API Design', level: 'Advanced', highlight: true },
+        { name: 'Slack API Webhooks', level: 'Advanced' },
+        { name: 'Authentication (JWT/OAuth 2.0)', level: 'Proficient' },
+        { name: 'Microservices Architecture', level: 'Intermediate' }
+      ]
+    },
+    {
+      title: 'Databases & Storage',
+      category: 'Database',
+      icon: <Database className="w-6 h-6 text-amber-400" />,
+      topBorderClass: 'border-t-2 border-t-amber-500',
+      badgeBg: 'bg-amber-500/10 text-amber-400 border-amber-500/20',
+      description: 'Schema modeling, indexing, query optimization, and data persistence for enterprise apps.',
+      skills: [
+        { name: 'MongoDB', level: 'Advanced', highlight: true },
+        { name: 'Mongoose ODM', level: 'Advanced', highlight: true },
+        { name: 'PostgreSQL', level: 'Proficient' },
+        { name: 'Redis Caching', level: 'Intermediate' },
+        { name: 'Database Schema Design', level: 'Advanced' }
+      ]
+    },
+    {
+      title: 'Mobile Engineering',
+      category: 'Mobile',
+      icon: <Smartphone className="w-6 h-6 text-purple-400" />,
+      topBorderClass: 'border-t-2 border-t-purple-500',
+      badgeBg: 'bg-purple-500/10 text-purple-400 border-purple-500/20',
+      description: 'Cross-platform mobile application development for iOS and Android with push notification delivery.',
+      skills: [
+        { name: 'React Native', level: 'Advanced', highlight: true },
+        { name: 'Firebase Auth & Store', level: 'Advanced', highlight: true },
+        { name: 'FCM Push Notifications', level: 'Advanced', highlight: true },
+        { name: 'Flutter', level: 'Proficient' },
+        { name: 'Expo SDK', level: 'Advanced' }
+      ]
+    },
+    {
+      title: 'Cloud & DevOps',
+      category: 'Cloud & DevOps',
+      icon: <Cloud className="w-6 h-6 text-cyan-400" />,
+      topBorderClass: 'border-t-2 border-t-cyan-500',
+      badgeBg: 'bg-cyan-500/10 text-cyan-400 border-cyan-500/20',
+      description: 'Cloud deployment, containerization, hosting environments, and continuous delivery.',
+      skills: [
+        { name: 'AWS (S3 / EC2)', level: 'Proficient' },
+        { name: 'Git & GitHub Workflows', level: 'Advanced', highlight: true },
+        { name: 'Vercel / Netlify Deploy', level: 'Advanced' },
+        { name: 'Docker Containers', level: 'Intermediate' },
+        { name: 'CI/CD Pipelines', level: 'Intermediate' }
+      ]
+    },
+    {
+      title: 'Tools & Workflows',
+      category: 'Tools & Methods',
+      icon: <Wrench className="w-6 h-6 text-rose-400" />,
+      topBorderClass: 'border-t-2 border-t-rose-500',
+      badgeBg: 'bg-rose-500/10 text-rose-400 border-rose-500/20',
+      description: 'Software engineering practices, API testing, design collaboration, and debugging tools.',
+      skills: [
+        { name: 'Postman API Suite', level: 'Advanced', highlight: true },
+        { name: 'VS Code & Debugging', level: 'Advanced' },
+        { name: 'Linux Command Line', level: 'Proficient' },
+        { name: 'Figma UI Handoff', level: 'Proficient' },
+        { name: 'Agile & Scrum', level: 'Advanced' }
+      ]
+    }
+  ];
+
+  const filterTabs = ['All', 'Frontend', 'Backend', 'Database', 'Mobile', 'Cloud & DevOps', 'Tools & Methods'];
+
+  const filteredCategories = selectedCategory === 'All'
+    ? categories
+    : categories.filter(c => c.category === selectedCategory);
+
+  const toggleFlip = (title: string) => {
+    setFlippedCardTitle(prev => (prev === title ? null : title));
+  };
+
+  return (
+    <section id="skills" className="py-24 border-t border-zinc-900/80 relative">
+      {/* Background radial highlight */}
+      <div className="absolute top-1/3 left-0 w-[400px] h-[250px] bg-emerald-600/10 blur-[120px] rounded-full pointer-events-none -z-10" />
+
+      <div className="space-y-12">
+        {/* Header */}
+        <div className="space-y-4">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-amber-500/10 border border-amber-500/20 text-xs font-mono text-amber-400 backdrop-blur-md">
+            <Sparkles className="w-4 h-4 text-amber-400" />
+            <span>Technical Stack Architecture</span>
+          </div>
+          <h2 className="text-4xl sm:text-5xl font-display font-extrabold text-white tracking-tight">
+            Tech Stack & <span className="text-gradient-emerald">Capabilities</span>
+          </h2>
+          <p className="text-zinc-300 max-w-2xl text-base leading-relaxed">
+            Click any 3D glass icon below or select a category tab to dynamically filter technical skills. Hover or tap cards to flip them.
+          </p>
+        </div>
+
+        {/* React Bits GlassIcons Interactive Hub */}
+        <div className="p-6 sm:p-8 rounded-2xl glass-panel border border-zinc-800/80 shadow-2xl relative overflow-visible">
+          <div className="flex items-center justify-between px-2 mb-2">
+            <span className="text-xs font-mono font-semibold text-zinc-400 uppercase tracking-wider">
+              Interactive 3D Glass Stack Hub
+            </span>
+            <span className="text-[10px] font-mono text-blue-400 bg-blue-500/10 px-2 py-0.5 rounded border border-blue-500/20">
+              Click icon to filter
+            </span>
+          </div>
+          <GlassIcons items={glassItems} className="my-2" />
+        </div>
+
+        {/* Filter Category Pills */}
+        <div className="flex flex-wrap gap-2.5 pt-2">
+          {filterTabs.map((tab) => (
+            <button
+              key={tab}
+              onClick={() => setSelectedCategory(tab)}
+              className={`px-4 py-2.5 rounded-xl text-xs font-mono transition-all min-h-[40px] ${
+                selectedCategory === tab
+                  ? 'bg-blue-600 text-white font-semibold shadow-lg shadow-blue-600/25 border border-blue-500'
+                  : 'bg-zinc-900/80 hover:bg-zinc-800 text-zinc-400 hover:text-zinc-200 border border-zinc-800/80'
+              }`}
+            >
+              {tab}
+            </button>
+          ))}
+        </div>
+
+        {/* Uiverse.io Flip Cards Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <AnimatePresence mode="sync">
+            {filteredCategories.map((cat, idx) => {
+              const isFlipped = flippedCardTitle === cat.title;
+
+              return (
+                <motion.div
+                  key={cat.title}
+                  initial={{ opacity: 0, y: 18 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -10 }}
+                  transition={{ duration: 0.35, delay: idx * 0.05, ease: [0.25, 1, 0.5, 1] }}
+                >
+                  <div
+                    className={`flip-card ${isFlipped ? 'flipped' : ''}`}
+                    onClick={() => toggleFlip(cat.title)}
+                  >
+                    <div className="flip-card-inner">
+                      {/* FRONT OF THE CARD - ONLY HEADING & SUB-HEADING (DARK GLASS THEME) */}
+                      <div className={`flip-card-front flex flex-col justify-between ${cat.topBorderClass}`}>
+                        <div className="space-y-4">
+                          <div className="flex items-center justify-between">
+                            <div className="p-3 rounded-2xl bg-zinc-950 border border-zinc-800/80 shadow-md">
+                              {cat.icon}
+                            </div>
+                            <span className={`text-[10px] font-mono font-semibold px-2.5 py-1 rounded-full border ${cat.badgeBg}`}>
+                              {cat.category}
+                            </span>
+                          </div>
+
+                          {/* HEADING */}
+                          <h3 className="title text-left text-white font-display pt-2 text-xl font-bold tracking-tight">
+                            {cat.title}
+                          </h3>
+
+                          {/* SUB-HEADING / DESCRIPTION */}
+                          <p className="text-xs text-zinc-300 leading-relaxed pt-1">
+                            {cat.description}
+                          </p>
+                        </div>
+
+                        {/* CARD FRONT FOOTER HINT */}
+                        <div className="pt-4 border-t border-zinc-800/80 flex items-center justify-between text-xs font-mono text-zinc-400">
+                          <span className="flex items-center gap-1.5 text-blue-400 font-medium">
+                            <RotateCw className="w-3.5 h-3.5 animate-spin-slow text-blue-400" />
+                            Hover for Tech Stack
+                          </span>
+                          <span className="text-[10px] text-zinc-500 font-mono">3D Flip ➔</span>
+                        </div>
+                      </div>
+
+                      {/* BACK OF THE CARD - DETAILED TECH STACK (DARK GLASS THEME) */}
+                      <div className={`flip-card-back ${cat.topBorderClass}`}>
+                        <div className="space-y-3 flex-1 flex flex-col justify-between overflow-hidden">
+                          <div>
+                            <div className="flex items-center justify-between mb-3 border-b border-zinc-800/80 pb-2.5">
+                              <div className="flex items-center gap-2.5">
+                                <div className="p-2 rounded-xl bg-zinc-950 border border-zinc-800 shadow-sm">
+                                  {cat.icon}
+                                </div>
+                                <h3 className="text-sm font-bold text-white font-display">
+                                  {cat.title}
+                                </h3>
+                              </div>
+                              <span className={`text-[9px] font-mono px-2 py-0.5 rounded border ${cat.badgeBg}`}>
+                                {cat.skills.length} Tools
+                              </span>
+                            </div>
+
+                            {/* DETAILED TECH STACK LIST - EXACT SAME STYLE FOR ALL ITEMS */}
+                            <div className="space-y-2 max-h-[250px] overflow-y-auto pr-1">
+                              {cat.skills.map((skill) => (
+                                <div
+                                  key={skill.name}
+                                  className="flex items-center justify-between p-2.5 rounded-xl border border-blue-500/60 bg-zinc-950 text-white font-semibold text-[11px] font-mono transition-all shadow-sm hover:border-blue-400"
+                                >
+                                  <div className="flex items-center gap-2.5">
+                                    <CheckCircle2 className="w-3.5 h-3.5 text-blue-400 shrink-0" />
+                                    <span>{skill.name}</span>
+                                  </div>
+                                  <span className="text-[9px] text-zinc-300 bg-zinc-900 px-2.5 py-0.5 rounded-md border border-zinc-700 font-sans font-medium">
+                                    {skill.level}
+                                  </span>
+                                </div>
+                              ))}
+                            </div>
+                          </div>
+
+                          {/* CARD BACK FOOTER */}
+                          <div className="pt-2 border-t border-zinc-800/80 flex items-center justify-between text-xs font-mono text-zinc-400">
+                            <span className="flex items-center gap-1.5 text-emerald-400 font-medium">
+                              <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400" />
+                              Tech Stack Revealed
+                            </span>
+                            <span className="text-[10px] text-zinc-500 font-mono">Flip Back ↩</span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </motion.div>
+              );
+            })}
+          </AnimatePresence>
+        </div>
+      </div>
+    </section>
+  );
+};
+

@@ -1,260 +1,80 @@
-import { SplineSceneBasic } from '@/components/demo'
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card'
-import { Github, ExternalLink, Code2, Smartphone, Monitor, Database } from 'lucide-react'
-import { InteractiveBg } from '@/components/ui/interactive-bg'
-import { InteractiveFolder } from '@/components/ui/folder'
-
-const projects = [
-  {
-    title: "ERP Website",
-    description: "Enterprise Resource Planning system bringing together Finance, HR, Inventory Control, and Sales Operations into a unified platform.",
-    image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&q=80",
-    tags: ["TypeScript", "MERN", "Dashboard"],
-    link: "https://github.com/ThakurAyushRaj/ERP-Website"
-  },
-  {
-    title: "Slack Attendance Bot",
-    description: "A Node.js and Express powered bot for entry/exit tracking, working hours calculation, and Google Sheets integration.",
-    image: "https://images.unsplash.com/photo-1611162617474-5b21e879e113?w=800&q=80",
-    tags: ["Node.js", "Express", "Slack API"],
-    link: "https://github.com/ThakurAyushRaj/SLACK-ATTENDANCE"
-  },
-  {
-    title: "Attendance Tracker App",
-    description: "React Native app with Google Auth, FCM Notifications, Admin Dashboard, and push alerts.",
-    image: "https://images.unsplash.com/photo-1512428559087-560fa5ceab42?w=800&q=80",
-    tags: ["React Native", "Firebase", "TypeScript"],
-    link: "https://github.com/ThakurAyushRaj/Google-Auth_FCM-Notification_Admin-Pannel_Attendence-Tracker_App-React-Native-"
-  },
-  {
-    title: "Blog Website",
-    description: "Modern animated blog built with React, TypeScript, Tailwind CSS, and Framer Motion.",
-    image: "https://images.unsplash.com/photo-1499750310107-5fef28a66643?w=800&q=80",
-    tags: ["React", "Tailwind", "Framer Motion"],
-    link: "https://github.com/ThakurAyushRaj/Blog-Website"
-  }
-]
+import { useState, useEffect } from 'react';
+import { Navbar } from '@/components/Navbar';
+import { Hero } from '@/components/Hero';
+import { Experience } from '@/components/Experience';
+import { Projects } from '@/components/Projects';
+import { Skills } from '@/components/Skills';
+import { Contact } from '@/components/Contact';
+import { Footer } from '@/components/Footer';
+import { CommandPalette } from '@/components/CommandPalette';
+import { StarfieldBg } from '@/components/ui/StarfieldBg';
 
 function App() {
+  const [commandPaletteOpen, setCommandPaletteOpen] = useState(false);
+  const [isDark, setIsDark] = useState<boolean>(() => {
+    const saved = localStorage.getItem('portfolio-theme');
+    return saved !== null ? saved === 'dark' : true;
+  });
+
+  // Sync theme class on <html> element
+  useEffect(() => {
+    if (isDark) {
+      document.documentElement.classList.add('dark');
+      document.documentElement.classList.remove('light');
+      localStorage.setItem('portfolio-theme', 'dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+      document.documentElement.classList.add('light');
+      localStorage.setItem('portfolio-theme', 'light');
+    }
+  }, [isDark]);
+
+  // Keyboard shortcut listener for Cmd+K / Ctrl+K
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
+        e.preventDefault();
+        setCommandPaletteOpen(prev => !prev);
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, []);
+
   return (
-    <div className="min-h-screen bg-gradient-to-b from-neutral-950 via-black to-neutral-950 text-zinc-50 font-sans selection:bg-blue-500/30 relative overflow-x-hidden">
-      <InteractiveBg />
-      <main className="container mx-auto px-4 py-8 md:py-16 max-w-6xl space-y-24 relative z-10">
-        
-        {/* Spline 3D Scene Section */}
-        <section>
-          <SplineSceneBasic />
-        </section>
+    <div className={`min-h-screen font-sans selection:bg-cyan-500/30 relative overflow-x-hidden transition-colors duration-500 ${
+      isDark ? 'bg-[#06070a] text-zinc-100' : 'bg-[#f4f6fc] text-slate-900 light'
+    }`}>
+      {/* Upgraded Cyber Cosmic & Nebula Background */}
+      <StarfieldBg />
 
-        {/* Skills Section */}
-        <section className="space-y-8">
-          <div className="text-center space-y-4">
-            <h2 className="text-3xl md:text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-emerald-400">
-              Tech Stack & Expertise
-            </h2>
-            <p className="text-zinc-400 max-w-2xl mx-auto">
-              I specialize in creating robust web and mobile applications using modern technologies.
-            </p>
-          </div>
-          
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-            <Card className="bg-zinc-950/30 backdrop-blur-md border-zinc-800/40 hover:border-blue-500/50 hover:bg-zinc-950/50 transition-all duration-300">
-              <CardHeader className="items-center text-center pb-2 pt-6">
-                <InteractiveFolder 
-                  size={0.9} 
-                  color="#3b82f6" 
-                  label="FRONTEND"
-                  items={[
-                    <div key="react" className="flex flex-col items-center justify-center text-blue-400 p-1">
-                      <Code2 className="w-5 h-5 mb-0.5" />
-                      <span className="text-[8px] font-bold text-zinc-600 dark:text-zinc-400">React</span>
-                    </div>,
-                    <div key="tailwind" className="flex flex-col items-center justify-center text-cyan-400 p-1">
-                      <Monitor className="w-5 h-5 mb-0.5" />
-                      <span className="text-[8px] font-bold text-zinc-600 dark:text-zinc-400">Tailwind</span>
-                    </div>,
-                    <div key="nextjs" className="flex flex-col items-center justify-center text-zinc-800 dark:text-zinc-200 p-1">
-                      <ExternalLink className="w-5 h-5 mb-0.5" />
-                      <span className="text-[8px] font-bold text-zinc-600 dark:text-zinc-400">Next.js</span>
-                    </div>
-                  ]}
-                />
-                <CardTitle className="text-lg mt-3">Frontend</CardTitle>
-              </CardHeader>
-              <CardContent className="text-center text-sm text-zinc-400">
-                React, Tailwind CSS, Next.js, Framer Motion
-              </CardContent>
-            </Card>
-            <Card className="bg-zinc-950/30 backdrop-blur-md border-zinc-800/40 hover:border-emerald-500/50 hover:bg-zinc-950/50 transition-all duration-300">
-              <CardHeader className="items-center text-center pb-2 pt-6">
-                <InteractiveFolder 
-                  size={0.9} 
-                  color="#10b981" 
-                  label="BACKEND"
-                  items={[
-                    <div key="nodejs" className="flex flex-col items-center justify-center text-emerald-400 p-1">
-                      <Code2 className="w-5 h-5 mb-0.5" />
-                      <span className="text-[8px] font-bold text-zinc-600 dark:text-zinc-400">Node.js</span>
-                    </div>,
-                    <div key="express" className="flex flex-col items-center justify-center text-zinc-400 p-1">
-                      <Database className="w-5 h-5 mb-0.5" />
-                      <span className="text-[8px] font-bold text-zinc-600 dark:text-zinc-400">Express</span>
-                    </div>,
-                    <div key="mongodb" className="flex flex-col items-center justify-center text-green-500 p-1">
-                      <Database className="w-5 h-5 mb-0.5" />
-                      <span className="text-[8px] font-bold text-zinc-600 dark:text-zinc-400">MongoDB</span>
-                    </div>
-                  ]}
-                />
-                <CardTitle className="text-lg mt-3">Backend</CardTitle>
-              </CardHeader>
-              <CardContent className="text-center text-sm text-zinc-400">
-                Node.js, Express, MongoDB, AWS
-              </CardContent>
-            </Card>
-            <Card className="bg-zinc-950/30 backdrop-blur-md border-zinc-800/40 hover:border-purple-500/50 hover:bg-zinc-950/50 transition-all duration-300">
-              <CardHeader className="items-center text-center pb-2 pt-6">
-                <InteractiveFolder 
-                  size={0.9} 
-                  color="#8b5cf6" 
-                  label="MOBILE"
-                  items={[
-                    <div key="rn" className="flex flex-col items-center justify-center text-purple-400 p-1">
-                      <Smartphone className="w-5 h-5 mb-0.5" />
-                      <span className="text-[8px] font-bold text-zinc-600 dark:text-zinc-400">R-Native</span>
-                    </div>,
-                    <div key="flutter" className="flex flex-col items-center justify-center text-sky-400 p-1">
-                      <Smartphone className="w-5 h-5 mb-0.5" />
-                      <span className="text-[8px] font-bold text-zinc-600 dark:text-zinc-400">Flutter</span>
-                    </div>,
-                    <div key="firebase" className="flex flex-col items-center justify-center text-amber-500 p-1">
-                      <Database className="w-5 h-5 mb-0.5" />
-                      <span className="text-[8px] font-bold text-zinc-600 dark:text-zinc-400">Firebase</span>
-                    </div>
-                  ]}
-                />
-                <CardTitle className="text-lg mt-3">Mobile</CardTitle>
-              </CardHeader>
-              <CardContent className="text-center text-sm text-zinc-400">
-                React Native, Flutter, Firebase
-              </CardContent>
-            </Card>
-            <Card className="bg-zinc-950/30 backdrop-blur-md border-zinc-800/40 hover:border-amber-500/50 hover:bg-zinc-950/50 transition-all duration-300">
-              <CardHeader className="items-center text-center pb-2 pt-6">
-                <InteractiveFolder 
-                  size={0.9} 
-                  color="#f59e0b" 
-                  label="LANGS"
-                  items={[
-                    <div key="ts" className="flex flex-col items-center justify-center text-blue-400 p-1">
-                      <Code2 className="w-5 h-5 mb-0.5" />
-                      <span className="text-[8px] font-bold text-zinc-600 dark:text-zinc-400">TS</span>
-                    </div>,
-                    <div key="js" className="flex flex-col items-center justify-center text-yellow-400 p-1">
-                      <Code2 className="w-5 h-5 mb-0.5" />
-                      <span className="text-[8px] font-bold text-zinc-600 dark:text-zinc-400">JS</span>
-                    </div>,
-                    <div key="htmlcss" className="flex flex-col items-center justify-center text-orange-500 p-1">
-                      <Code2 className="w-5 h-5 mb-0.5" />
-                      <span className="text-[8px] font-bold text-zinc-600 dark:text-zinc-400">HTML/CSS</span>
-                    </div>
-                  ]}
-                />
-                <CardTitle className="text-lg mt-3">Languages</CardTitle>
-              </CardHeader>
-              <CardContent className="text-center text-sm text-zinc-400">
-                TypeScript, JavaScript, HTML, CSS
-              </CardContent>
-            </Card>
-          </div>
-        </section>
+      {/* Global Navbar with BB-8 Theme Switcher */}
+      <Navbar
+        onOpenCommandPalette={() => setCommandPaletteOpen(true)}
+        isDark={isDark}
+        onToggleTheme={(val) => setIsDark(val)}
+      />
 
-        {/* Projects Section */}
-        <section className="space-y-8">
-          <div className="flex items-center justify-between">
-            <div>
-              <h2 className="text-3xl md:text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-emerald-400">
-                Featured Projects
-              </h2>
-              <p className="text-zinc-400 mt-2">Some of my recent open source work.</p>
-            </div>
-            <a 
-              href="https://github.com/ThakurAyushRaj" 
-              target="_blank" 
-              rel="noreferrer"
-              className="hidden md:flex items-center gap-2 px-4 py-2 rounded-full bg-zinc-900 hover:bg-zinc-800 transition-colors border border-zinc-800 text-sm font-medium"
-            >
-              <Github className="w-4 h-4" />
-              View all on GitHub
-            </a>
-          </div>
-
-          <div className="grid md:grid-cols-2 gap-6">
-            {projects.map((project, idx) => (
-              <Card key={idx} className="bg-zinc-950/30 backdrop-blur-md border-zinc-800/40 overflow-hidden flex flex-col group hover:border-zinc-700/60 hover:bg-zinc-950/50 transition-all duration-300">
-                <div className="relative h-48 overflow-hidden">
-                  <img 
-                    src={project.image} 
-                    alt={project.title} 
-                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-zinc-950 to-transparent" />
-                </div>
-                <CardHeader className="relative z-10 -mt-12">
-                  <CardTitle className="text-xl">{project.title}</CardTitle>
-                </CardHeader>
-                <CardContent className="flex-1">
-                  <CardDescription className="text-base text-zinc-400">
-                    {project.description}
-                  </CardDescription>
-                  <div className="flex flex-wrap gap-2 mt-4">
-                    {project.tags.map(tag => (
-                      <span key={tag} className="px-2 py-1 text-xs font-medium bg-blue-500/10 text-blue-400 rounded-md border border-blue-500/20">
-                        {tag}
-                      </span>
-                    ))}
-                  </div>
-                </CardContent>
-                <CardFooter className="pt-4 border-t border-zinc-800/50">
-                  <a 
-                    href={project.link}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="flex items-center gap-2 text-sm text-zinc-300 hover:text-white transition-colors"
-                  >
-                    <Github className="w-4 h-4" />
-                    Source Code
-                    <ExternalLink className="w-3 h-3 ml-1 opacity-50" />
-                  </a>
-                </CardFooter>
-              </Card>
-            ))}
-          </div>
-          
-          <div className="md:hidden flex justify-center pt-4">
-            <a 
-              href="https://github.com/ThakurAyushRaj" 
-              target="_blank" 
-              rel="noreferrer"
-              className="flex items-center gap-2 px-6 py-3 rounded-full bg-zinc-900 hover:bg-zinc-800 transition-colors border border-zinc-800 text-sm font-medium"
-            >
-              <Github className="w-5 h-5" />
-              View GitHub Profile
-            </a>
-          </div>
-        </section>
-
-        {/* Footer */}
-        <footer className="border-t border-zinc-900 pt-8 pb-4 text-center text-zinc-500 text-sm flex flex-col md:flex-row items-center justify-between">
-          <p>© {new Date().getFullYear()} Ayush Raj. All rights reserved.</p>
-          <div className="flex items-center gap-4 mt-4 md:mt-0">
-            <a href="https://github.com/ThakurAyushRaj" className="hover:text-white transition-colors"><Github className="w-5 h-5" /></a>
-          </div>
-        </footer>
-
+      {/* Main Page Layout Container */}
+      <main className="max-w-6xl mx-auto px-4 md:px-6 relative z-10 space-y-12">
+        <Hero />
+        <Experience />
+        <Projects />
+        <Skills />
+        <Contact />
       </main>
+
+      {/* Footer */}
+      <Footer />
+
+      {/* Global Command Palette Modal */}
+      <CommandPalette
+        isOpen={commandPaletteOpen}
+        onClose={() => setCommandPaletteOpen(false)}
+      />
     </div>
-  )
+  );
 }
 
-export default App
+export default App;
