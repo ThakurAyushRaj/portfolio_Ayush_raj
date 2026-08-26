@@ -161,13 +161,12 @@ export const Hero3DInteractiveMesh: React.FC = () => {
     window.addEventListener('touchmove', handleTouchMove, { passive: true });
     window.addEventListener('touchend', handleTouchEnd);
 
-    // 6. Animation Loop (Active only when visible in viewport)
-    let animId: number | null = null;
-    let isVisible = true;
+    // 6. Animation Loop
+    let animId: number;
     const clock = new THREE.Clock();
 
-    const renderFrame = () => {
-      if (!isVisible) return;
+    const animate = () => {
+      animId = requestAnimationFrame(animate);
       const elapsedTime = clock.getElapsedTime();
 
       const speedFactor = turboSpeed ? 0.015 : 0.004;
@@ -184,38 +183,9 @@ export const Hero3DInteractiveMesh: React.FC = () => {
       particleSystem.rotation.x = mouseY * 0.2;
 
       renderer.render(scene, camera);
-      animId = requestAnimationFrame(renderFrame);
     };
 
-    const startAnimation = () => {
-      if (!animId) {
-        animId = requestAnimationFrame(renderFrame);
-      }
-    };
-
-    const stopAnimation = () => {
-      if (animId) {
-        cancelAnimationFrame(animId);
-        animId = null;
-      }
-    };
-
-    // Intersection Observer to completely pause Three.js GPU cycles when user scrolls down
-    const observer = new IntersectionObserver(
-      (entries) => {
-        const entry = entries[0];
-        isVisible = entry.isIntersecting;
-        if (isVisible) {
-          clock.start();
-          startAnimation();
-        } else {
-          stopAnimation();
-        }
-      },
-      { threshold: 0.05 }
-    );
-
-    observer.observe(container);
+    animate();
 
     const handleResize = () => {
       if (!container) return;
@@ -229,8 +199,7 @@ export const Hero3DInteractiveMesh: React.FC = () => {
     window.addEventListener('resize', handleResize);
 
     return () => {
-      stopAnimation();
-      observer.disconnect();
+      cancelAnimationFrame(animId);
       domEl.removeEventListener('mousedown', handleMouseDown);
       window.removeEventListener('mousemove', handleMouseMove);
       window.removeEventListener('mouseup', handleMouseUp);

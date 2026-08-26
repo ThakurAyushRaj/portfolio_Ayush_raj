@@ -1115,6 +1115,7 @@ export const SplashCursor: React.FC<SplashCursorProps> = ({
     window.addEventListener('touchmove', handleTouchMove, { passive: true } as any);
     window.addEventListener('touchend', handleTouchEnd);
     window.addEventListener('resize', startAnimation);
+    window.addEventListener('scroll', startAnimation, { passive: true } as any);
 
     startAnimation();
 
@@ -1128,6 +1129,7 @@ export const SplashCursor: React.FC<SplashCursorProps> = ({
       window.removeEventListener('touchmove', handleTouchMove);
       window.removeEventListener('touchend', handleTouchEnd);
       window.removeEventListener('resize', startAnimation);
+      window.removeEventListener('scroll', startAnimation);
     };
   }, [
     SIM_RESOLUTION,
