@@ -41,6 +41,7 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({ isOpen, onClose 
     { id: 'nav-experience', title: 'Go to Experience', category: 'Navigation', icon: <Briefcase className="w-4 h-4 text-emerald-400" />, action: () => handleScrollTo('experience'), keywords: 'work sde internship job timeline' },
     { id: 'nav-projects', title: 'Go to Featured Projects', category: 'Navigation', icon: <Code2 className="w-4 h-4 text-indigo-400" />, action: () => handleScrollTo('projects'), keywords: 'case studies work apps repository' },
     { id: 'nav-skills', title: 'Go to Tech Stack & Skills', category: 'Navigation', icon: <Sparkles className="w-4 h-4 text-amber-400" />, action: () => handleScrollTo('skills'), keywords: 'react node typescript mern stack tools' },
+    { id: 'nav-education', title: 'Go to Education & Degrees', category: 'Navigation', icon: <FileText className="w-4 h-4 text-purple-400" />, action: () => handleScrollTo('education'), keywords: 'btech college iimt bseb cbse degree academic' },
     { id: 'nav-contact', title: 'Go to Contact', category: 'Navigation', icon: <Mail className="w-4 h-4 text-cyan-400" />, action: () => handleScrollTo('contact'), keywords: 'email message hire touch connect' },
 
     // Projects

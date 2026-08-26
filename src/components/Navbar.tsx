@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Command, Menu, X, FileText, Code2, Briefcase, Sparkles, Mail, Download, Search } from 'lucide-react';
+import { Command, Menu, X, FileText, Code2, Briefcase, Sparkles, Mail, Download, Search, GraduationCap } from 'lucide-react';
 import { ClawToggle } from '@/components/ui/ClawToggle';
 
 interface NavbarProps {
@@ -15,7 +15,7 @@ export const Navbar: React.FC<NavbarProps> = ({
 }) => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [activeSection, setActiveSection] = useState<'hero' | 'experience' | 'projects' | 'skills' | 'contact'>('hero');
+  const [activeSection, setActiveSection] = useState<'hero' | 'experience' | 'projects' | 'skills' | 'education' | 'contact'>('hero');
   const isClickScrollingRef = React.useRef(false);
   const scrollTimeoutRef = React.useRef<NodeJS.Timeout | null>(null);
 
@@ -35,11 +35,12 @@ export const Navbar: React.FC<NavbarProps> = ({
     window.addEventListener('scroll', onScroll, { passive: true });
 
     // 2. High-performance IntersectionObserver for Section Scroll-Spy (zero layout reflows)
-    const sections: Array<'hero' | 'experience' | 'projects' | 'skills' | 'contact'> = [
+    const sections: Array<'hero' | 'experience' | 'projects' | 'skills' | 'education' | 'contact'> = [
       'hero',
       'experience',
       'projects',
       'skills',
+      'education',
       'contact',
     ];
 
@@ -51,7 +52,7 @@ export const Navbar: React.FC<NavbarProps> = ({
         const visibleEntries = entries.filter((e) => e.isIntersecting);
         if (visibleEntries.length > 0) {
           visibleEntries.sort((a, b) => b.intersectionRatio - a.intersectionRatio);
-          const currentId = visibleEntries[0].target.id as 'experience' | 'projects' | 'skills' | 'contact';
+          const currentId = visibleEntries[0].target.id as 'experience' | 'projects' | 'skills' | 'education' | 'contact';
           if (sections.includes(currentId)) {
             setActiveSection(currentId);
           }
@@ -80,10 +81,11 @@ export const Navbar: React.FC<NavbarProps> = ({
     { id: 'rd-1', section: 'experience' as const, name: 'Experience', href: '#experience', icon: <Briefcase className="w-4 h-4" /> },
     { id: 'rd-2', section: 'projects' as const, name: 'Projects', href: '#projects', icon: <Code2 className="w-4 h-4" /> },
     { id: 'rd-3', section: 'skills' as const, name: 'Skills', href: '#skills', icon: <Sparkles className="w-4 h-4" /> },
-    { id: 'rd-4', section: 'contact' as const, name: 'Contact', href: '#contact', icon: <Mail className="w-4 h-4" /> },
+    { id: 'rd-4', section: 'education' as const, name: 'Education', href: '#education', icon: <GraduationCap className="w-4 h-4" /> },
+    { id: 'rd-5', section: 'contact' as const, name: 'Contact', href: '#contact', icon: <Mail className="w-4 h-4" /> },
   ];
 
-  const handleNavClick = (section: 'hero' | 'experience' | 'projects' | 'skills' | 'contact') => {
+  const handleNavClick = (section: 'hero' | 'experience' | 'projects' | 'skills' | 'education' | 'contact') => {
     setActiveSection(section);
     setMobileMenuOpen(false);
 

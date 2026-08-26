@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Briefcase, Calendar, CheckCircle2, Building2, Code, Cpu, Server, GraduationCap, Award, MapPin } from 'lucide-react';
+import { Briefcase, Calendar, CheckCircle2, Building2, Code, Cpu, Server, MapPin } from 'lucide-react';
 import { ResumeCard } from '@/components/ui/ResumeCard';
 
 interface ExperienceItem {
@@ -12,15 +12,6 @@ interface ExperienceItem {
   description: string;
   achievements: string[];
   skills: string[];
-}
-
-interface EducationItem {
-  degree: string;
-  institution: string;
-  location: string;
-  period: string;
-  details?: string;
-  highlight?: boolean;
 }
 
 export const Experience: React.FC = () => {
@@ -54,31 +45,6 @@ export const Experience: React.FC = () => {
         'Demonstrated strong technical delivery and converted to a full-time Software Development Engineer role at the end of the internship.'
       ],
       skills: ['React.js', 'JavaScript', 'Node.js', 'Express.js', 'MongoDB', 'Tailwind CSS', 'MERN Stack', 'REST APIs']
-    }
-  ];
-
-  const educationList: EducationItem[] = [
-    {
-      degree: 'Bachelor of Technology (B.Tech), Computer Science',
-      institution: 'IIMT College of Engineering',
-      location: 'Greater Noida, Uttar Pradesh, India',
-      period: '2021 – 2025',
-      details: 'Core engineering coursework in Data Structures & Algorithms, Database Management Systems, Operating Systems, Computer Networks, Object-Oriented Programming, and Full Stack Web Architecture.',
-      highlight: true
-    },
-    {
-      degree: 'Class XII (Senior Secondary — Science)',
-      institution: 'Bihar School Examination Board (BSEB)',
-      location: 'Patna, Bihar, India',
-      period: '2021',
-      details: 'Specialization in Mathematics, Physics, Chemistry, and Computer Applications.'
-    },
-    {
-      degree: 'Class X (Secondary Education)',
-      institution: 'Central Board of Secondary Education (CBSE)',
-      location: 'New Delhi, India',
-      period: '2019',
-      details: 'Comprehensive foundational curriculum in Science, Mathematics, and Computer Science.'
     }
   ];
 
@@ -318,60 +284,6 @@ export const Experience: React.FC = () => {
                       </span>
                     ))}
                   </div>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-
-        {/* Education Section from CV */}
-        <div className="space-y-8 pt-4">
-          <div className="flex items-center gap-3">
-            <GraduationCap className="w-6 h-6 text-indigo-400" />
-            <h3 className="text-2xl font-bold font-display text-white">Education</h3>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {educationList.map((edu, idx) => (
-              <motion.div
-                key={idx}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: idx * 0.1 }}
-                className={`p-6 rounded-2xl bg-zinc-900/40 border transition-all space-y-4 hover:border-indigo-500/40 hover:shadow-xl hover:shadow-indigo-500/10 flex flex-col justify-between ${
-                  edu.highlight ? 'border-indigo-500/30 bg-indigo-950/10' : 'border-zinc-800/80'
-                }`}
-              >
-                <div className="space-y-3">
-                  <div className="flex items-center justify-between">
-                    <div className="p-2 w-max rounded-lg bg-indigo-500/10 text-indigo-400 border border-indigo-500/20">
-                      <GraduationCap className="w-4 h-4" />
-                    </div>
-                    <span className="text-xs font-mono text-zinc-400 bg-zinc-950 px-2.5 py-1 rounded-md border border-zinc-800">
-                      {edu.period}
-                    </span>
-                  </div>
-                  <div>
-                    <h4 className="text-base font-bold text-white font-display leading-snug">{edu.degree}</h4>
-                    <p className="text-sm text-indigo-300 font-medium mt-1">{edu.institution}</p>
-                    <p className="text-xs text-zinc-400 flex items-center gap-1 mt-1 font-mono">
-                      <MapPin className="w-3 h-3 text-zinc-500" />
-                      {edu.location}
-                    </p>
-                  </div>
-                  {edu.details && (
-                    <p className="text-xs text-zinc-300 leading-relaxed pt-1">
-                      {edu.details}
-                    </p>
-                  )}
-                </div>
-
-                <div className="pt-2 border-t border-zinc-800/60">
-                  <span className="text-[10px] font-mono text-emerald-400 flex items-center gap-1.5 font-semibold">
-                    <CheckCircle2 className="w-3 h-3" />
-                    Completed & Verified
-                  </span>
                 </div>
               </motion.div>
             ))}
