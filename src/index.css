@@ -8,7 +8,6 @@
   }
 
   html {
-    scroll-behavior: smooth !important;
     -webkit-overflow-scrolling: touch;
   }
   
@@ -20,6 +19,9 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     overflow-x: hidden;
+    /* Enable GPU compositing for fast paint cycles */
+    transform: translateZ(0);
+    backface-visibility: hidden;
   }
 
   /* Global Hardware Acceleration & Fluid Motion Defaults */

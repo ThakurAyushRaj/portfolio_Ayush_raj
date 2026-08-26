@@ -53,11 +53,11 @@ function App() {
 
       {/* React Bits: Optimized Hardware-Accelerated Fluid Splash Cursor */}
       <SplashCursor
-        SIM_RESOLUTION={64}
-        DYE_RESOLUTION={512}
-        PRESSURE_ITERATIONS={10}
-        DENSITY_DISSIPATION={3.5}
-        VELOCITY_DISSIPATION={2}
+        SIM_RESOLUTION={48}
+        DYE_RESOLUTION={384}
+        PRESSURE_ITERATIONS={6}
+        DENSITY_DISSIPATION={4.0}
+        VELOCITY_DISSIPATION={2.5}
       />
 
       {/* Global Navbar with BB-8 Theme Switcher */}
