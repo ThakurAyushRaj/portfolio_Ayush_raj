@@ -13,9 +13,9 @@ export const SocialButton: React.FC<SocialButtonProps> = ({
   className = '',
 }) => {
   const defaultLinks = {
-    email: 'mailto:rajayush0852@gmail.com',
+    email: 'mailto:rajayush226@gmail.com',
     github: 'https://github.com/ThakurAyushRaj',
-    linkedin: 'https://linkedin.com/in/thakur-ayush-raj',
+    linkedin: 'https://www.linkedin.com/in/ayush-raj-8348a9260',
   };
 
   const targetHref = href || defaultLinks[type];

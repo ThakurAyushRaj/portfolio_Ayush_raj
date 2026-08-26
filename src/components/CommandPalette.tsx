@@ -44,15 +44,20 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({ isOpen, onClose 
     { id: 'nav-contact', title: 'Go to Contact', category: 'Navigation', icon: <Mail className="w-4 h-4 text-cyan-400" />, action: () => handleScrollTo('contact'), keywords: 'email message hire touch connect' },
 
     // Projects
-    { id: 'proj-erp', title: 'ERP Website System', category: 'Projects', icon: <Code2 className="w-4 h-4 text-blue-400" />, action: () => handleOpenLink('https://github.com/ThakurAyushRaj/ERP-Website'), keywords: 'mern typescript dashboard finance hr' },
-    { id: 'proj-slack', title: 'Slack Attendance Bot', category: 'Projects', icon: <Code2 className="w-4 h-4 text-emerald-400" />, action: () => handleOpenLink('https://github.com/ThakurAyushRaj/SLACK-ATTENDANCE'), keywords: 'node express slack api sheets' },
-    { id: 'proj-attendance', title: 'Attendance Tracker App', category: 'Projects', icon: <Code2 className="w-4 h-4 text-purple-400" />, action: () => handleOpenLink('https://github.com/ThakurAyushRaj/Google-Auth_FCM-Notification_Admin-Pannel_Attendence-Tracker_App-React-Native-'), keywords: 'react native firebase fcm notifications' },
-    { id: 'proj-blog', title: 'Blog Website', category: 'Projects', icon: <Code2 className="w-4 h-4 text-amber-400" />, action: () => handleOpenLink('https://github.com/ThakurAyushRaj/Blog-Website'), keywords: 'react tailwind framer motion' },
+    { id: 'proj-crm', title: 'CRM Real Estate (aNquest Media)', category: 'Projects', icon: <Code2 className="w-4 h-4 text-blue-400" />, action: () => handleScrollTo('projects'), keywords: 'anquest crm real estate lead react node mongo' },
+    { id: 'proj-emr', title: 'EMR Healthcare (aNquest Media)', category: 'Projects', icon: <Code2 className="w-4 h-4 text-emerald-400" />, action: () => handleScrollTo('projects'), keywords: 'anquest emr healthcare patient react node' },
+    { id: 'proj-vobiz', title: 'In-App & Bridge Calling (Vobiz API)', category: 'Projects', icon: <Code2 className="w-4 h-4 text-cyan-400" />, action: () => handleScrollTo('projects'), keywords: 'vobiz voice calling bridge masked telephony' },
+    { id: 'proj-whatsapp', title: 'WhatsApp Lead Automation', category: 'Projects', icon: <Code2 className="w-4 h-4 text-purple-400" />, action: () => handleScrollTo('projects'), keywords: 'meta whatsapp business api automation leads' },
+    { id: 'proj-erp', title: 'ERP Website System', category: 'Projects', icon: <Code2 className="w-4 h-4 text-blue-400" />, action: () => handleOpenLink('https://github.com/ThakurAyushRaj'), keywords: 'mern typescript dashboard finance hr' },
+    { id: 'proj-slack', title: 'Slack Attendance Bot', category: 'Projects', icon: <Code2 className="w-4 h-4 text-emerald-400" />, action: () => handleOpenLink('https://github.com/ThakurAyushRaj'), keywords: 'node express slack api sheets' },
+    { id: 'proj-attendance', title: 'Attendance Tracker Mobile App', category: 'Projects', icon: <Code2 className="w-4 h-4 text-purple-400" />, action: () => handleOpenLink('https://github.com/ThakurAyushRaj'), keywords: 'react native firebase fcm notifications' },
+    { id: 'proj-blog', title: 'Animated Blog Website', category: 'Projects', icon: <Code2 className="w-4 h-4 text-amber-400" />, action: () => handleOpenLink('https://github.com/ThakurAyushRaj'), keywords: 'react tailwind framer motion' },
 
     // Links & Actions
-    { id: 'link-github', title: 'GitHub Profile', category: 'Links & Actions', icon: <Github className="w-4 h-4 text-zinc-300" />, action: () => handleOpenLink('https://github.com/ThakurAyushRaj'), keywords: 'code repos thakurayushraj' },
-    { id: 'link-email', title: 'Send Direct Email', category: 'Links & Actions', icon: <Mail className="w-4 h-4 text-cyan-400" />, action: () => handleOpenLink('mailto:rajayush0852@gmail.com'), keywords: 'mail message contact' },
-    { id: 'link-resume', title: 'Download Resume', category: 'Links & Actions', icon: <FileText className="w-4 h-4 text-emerald-400" />, action: () => handleScrollTo('hero'), keywords: 'cv resume pdf download' },
+    { id: 'link-github', title: 'GitHub Profile (ThakurAyushRaj)', category: 'Links & Actions', icon: <Github className="w-4 h-4 text-zinc-300" />, action: () => handleOpenLink('https://github.com/ThakurAyushRaj'), keywords: 'code repos thakurayushraj' },
+    { id: 'link-linkedin', title: 'LinkedIn Profile (Ayush Raj)', category: 'Links & Actions', icon: <User className="w-4 h-4 text-blue-400" />, action: () => handleOpenLink('https://www.linkedin.com/in/ayush-raj-8348a9260'), keywords: 'linkedin network profile' },
+    { id: 'link-email', title: 'Send Direct Email (rajayush226@gmail.com)', category: 'Links & Actions', icon: <Mail className="w-4 h-4 text-cyan-400" />, action: () => handleOpenLink('mailto:rajayush226@gmail.com'), keywords: 'mail message contact rajayush226' },
+    { id: 'link-resume', title: 'Download Official Resume / CV', category: 'Links & Actions', icon: <FileText className="w-4 h-4 text-emerald-400" />, action: () => handleScrollTo('experience'), keywords: 'cv resume pdf download' },
   ];
 
   const filteredItems = items.filter(item => {

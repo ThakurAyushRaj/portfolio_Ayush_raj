@@ -58,36 +58,50 @@ export const Skills: React.FC = () => {
 
   const categories: SkillCategory[] = [
     {
-      title: 'Frontend Engineering',
+      title: 'Languages & Core',
       category: 'Frontend',
       icon: <Code2 className="w-6 h-6 text-blue-400" />,
       topBorderClass: 'border-t-2 border-t-blue-500',
       badgeBg: 'bg-blue-500/10 text-blue-400 border-blue-500/20',
-      description: 'Building responsive, accessible, and high-performance user interfaces with modern React ecosystem.',
+      description: 'Core programming languages and web standards powering modern full-stack web and mobile systems.',
       skills: [
-        { name: 'React.js', level: 'Advanced', highlight: true },
+        { name: 'JavaScript (ES6+)', level: 'Advanced', highlight: true },
         { name: 'TypeScript', level: 'Advanced', highlight: true },
-        { name: 'Tailwind CSS', level: 'Advanced', highlight: true },
-        { name: 'Next.js', level: 'Proficient' },
-        { name: 'Framer Motion', level: 'Proficient' },
-        { name: 'HTML5 & CSS3', level: 'Advanced' },
-        { name: 'State Management (Redux/Zustand)', level: 'Proficient' }
+        { name: 'Dart', level: 'Proficient', highlight: true },
+        { name: 'HTML5 & Semantic Web', level: 'Advanced' },
+        { name: 'CSS3 & CSS Variables', level: 'Advanced' },
       ]
     },
     {
-      title: 'Backend & APIs',
+      title: 'Frontend & Mobile Engineering',
+      category: 'Frontend',
+      icon: <Smartphone className="w-6 h-6 text-purple-400" />,
+      topBorderClass: 'border-t-2 border-t-purple-500',
+      badgeBg: 'bg-purple-500/10 text-purple-400 border-purple-500/20',
+      description: 'Building responsive, accessible web applications and cross-platform native mobile solutions.',
+      skills: [
+        { name: 'React.js', level: 'Advanced', highlight: true },
+        { name: 'React Native', level: 'Advanced', highlight: true },
+        { name: 'Flutter', level: 'Proficient', highlight: true },
+        { name: 'Tailwind CSS', level: 'Advanced', highlight: true },
+        { name: 'Framer Motion', level: 'Proficient' },
+        { name: 'Expo SDK', level: 'Advanced' }
+      ]
+    },
+    {
+      title: 'Backend & Communication APIs',
       category: 'Backend',
       icon: <Server className="w-6 h-6 text-emerald-400" />,
       topBorderClass: 'border-t-2 border-t-emerald-500',
       badgeBg: 'bg-emerald-500/10 text-emerald-400 border-emerald-500/20',
-      description: 'Designing scalable microservices, RESTful APIs, auth pipelines, and third-party integrations.',
+      description: 'Designing scalable RESTful APIs, telephony/voice bridges, and WhatsApp enterprise automation.',
       skills: [
         { name: 'Node.js', level: 'Advanced', highlight: true },
         { name: 'Express.js', level: 'Advanced', highlight: true },
-        { name: 'RESTful API Design', level: 'Advanced', highlight: true },
-        { name: 'Slack API Webhooks', level: 'Advanced' },
-        { name: 'Authentication (JWT/OAuth 2.0)', level: 'Proficient' },
-        { name: 'Microservices Architecture', level: 'Intermediate' }
+        { name: 'RESTful API Architecture', level: 'Advanced', highlight: true },
+        { name: 'Vobiz Voice API (Calling/Bridge)', level: 'Advanced', highlight: true },
+        { name: 'Meta WhatsApp Business API', level: 'Advanced', highlight: true },
+        { name: 'Slack Bot & Google Sheets API', level: 'Advanced' }
       ]
     },
     {
@@ -96,28 +110,13 @@ export const Skills: React.FC = () => {
       icon: <Database className="w-6 h-6 text-amber-400" />,
       topBorderClass: 'border-t-2 border-t-amber-500',
       badgeBg: 'bg-amber-500/10 text-amber-400 border-amber-500/20',
-      description: 'Schema modeling, indexing, query optimization, and data persistence for enterprise apps.',
+      description: 'Relational and NoSQL schema design, query optimization, indexing, and real-time syncing.',
       skills: [
-        { name: 'MongoDB', level: 'Advanced', highlight: true },
-        { name: 'Mongoose ODM', level: 'Advanced', highlight: true },
+        { name: 'MongoDB & Mongoose', level: 'Advanced', highlight: true },
+        { name: 'MySQL Schema Design', level: 'Advanced', highlight: true },
         { name: 'PostgreSQL', level: 'Proficient' },
-        { name: 'Redis Caching', level: 'Intermediate' },
-        { name: 'Database Schema Design', level: 'Advanced' }
-      ]
-    },
-    {
-      title: 'Mobile Engineering',
-      category: 'Mobile',
-      icon: <Smartphone className="w-6 h-6 text-purple-400" />,
-      topBorderClass: 'border-t-2 border-t-purple-500',
-      badgeBg: 'bg-purple-500/10 text-purple-400 border-purple-500/20',
-      description: 'Cross-platform mobile application development for iOS and Android with push notification delivery.',
-      skills: [
-        { name: 'React Native', level: 'Advanced', highlight: true },
-        { name: 'Firebase Auth & Store', level: 'Advanced', highlight: true },
-        { name: 'FCM Push Notifications', level: 'Advanced', highlight: true },
-        { name: 'Flutter', level: 'Proficient' },
-        { name: 'Expo SDK', level: 'Advanced' }
+        { name: 'Firebase Firestore & Auth', level: 'Advanced', highlight: true },
+        { name: 'Firebase Cloud Messaging (FCM)', level: 'Advanced', highlight: true }
       ]
     },
     {
@@ -126,28 +125,26 @@ export const Skills: React.FC = () => {
       icon: <Cloud className="w-6 h-6 text-cyan-400" />,
       topBorderClass: 'border-t-2 border-t-cyan-500',
       badgeBg: 'bg-cyan-500/10 text-cyan-400 border-cyan-500/20',
-      description: 'Cloud deployment, containerization, hosting environments, and continuous delivery.',
+      description: 'Cloud infrastructure, server management, containerization, and deployment automation.',
       skills: [
-        { name: 'AWS (S3 / EC2)', level: 'Proficient' },
+        { name: 'AWS (EC2, S3)', level: 'Proficient', highlight: true },
         { name: 'Git & GitHub Workflows', level: 'Advanced', highlight: true },
-        { name: 'Vercel / Netlify Deploy', level: 'Advanced' },
-        { name: 'Docker Containers', level: 'Intermediate' },
-        { name: 'CI/CD Pipelines', level: 'Intermediate' }
+        { name: 'Facebook Developer Apps', level: 'Advanced' },
+        { name: 'Vercel / Cloudflare', level: 'Advanced' }
       ]
     },
     {
-      title: 'Tools & Workflows',
+      title: 'Tools & Engineering Practices',
       category: 'Tools & Methods',
       icon: <Wrench className="w-6 h-6 text-rose-400" />,
       topBorderClass: 'border-t-2 border-t-rose-500',
       badgeBg: 'bg-rose-500/10 text-rose-400 border-rose-500/20',
-      description: 'Software engineering practices, API testing, design collaboration, and debugging tools.',
+      description: 'Software development lifecycle, API testing suites, Linux environment, and agile sprints.',
       skills: [
         { name: 'Postman API Suite', level: 'Advanced', highlight: true },
-        { name: 'VS Code & Debugging', level: 'Advanced' },
+        { name: 'VS Code & Chrome DevTools', level: 'Advanced' },
         { name: 'Linux Command Line', level: 'Proficient' },
-        { name: 'Figma UI Handoff', level: 'Proficient' },
-        { name: 'Agile & Scrum', level: 'Advanced' }
+        { name: 'Agile, Scrum & Code Reviews', level: 'Advanced', highlight: true }
       ]
     }
   ];

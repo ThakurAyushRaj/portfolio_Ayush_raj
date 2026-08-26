@@ -15,7 +15,7 @@ export const Navbar: React.FC<NavbarProps> = ({
 }) => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [activeSection, setActiveSection] = useState<'experience' | 'projects' | 'skills' | 'contact'>('experience');
+  const [activeSection, setActiveSection] = useState<'hero' | 'experience' | 'projects' | 'skills' | 'contact'>('hero');
   const isClickScrollingRef = React.useRef(false);
   const scrollTimeoutRef = React.useRef<NodeJS.Timeout | null>(null);
 
@@ -35,7 +35,8 @@ export const Navbar: React.FC<NavbarProps> = ({
     window.addEventListener('scroll', onScroll, { passive: true });
 
     // 2. High-performance IntersectionObserver for Section Scroll-Spy (zero layout reflows)
-    const sections: Array<'experience' | 'projects' | 'skills' | 'contact'> = [
+    const sections: Array<'hero' | 'experience' | 'projects' | 'skills' | 'contact'> = [
+      'hero',
       'experience',
       'projects',
       'skills',
@@ -82,11 +83,11 @@ export const Navbar: React.FC<NavbarProps> = ({
     { id: 'rd-4', section: 'contact' as const, name: 'Contact', href: '#contact', icon: <Mail className="w-4 h-4" /> },
   ];
 
-  const handleNavClick = (section: 'experience' | 'projects' | 'skills' | 'contact') => {
+  const handleNavClick = (section: 'hero' | 'experience' | 'projects' | 'skills' | 'contact') => {
     setActiveSection(section);
     setMobileMenuOpen(false);
 
-    // Lock scroll listener while smooth scrolling completes
+    // Lock scroll spy listener while smooth scrolling completes
     isClickScrollingRef.current = true;
     if (scrollTimeoutRef.current) clearTimeout(scrollTimeoutRef.current);
     scrollTimeoutRef.current = setTimeout(() => {
@@ -95,7 +96,14 @@ export const Navbar: React.FC<NavbarProps> = ({
 
     const element = document.getElementById(section);
     if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
+      const navOffset = 75;
+      const elementPosition = element.getBoundingClientRect().top;
+      const offsetPosition = elementPosition + window.pageYOffset - navOffset;
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: 'smooth'
+      });
     }
   };
 

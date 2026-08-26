@@ -8,7 +8,8 @@
   }
 
   html {
-    scroll-behavior: smooth;
+    scroll-behavior: smooth !important;
+    -webkit-overflow-scrolling: touch;
   }
   
   body {
@@ -19,6 +20,15 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     overflow-x: hidden;
+  }
+
+  /* Global Hardware Acceleration & Fluid Motion Defaults */
+  *, *::before, *::after {
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  button, a, [role="button"] {
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
   }
 
   /* Accessibility Focus Ring Styles */
@@ -2819,6 +2829,327 @@ html.light .cobp-hover-label {
 html.light .cobp-folder-wrapper:hover .cobp-hover-label {
   color: #d97706;
 }
+
+/* -------------------------------------------------------------
+   Studio-Grade Specular Card Highlight (Linear / Vercel Pattern)
+   ------------------------------------------------------------- */
+:root {
+  --mouse-x: -500px;
+  --mouse-y: -500px;
+}
+
+/* -------------------------------------------------------------
+   From Uiverse.io by PhyoTP - Enhanced Luxury 3D Blueprint Dossier Card
+   ------------------------------------------------------------- */
+.book {
+  position: relative;
+  border-radius: 14px;
+  width: 100%;
+  max-width: 350px;
+  height: 230px;
+  background-color: #080b15;
+  background-image: 
+    radial-gradient(rgba(0, 240, 255, 0.08) 1px, transparent 1px),
+    linear-gradient(145deg, #0d1224 0%, #060810 100%);
+  background-size: 16px 16px, 100% 100%;
+  -webkit-box-shadow: 
+    2px 2px 0px rgba(255, 255, 255, 0.06),
+    4px 4px 0px rgba(255, 255, 255, 0.02),
+    6px 6px 1px rgba(0, 0, 0, 0.6),
+    0 14px 32px rgba(0, 0, 0, 0.75);
+  box-shadow: 
+    2px 2px 0px rgba(255, 255, 255, 0.06),
+    4px 4px 0px rgba(255, 255, 255, 0.02),
+    6px 6px 1px rgba(0, 0, 0, 0.6),
+    0 14px 32px rgba(0, 0, 0, 0.75);
+  -webkit-transform: preserve-3d;
+  -ms-transform: preserve-3d;
+  transform: preserve-3d;
+  -webkit-perspective: 2000px;
+  perspective: 2000px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  color: #fff;
+  padding: 14px;
+  cursor: pointer;
+  user-select: none;
+  transition: transform 0.45s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.45s ease;
+}
+
+.book:hover {
+  transform: translateY(-4px);
+  box-shadow: 
+    2px 2px 0px rgba(255, 255, 255, 0.08),
+    4px 4px 0px rgba(255, 255, 255, 0.03),
+    6px 6px 1px rgba(0, 0, 0, 0.75),
+    0 22px 45px rgba(0, 0, 0, 0.85);
+}
+
+.cover {
+  top: 0;
+  left: 0;
+  position: absolute;
+  background: 
+    linear-gradient(135deg, rgba(255, 255, 255, 0.08) 0%, transparent 35%),
+    linear-gradient(145deg, #13182b 0%, #090b16 100%);
+  width: 100%;
+  height: 100%;
+  border-radius: 14px;
+  cursor: pointer;
+  -webkit-transition: all 0.55s cubic-bezier(0.25, 1, 0.5, 1);
+  transition: all 0.55s cubic-bezier(0.25, 1, 0.5, 1);
+  -webkit-transform-origin: 0;
+  -ms-transform-origin: 0;
+  transform-origin: 0;
+  -webkit-box-shadow: 
+    inset 0 1px 1px rgba(255, 255, 255, 0.18),
+    inset 0 -1px 1px rgba(0, 0, 0, 0.6),
+    0 10px 25px rgba(0, 0, 0, 0.75);
+  box-shadow: 
+    inset 0 1px 1px rgba(255, 255, 255, 0.18),
+    inset 0 -1px 1px rgba(0, 0, 0, 0.6),
+    0 10px 25px rgba(0, 0, 0, 0.75);
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  overflow: hidden;
+  z-index: 20;
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
+}
+
+/* Glossy Specular Sheen Sweep on Cover */
+.cover::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(
+    60deg,
+    transparent 40%,
+    rgba(255, 255, 255, 0.06) 45%,
+    rgba(255, 255, 255, 0.16) 50%,
+    rgba(255, 255, 255, 0.06) 55%,
+    transparent 60%
+  );
+  transform: translateX(-100%);
+  transition: transform 0.8s ease-in-out;
+  pointer-events: none;
+}
+
+.book:hover .cover::after {
+  transform: translateX(100%);
+}
+
+.book:hover .cover,
+.book:focus-within .cover {
+  -webkit-transition: all 0.55s cubic-bezier(0.25, 1, 0.5, 1);
+  transition: all 0.55s cubic-bezier(0.25, 1, 0.5, 1);
+  -webkit-transform: rotatey(-85deg);
+  -ms-transform: rotatey(-85deg);
+  transform: rotatey(-85deg);
+  box-shadow: -10px 14px 32px rgba(0, 0, 0, 0.9), inset 0 0 0 1px rgba(255, 255, 255, 0.15);
+}
+
+/* Light Theme Overrides for .book and .cover */
+html.light .book {
+  background-color: #f8fafc;
+  background-image: 
+    radial-gradient(rgba(14, 165, 233, 0.1) 1px, transparent 1px),
+    linear-gradient(145deg, #ffffff 0%, #f1f5f9 100%);
+  -webkit-box-shadow: 
+    2px 2px 0px rgba(0, 0, 0, 0.04),
+    4px 4px 0px rgba(0, 0, 0, 0.02),
+    6px 6px 1px rgba(0, 0, 0, 0.05),
+    0 10px 25px rgba(0, 0, 0, 0.08);
+  box-shadow: 
+    2px 2px 0px rgba(0, 0, 0, 0.04),
+    4px 4px 0px rgba(0, 0, 0, 0.02),
+    6px 6px 1px rgba(0, 0, 0, 0.05),
+    0 10px 25px rgba(0, 0, 0, 0.08);
+  color: #0f172a;
+}
+
+html.light .cover {
+  background: 
+    linear-gradient(135deg, rgba(255, 255, 255, 0.9) 0%, transparent 40%),
+    linear-gradient(145deg, #ffffff 0%, #f1f5f9 100%);
+  -webkit-box-shadow: 
+    inset 0 1px 1px rgba(255, 255, 255, 1),
+    0 8px 22px rgba(0, 0, 0, 0.08),
+    0 1px 3px rgba(0, 0, 0, 0.05);
+  box-shadow: 
+    inset 0 1px 1px rgba(255, 255, 255, 1),
+    0 8px 22px rgba(0, 0, 0, 0.08),
+    0 1px 3px rgba(0, 0, 0, 0.05);
+  color: #0f172a;
+}
+
+html.light .book:hover .cover,
+html.light .book:focus-within .cover {
+  box-shadow: -10px 14px 25px rgba(0, 0, 0, 0.15);
+}
+
+/* -------------------------------------------------------------
+   From Uiverse.io by codebykay101 - Luxury Fanned-Out Interactive Glass Cards
+   ------------------------------------------------------------- */
+.fanned-glass-container {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 36px 12px;
+  width: 100%;
+}
+
+.fanned-glass-container .glass-card {
+  position: relative;
+  width: 100%;
+  max-width: 330px;
+  min-height: 240px;
+  background: 
+    linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.02) 45%, rgba(0, 0, 0, 0.35) 100%),
+    linear-gradient(145deg, #101424 0%, #080a14 100%);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  box-shadow: 
+    inset 0 1px 1px rgba(255, 255, 255, 0.22),
+    inset 0 -1px 1px rgba(0, 0, 0, 0.6),
+    0 20px 40px rgba(0, 0, 0, 0.55),
+    0 0 20px var(--glow-color, rgba(59, 130, 246, 0.15));
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: all 0.55s cubic-bezier(0.25, 1, 0.5, 1);
+  border-radius: 20px;
+  margin: 0 -35px;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  transform: rotate(calc(var(--r, 0) * 1deg)) translateY(calc(var(--y, 0) * 1px));
+  z-index: var(--z, 10);
+  cursor: pointer;
+  user-select: none;
+  padding: 22px;
+  overflow: hidden;
+}
+
+/* Diagonal Specular Sheen Sweep on Glass Card */
+.fanned-glass-container .glass-card::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(
+    60deg,
+    transparent 40%,
+    rgba(255, 255, 255, 0.05) 45%,
+    rgba(255, 255, 255, 0.15) 50%,
+    rgba(255, 255, 255, 0.05) 55%,
+    transparent 60%
+  );
+  transform: translateX(-100%);
+  transition: transform 0.85s ease-in-out;
+  pointer-events: none;
+}
+
+.fanned-glass-container .glass-card:hover::after {
+  transform: translateX(100%);
+}
+
+.fanned-glass-container:hover .glass-card {
+  transform: rotate(0deg) translateY(0);
+  margin: 0 16px;
+}
+
+.fanned-glass-container .glass-card:hover {
+  transform: translateY(-14px) scale(1.04) !important;
+  z-index: 50 !important;
+  box-shadow: 
+    inset 0 1px 2px rgba(255, 255, 255, 0.35),
+    0 35px 55px rgba(0, 0, 0, 0.7),
+    0 0 35px var(--glow-color, rgba(59, 130, 246, 0.35)) !important;
+  border-color: var(--border-color, rgba(59, 130, 246, 0.6)) !important;
+}
+
+.fanned-glass-container .glass-card .glass-footer {
+  position: relative;
+  width: calc(100% + 44px);
+  margin: 16px -22px -22px -22px;
+  height: 44px;
+  background: rgba(255, 255, 255, 0.04);
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 18px;
+  font-family: var(--font-mono, monospace);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #fff;
+  transition: background 0.3s ease, border-color 0.3s ease;
+}
+
+.fanned-glass-container .glass-card:hover .glass-footer {
+  background: rgba(255, 255, 255, 0.08);
+  border-top-color: rgba(255, 255, 255, 0.15);
+}
+
+/* Light Theme Overrides */
+html.light .fanned-glass-container .glass-card {
+  background: 
+    linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(241, 245, 249, 0.8) 100%);
+  border: 1px solid rgba(226, 232, 240, 0.95);
+  box-shadow: 
+    inset 0 1px 1px rgba(255, 255, 255, 1),
+    0 20px 35px rgba(0, 0, 0, 0.08),
+    0 0 15px var(--glow-color, rgba(59, 130, 246, 0.1));
+  color: #0f172a;
+}
+
+html.light .fanned-glass-container .glass-card .glass-footer {
+  background: rgba(241, 245, 249, 0.85);
+  border-top: 1px solid rgba(226, 232, 240, 0.85);
+  color: #0f172a;
+}
+
+html.light .fanned-glass-container .glass-card:hover {
+  box-shadow: 
+    0 30px 45px rgba(0, 0, 0, 0.12),
+    0 0 25px var(--glow-color, rgba(59, 130, 246, 0.2)) !important;
+}
+
+@media (max-width: 768px) {
+  .fanned-glass-container {
+    flex-direction: column;
+    padding: 12px 0;
+  }
+  .fanned-glass-container .glass-card {
+    margin: 12px 0 !important;
+    transform: rotate(0deg) translateY(0) !important;
+    max-width: 100%;
+  }
+}
+
+
+
+
+
+
+
+
+
 
 
 

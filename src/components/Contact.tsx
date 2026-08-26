@@ -1,5 +1,5 @@
 import React, { useState, useId } from 'react';
-import { Mail, Send, Check, Copy, Github, MapPin, AlertCircle, Linkedin } from 'lucide-react';
+import { Mail, Send, Check, Copy, MapPin, Phone } from 'lucide-react';
 import { SocialButton, SocialLinksGroup } from '@/components/ui/SocialButton';
 
 export const Contact: React.FC = () => {
@@ -14,18 +14,26 @@ export const Contact: React.FC = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [copiedEmail, setCopiedEmail] = useState(false);
+  const [copiedPhone, setCopiedPhone] = useState(false);
 
   const nameId = useId();
   const emailId = useId();
   const subjectId = useId();
   const messageId = useId();
 
-  const directEmail = 'rajayush0852@gmail.com';
+  const directEmail = 'rajayush226@gmail.com';
+  const directPhone = '+91 91358 31645';
 
   const handleCopyEmail = () => {
     navigator.clipboard.writeText(directEmail);
     setCopiedEmail(true);
     setTimeout(() => setCopiedEmail(false), 2500);
+  };
+
+  const handleCopyPhone = () => {
+    navigator.clipboard.writeText(directPhone);
+    setCopiedPhone(true);
+    setTimeout(() => setCopiedPhone(false), 2500);
   };
 
   const validateForm = () => {
@@ -80,7 +88,7 @@ export const Contact: React.FC = () => {
             Let's Build <span className="text-gradient-blue">Together</span>
           </h2>
           <p className="text-zinc-300 max-w-2xl text-base leading-relaxed">
-            Open for Software Development Engineer (SDE) positions, full-stack enterprise platform inquiries, and technical consulting.
+            Open for Software Development Engineer (SDE) positions, full-stack enterprise platform inquiries, and technical engineering roles.
           </p>
         </div>
 
@@ -94,11 +102,11 @@ export const Contact: React.FC = () => {
                 <SocialLinksGroup />
               </div>
               <p className="text-sm text-zinc-300 leading-relaxed">
-                Reach out directly via email, GitHub, LinkedIn, or the contact terminal. I typically respond within 24 hours.
+                Reach out directly via email, phone, GitHub, LinkedIn, or the contact terminal. I typically respond within 24 hours.
               </p>
 
               <div className="space-y-4 pt-2">
-                {/* Email Item with Copy & Uiverse Button */}
+                {/* Email Item with Copy */}
                 <div className="p-4 rounded-xl bg-zinc-950/90 border border-zinc-800 flex items-center justify-between gap-3 shadow-sm">
                   <div className="flex items-center gap-3.5 overflow-hidden">
                     <SocialButton type="email" />
@@ -117,6 +125,29 @@ export const Contact: React.FC = () => {
                   </button>
                 </div>
 
+                {/* Phone Item */}
+                <div className="p-4 rounded-xl bg-zinc-950/90 border border-zinc-800 flex items-center justify-between gap-3 shadow-sm">
+                  <div className="flex items-center gap-3.5 overflow-hidden">
+                    <div className="w-10 h-10 rounded-full bg-blue-500/10 text-blue-400 border border-blue-500/20 flex items-center justify-center flex-shrink-0 shadow-sm">
+                      <Phone className="w-4 h-4" />
+                    </div>
+                    <div className="overflow-hidden">
+                      <div className="text-xs font-mono text-zinc-400">Phone / WhatsApp</div>
+                      <a href={`tel:${directPhone.replace(/\s+/g, '')}`} className="text-sm font-mono text-white font-semibold hover:text-blue-400 transition-colors">
+                        {directPhone}
+                      </a>
+                    </div>
+                  </div>
+                  <button
+                    onClick={handleCopyPhone}
+                    className="px-3.5 py-2 rounded-xl bg-zinc-900 hover:bg-zinc-800 text-xs font-mono text-zinc-200 hover:text-white border border-zinc-700 transition-all flex items-center gap-1.5 flex-shrink-0 min-h-[40px]"
+                    aria-label="Copy phone number"
+                  >
+                    {copiedPhone ? <Check className="w-3.5 h-3.5 text-emerald-400" /> : <Copy className="w-3.5 h-3.5" />}
+                    <span>{copiedPhone ? 'Copied' : 'Copy'}</span>
+                  </button>
+                </div>
+
                 {/* Location Item */}
                 <div className="p-4 rounded-xl bg-zinc-950/90 border border-zinc-800 flex items-center gap-3.5 shadow-sm">
                   <div className="w-10 h-10 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 flex items-center justify-center flex-shrink-0 shadow-sm">
@@ -124,7 +155,7 @@ export const Contact: React.FC = () => {
                   </div>
                   <div>
                     <div className="text-xs font-mono text-zinc-400">Location</div>
-                    <div className="text-sm font-medium text-white">India • Available for Global Remote</div>
+                    <div className="text-sm font-medium text-white">Greater Noida, Uttar Pradesh, India</div>
                   </div>
                 </div>
 
@@ -151,14 +182,14 @@ export const Contact: React.FC = () => {
                   <div className="flex items-center gap-3.5 overflow-hidden">
                     <SocialButton type="linkedin" />
                     <div>
-                      <div className="text-xs font-mono text-zinc-400">LinkedIn Network</div>
+                      <div className="text-xs font-mono text-zinc-400">LinkedIn Profile</div>
                       <a
-                        href="https://linkedin.com/in/thakur-ayush-raj"
+                        href="https://www.linkedin.com/in/ayush-raj-8348a9260"
                         target="_blank"
                         rel="noreferrer"
                         className="text-sm font-medium text-white hover:text-cyan-400 transition-colors"
                       >
-                        linkedin.com/in/thakur-ayush-raj
+                        linkedin.com/in/ayush-raj-8348a9260
                       </a>
                     </div>
                   </div>

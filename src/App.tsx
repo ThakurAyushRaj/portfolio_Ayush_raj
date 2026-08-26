@@ -7,6 +7,7 @@ import { Skills } from '@/components/Skills';
 import { Contact } from '@/components/Contact';
 import { Footer } from '@/components/Footer';
 import { CommandPalette } from '@/components/CommandPalette';
+import { SplashCursor } from '@/components/ui/SplashCursor';
 import { StarfieldBg } from '@/components/ui/StarfieldBg';
 
 function App() {
@@ -44,10 +45,19 @@ function App() {
 
   return (
     <div className={`min-h-screen font-sans selection:bg-cyan-500/30 relative overflow-x-hidden transition-colors duration-500 ${
-      isDark ? 'bg-[#06070a] text-zinc-100' : 'bg-[#f4f6fc] text-slate-900 light'
+      isDark ? 'bg-[#090a0f] text-zinc-100' : 'bg-[#f8fafc] text-slate-900 light'
     }`}>
-      {/* Upgraded Cyber Cosmic & Nebula Background */}
+      {/* Animated Uiverse.io Radial Starfield Background */}
       <StarfieldBg />
+
+      {/* React Bits: Optimized Hardware-Accelerated Fluid Splash Cursor */}
+      <SplashCursor
+        SIM_RESOLUTION={64}
+        DYE_RESOLUTION={512}
+        PRESSURE_ITERATIONS={10}
+        DENSITY_DISSIPATION={3.5}
+        VELOCITY_DISSIPATION={2}
+      />
 
       {/* Global Navbar with BB-8 Theme Switcher */}
       <Navbar

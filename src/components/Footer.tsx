@@ -33,7 +33,7 @@ export const Footer: React.FC = () => {
             </p>
             <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-zinc-900/90 border border-zinc-800 text-xs font-mono text-zinc-300 shadow-sm backdrop-blur-md">
               <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-              <span>Based in India • Global Remote Available</span>
+              <span>Greater Noida, UP, India • Global Remote Available</span>
             </div>
           </div>
 
@@ -70,11 +70,11 @@ export const Footer: React.FC = () => {
               </a>
 
               <a
-                href="mailto:rajayush0852@gmail.com"
+                href="mailto:rajayush226@gmail.com"
                 className="inline-flex items-center gap-3 p-3 rounded-xl bg-zinc-900/60 hover:bg-zinc-900 border border-zinc-800/80 text-xs font-mono text-zinc-300 hover:text-white transition-all w-max min-h-[42px]"
               >
                 <Mail className="w-4 h-4 text-cyan-400" />
-                <span>rajayush0852@gmail.com</span>
+                <span>rajayush226@gmail.com</span>
               </a>
 
               <a
