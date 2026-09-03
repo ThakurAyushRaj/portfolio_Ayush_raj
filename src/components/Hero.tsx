@@ -93,7 +93,7 @@ export const Hero: React.FC = () => {
             transition={{ duration: 0.6, delay: 0.3 }}
             className="text-zinc-300 text-base sm:text-lg leading-relaxed max-w-xl font-sans"
           >
-            Full-stack developer experienced in building and shipping production features across the MERN and MEAN stacks, React Native, and Flutter. Currently at <span className="text-white font-semibold">aNquest Media</span>, developing CRM and EMR products that power lead and patient workflows for real estate and healthcare clients.
+            Full-stack developer experienced in building and shipping production features across the MERN and MEAN stacks, React Native, and Flutter. Currently at <span className="text-white font-semibold">aNquest Media</span>, developing CRM and EMR products that power lead and patient workflows for real estate and healthcare clients. Strong foundation in REST API design and both relational and NoSQL databases, with an expanding focus on AWS and system design.
           </motion.p>
 
           {/* Core Tech Stack Chips from CV */}

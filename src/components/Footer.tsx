@@ -20,12 +20,14 @@ export const Footer: React.FC = () => {
         <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-start">
           {/* Brand & Mission */}
           <div className="md:col-span-5 space-y-4">
-            <div className="flex items-center gap-2.5">
-              <div className="w-9 h-9 rounded-xl bg-zinc-900 border border-zinc-800 flex items-center justify-center text-blue-400 font-mono font-bold text-sm shadow-md">
-                AR
-              </div>
-              <span className="font-display font-bold text-xl text-white tracking-tight">
-                Ayush<span className="text-blue-500">.</span>Raj
+            <div className="flex items-center gap-3">
+              <img 
+                src="/image_77dcd00e-removebg-preview.png" 
+                alt="AR Logo" 
+                className="w-[3.2rem] h-[3.2rem] object-contain drop-shadow-[0_4px_10px_rgba(0,0,0,0.4)]"
+              />
+              <span className="font-display font-extrabold text-[1.4rem] tracking-tight text-white">
+                Ayush<span className="text-[#00e5ff]">.</span>Raj
               </span>
             </div>
             <p className="text-zinc-300 text-sm max-w-sm leading-relaxed">

@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { createPortal } from 'react-dom';
 import { motion, AnimatePresence, useMotionValue, useSpring, useTransform } from 'framer-motion';
-import { Github, Check, ArrowUpRight, AlertTriangle, ShieldCheck, Box, Cpu, Copy, Layers, Target, X, Terminal, BookOpen, ExternalLink, Activity, PhoneCall, MessageSquare, Database, Smartphone, Calendar, FileText } from 'lucide-react';
+import { Github, Check, ArrowUpRight, AlertTriangle, ShieldCheck, Box, Cpu, Copy, Layers, Target, X, Terminal, BookOpen, ExternalLink, Activity, PhoneCall, MessageSquare, Database, Smartphone, Calendar, FileText, LayoutGrid, Building2, Bot, Code2 } from 'lucide-react';
+import { GlassIcons, GlassIconsItem } from '@/components/ui/glass-icons';
 
 interface ProjectCaseStudy {
   id: string;
@@ -710,6 +711,45 @@ export const Projects: React.FC = () => {
 
   const filteredProjects = activeFilter === 'All' ? caseStudies : caseStudies.filter(p => p.category === activeFilter);
 
+  const glassItems: GlassIconsItem[] = [
+    {
+      icon: <LayoutGrid className="w-6 h-6 text-white" />,
+      color: 'slate',
+      label: 'All',
+      onClick: () => setActiveFilter('All')
+    },
+    {
+      icon: <Building2 className="w-6 h-6 text-white" />,
+      color: 'blue',
+      label: 'aNquest',
+      onClick: () => setActiveFilter('Production / aNquest')
+    },
+    {
+      icon: <Layers className="w-6 h-6 text-white" />,
+      color: 'purple',
+      label: 'Full Stack',
+      onClick: () => setActiveFilter('Full Stack')
+    },
+    {
+      icon: <Bot className="w-6 h-6 text-white" />,
+      color: 'green',
+      label: 'Automation',
+      onClick: () => setActiveFilter('Automation / Bot')
+    },
+    {
+      icon: <Smartphone className="w-6 h-6 text-white" />,
+      color: 'indigo',
+      label: 'Mobile',
+      onClick: () => setActiveFilter('Mobile App')
+    },
+    {
+      icon: <Code2 className="w-6 h-6 text-white" />,
+      color: 'orange',
+      label: 'Frontend',
+      onClick: () => setActiveFilter('Frontend')
+    }
+  ];
+
   return (
     <section id="projects" className="py-24 border-t border-zinc-200 dark:border-zinc-900/80 relative">
       {/* Background ambient radial light */}
@@ -744,24 +784,9 @@ export const Projects: React.FC = () => {
           </a>
         </div>
 
-        {/* Filter Pills */}
-        <div className="flex flex-wrap gap-2.5 pt-2">
-          {categories.map((cat) => {
-            const isSelected = activeFilter === cat;
-            return (
-              <button
-                key={cat}
-                onClick={() => setActiveFilter(cat)}
-                className={`relative px-5 py-2.5 rounded-xl text-xs font-mono transition-all min-h-[40px] ${
-                  isSelected
-                    ? 'bg-cyan-500 text-white dark:text-zinc-950 font-bold shadow-lg shadow-cyan-500/25 border border-cyan-400'
-                    : 'bg-white dark:bg-zinc-900/80 hover:bg-zinc-50 dark:hover:bg-zinc-800 text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-200 border border-zinc-200 dark:border-zinc-800/80'
-                }`}
-              >
-                {cat}
-              </button>
-            );
-          })}
+        {/* GlassIcons Interactive Filter Bar replaces old text pills */}
+        <div className="w-full">
+          <GlassIcons items={glassItems} className="my-2" />
         </div>
 
         {/* Uiverse 3D Interactive Landscape Book Cards Grid - 3 Per Row */}

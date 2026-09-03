@@ -69,12 +69,12 @@ export const Education: React.FC = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: idx * 0.1 }}
-              className={`p-6 sm:p-7 rounded-2xl bg-zinc-900/50 backdrop-blur-md border transition-all space-y-4 hover:border-indigo-500/40 hover:shadow-2xl hover:shadow-indigo-500/10 flex flex-col justify-between group ${
-                edu.highlight ? 'border-indigo-500/35 bg-indigo-950/15 ring-1 ring-indigo-500/20' : 'border-zinc-800/80'
+              className={`relative overflow-hidden rounded-2xl bg-zinc-900/50 backdrop-blur-md border h-64 sm:h-[280px] transition-all group shadow-lg ${
+                edu.highlight ? 'border-indigo-500/35 bg-indigo-950/15' : 'border-zinc-800/80'
               }`}
             >
-              <div className="space-y-3.5">
-                {/* Header row with Icon and Period Badge */}
+              {/* Main Card Content */}
+              <div className="p-6 h-full flex flex-col justify-start space-y-4">
                 <div className="flex items-center justify-between">
                   <div className="Btn cursor-default flex-shrink-0" style={{ transform: 'scale(0.85)', transformOrigin: 'left center' }}>
                     <div className="BG bg-indigo" />
@@ -87,7 +87,6 @@ export const Education: React.FC = () => {
                   </span>
                 </div>
 
-                {/* Degree and Institution */}
                 <div className="space-y-1">
                   <h3 className="text-base sm:text-lg font-bold text-white font-display leading-snug">
                     {edu.degree}
@@ -95,29 +94,30 @@ export const Education: React.FC = () => {
                   <p className="text-sm text-indigo-300 font-medium font-sans">
                     {edu.institution}
                   </p>
-                  <p className="text-xs text-zinc-400 flex items-center gap-1.5 pt-0.5 font-mono">
+                  <p className="text-xs text-zinc-400 flex items-center gap-1.5 pt-1 font-mono">
                     <MapPin className="w-3.5 h-3.5 text-zinc-500 flex-shrink-0" />
                     <span>{edu.location}</span>
                   </p>
                 </div>
+              </div>
 
-                {/* Details / Coursework */}
+              {/* Uiverse Slide-up Details Overlay */}
+              <div className="absolute bottom-0 left-0 w-full bg-black/80 backdrop-blur-md shadow-[0_3px_10px_rgba(0,0,0,0.2)] text-white overflow-hidden h-[3.2em] group-hover:h-[12em] sm:group-hover:h-[10em] transition-[height] duration-500 ease-in-out p-[0.8em] px-5 flex flex-col justify-start border-t border-white/10">
+                <div className="flex items-center justify-between font-bold text-sm text-emerald-400">
+                  <span className="flex items-center gap-1.5">
+                    <CheckCircle2 className="w-4 h-4" />
+                    Completed & Verified
+                  </span>
+                  <span className="text-[10px] font-mono text-zinc-400 uppercase tracking-widest font-bold">
+                    {idx === 0 ? 'DEGREE' : 'SECONDARY'}
+                  </span>
+                </div>
+                
                 {edu.details && (
-                  <p className="text-xs text-zinc-300 leading-relaxed pt-1 font-sans">
+                  <p className="text-[0.8em] text-zinc-300 leading-relaxed mt-[1.2em] font-sans opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-100">
                     {edu.details}
                   </p>
                 )}
-              </div>
-
-              {/* Bottom Verification Footer */}
-              <div className="pt-3 border-t border-zinc-800/70 flex items-center justify-between">
-                <span className="text-[11px] font-mono text-emerald-400 flex items-center gap-1.5 font-semibold">
-                  <CheckCircle2 className="w-3.5 h-3.5" />
-                  <span>Completed & Verified</span>
-                </span>
-                <span className="text-[10px] font-mono text-zinc-500 uppercase tracking-widest font-bold">
-                  {idx === 0 ? 'DEGREE' : 'SECONDARY'}
-                </span>
               </div>
             </motion.div>
           ))}

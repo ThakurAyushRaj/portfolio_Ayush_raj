@@ -126,14 +126,16 @@ export const Navbar: React.FC<NavbarProps> = ({
             const element = document.getElementById('hero');
             if (element) element.scrollIntoView({ behavior: 'smooth' });
           }}
-          className="flex items-center gap-2 group text-zinc-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-500 rounded-lg p-1"
+          className="flex items-center gap-3 group text-zinc-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-500 rounded-lg p-1"
           aria-label="Ayush Raj Portfolio Home"
         >
-          <div className="w-8 h-8 rounded-lg bg-zinc-900 border border-zinc-700/80 flex items-center justify-center text-cyan-400 font-mono font-bold text-sm group-hover:border-cyan-400 group-hover:text-white transition-all shadow-sm">
-            AR
-          </div>
-          <span className="font-display font-bold text-lg tracking-tight group-hover:text-cyan-400 transition-colors">
-            Ayush<span className="text-cyan-400">.</span>Raj
+          <img 
+            src="/image_77dcd00e-removebg-preview.png" 
+            alt="AR Logo" 
+            className="w-[3.2rem] h-[3.2rem] object-contain group-hover:scale-105 transition-transform drop-shadow-[0_4px_10px_rgba(0,0,0,0.4)]"
+          />
+          <span className="font-display font-extrabold text-[1.4rem] tracking-tight text-white group-hover:opacity-90 transition-opacity">
+            Ayush<span className="text-[#00e5ff]">.</span>Raj
           </span>
         </a>
 
