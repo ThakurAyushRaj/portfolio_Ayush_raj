@@ -76,8 +76,11 @@ export const Education: React.FC = () => {
               <div className="space-y-3.5">
                 {/* Header row with Icon and Period Badge */}
                 <div className="flex items-center justify-between">
-                  <div className="p-2.5 w-max rounded-xl bg-indigo-500/10 text-indigo-400 border border-indigo-500/20 group-hover:scale-110 transition-transform">
-                    <GraduationCap className="w-5 h-5" />
+                  <div className="Btn cursor-default flex-shrink-0" style={{ transform: 'scale(0.85)', transformOrigin: 'left center' }}>
+                    <div className="BG bg-indigo" />
+                    <div className="svgContainer">
+                      <GraduationCap className="w-5 h-5 text-zinc-800 dark:text-white" />
+                    </div>
                   </div>
                   <span className="text-xs font-mono text-zinc-300 bg-zinc-950/90 px-3 py-1 rounded-lg border border-zinc-800 font-semibold shadow-inner">
                     {edu.period}

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Code2, Server, Database, Smartphone, Cloud, Wrench, Sparkles, CheckCircle2, Terminal, RotateCw } from 'lucide-react';
+import { Code2, Server, Database, Smartphone, Cloud, Wrench, Sparkles, CheckCircle2, Terminal, RotateCw, LayoutGrid } from 'lucide-react';
 import { GlassIcons, GlassIconsItem } from '@/components/ui/glass-icons';
 
 interface SkillCategory {
@@ -9,6 +9,7 @@ interface SkillCategory {
   icon: React.ReactNode;
   topBorderClass: string;
   badgeBg: string;
+  bgClass: string;
   description: string;
   skills: { name: string; level: string; highlight?: boolean }[];
 }
@@ -18,6 +19,12 @@ export const Skills: React.FC = () => {
   const [flippedCardTitle, setFlippedCardTitle] = useState<string | null>(null);
 
   const glassItems: GlassIconsItem[] = [
+    {
+      icon: <LayoutGrid className="w-6 h-6 text-white" />,
+      color: 'slate',
+      label: 'All',
+      onClick: () => setSelectedCategory('All')
+    },
     {
       icon: <Code2 className="w-6 h-6 text-white" />,
       color: 'blue',
@@ -60,9 +67,10 @@ export const Skills: React.FC = () => {
     {
       title: 'Languages & Core',
       category: 'Frontend',
-      icon: <Code2 className="w-6 h-6 text-blue-400" />,
+      icon: <Code2 className="w-5 h-5 text-zinc-800 dark:text-white" />,
       topBorderClass: 'border-t-2 border-t-blue-500',
       badgeBg: 'bg-blue-500/10 text-blue-400 border-blue-500/20',
+      bgClass: 'bg-blue',
       description: 'Core programming languages and web standards powering modern full-stack web and mobile systems.',
       skills: [
         { name: 'JavaScript (ES6+)', level: 'Advanced', highlight: true },
@@ -75,9 +83,10 @@ export const Skills: React.FC = () => {
     {
       title: 'Frontend & Mobile Engineering',
       category: 'Frontend',
-      icon: <Smartphone className="w-6 h-6 text-purple-400" />,
+      icon: <Smartphone className="w-5 h-5 text-zinc-800 dark:text-white" />,
       topBorderClass: 'border-t-2 border-t-purple-500',
       badgeBg: 'bg-purple-500/10 text-purple-400 border-purple-500/20',
+      bgClass: 'bg-purple',
       description: 'Building responsive, accessible web applications and cross-platform native mobile solutions.',
       skills: [
         { name: 'React.js', level: 'Advanced', highlight: true },
@@ -91,9 +100,10 @@ export const Skills: React.FC = () => {
     {
       title: 'Backend & Communication APIs',
       category: 'Backend',
-      icon: <Server className="w-6 h-6 text-emerald-400" />,
+      icon: <Server className="w-5 h-5 text-zinc-800 dark:text-white" />,
       topBorderClass: 'border-t-2 border-t-emerald-500',
       badgeBg: 'bg-emerald-500/10 text-emerald-400 border-emerald-500/20',
+      bgClass: 'bg-emerald',
       description: 'Designing scalable RESTful APIs, telephony/voice bridges, and WhatsApp enterprise automation.',
       skills: [
         { name: 'Node.js', level: 'Advanced', highlight: true },
@@ -107,9 +117,10 @@ export const Skills: React.FC = () => {
     {
       title: 'Databases & Storage',
       category: 'Database',
-      icon: <Database className="w-6 h-6 text-amber-400" />,
+      icon: <Database className="w-5 h-5 text-zinc-800 dark:text-white" />,
       topBorderClass: 'border-t-2 border-t-amber-500',
       badgeBg: 'bg-amber-500/10 text-amber-400 border-amber-500/20',
+      bgClass: 'bg-amber',
       description: 'Relational and NoSQL schema design, query optimization, indexing, and real-time syncing.',
       skills: [
         { name: 'MongoDB & Mongoose', level: 'Advanced', highlight: true },
@@ -122,9 +133,10 @@ export const Skills: React.FC = () => {
     {
       title: 'Cloud & DevOps',
       category: 'Cloud & DevOps',
-      icon: <Cloud className="w-6 h-6 text-cyan-400" />,
+      icon: <Cloud className="w-5 h-5 text-zinc-800 dark:text-white" />,
       topBorderClass: 'border-t-2 border-t-cyan-500',
       badgeBg: 'bg-cyan-500/10 text-cyan-400 border-cyan-500/20',
+      bgClass: 'bg-cyan',
       description: 'Cloud infrastructure, server management, containerization, and deployment automation.',
       skills: [
         { name: 'AWS (EC2, S3)', level: 'Proficient', highlight: true },
@@ -136,9 +148,10 @@ export const Skills: React.FC = () => {
     {
       title: 'Tools & Engineering Practices',
       category: 'Tools & Methods',
-      icon: <Wrench className="w-6 h-6 text-rose-400" />,
+      icon: <Wrench className="w-5 h-5 text-zinc-800 dark:text-white" />,
       topBorderClass: 'border-t-2 border-t-rose-500',
       badgeBg: 'bg-rose-500/10 text-rose-400 border-rose-500/20',
+      bgClass: 'bg-rose',
       description: 'Software development lifecycle, API testing suites, Linux environment, and agile sprints.',
       skills: [
         { name: 'Postman API Suite', level: 'Advanced', highlight: true },
@@ -179,34 +192,9 @@ export const Skills: React.FC = () => {
           </p>
         </div>
 
-        {/* React Bits GlassIcons Interactive Hub */}
-        <div className="p-6 sm:p-8 rounded-2xl bg-zinc-50/50 dark:glass-panel border border-zinc-200 dark:border-zinc-800/80 shadow-2xl relative overflow-visible">
-          <div className="flex items-center justify-between px-2 mb-2">
-            <span className="text-xs font-mono font-semibold text-zinc-500 dark:text-zinc-400 uppercase tracking-wider">
-              Interactive 3D Glass Stack Hub
-            </span>
-            <span className="text-[10px] font-mono text-blue-400 bg-blue-500/10 px-2 py-0.5 rounded border border-blue-500/20">
-              Click icon to filter
-            </span>
-          </div>
+        {/* React Bits GlassIcons Interactive Hub replaces text filter pills */}
+        <div className="w-full">
           <GlassIcons items={glassItems} className="my-2" />
-        </div>
-
-        {/* Filter Category Pills */}
-        <div className="flex flex-wrap gap-2.5 pt-2">
-          {filterTabs.map((tab) => (
-            <button
-              key={tab}
-              onClick={() => setSelectedCategory(tab)}
-              className={`px-4 py-2.5 rounded-xl text-xs font-mono transition-all min-h-[40px] ${
-                selectedCategory === tab
-                  ? 'bg-blue-600 text-white font-semibold shadow-lg shadow-blue-600/25 border border-blue-500'
-                  : 'bg-zinc-900/80 hover:bg-zinc-800 text-zinc-400 hover:text-zinc-200 border border-zinc-800/80'
-              }`}
-            >
-              {tab}
-            </button>
-          ))}
         </div>
 
         {/* Uiverse.io Flip Cards Grid */}
@@ -232,8 +220,11 @@ export const Skills: React.FC = () => {
                       <div className={`flip-card-front flex flex-col justify-between ${cat.topBorderClass}`}>
                         <div className="space-y-4">
                           <div className="flex items-center justify-between">
-                            <div className="p-3 rounded-2xl bg-white dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800/80 shadow-md">
-                              {cat.icon}
+                            <div className="Btn cursor-default flex-shrink-0" style={{ transform: 'scale(0.85)', transformOrigin: 'left center' }}>
+                              <div className={`BG ${cat.bgClass}`} />
+                              <div className="svgContainer">
+                                {cat.icon}
+                              </div>
                             </div>
                             <span className={`text-[10px] font-mono font-semibold px-2.5 py-1 rounded-full border ${cat.badgeBg}`}>
                               {cat.category}
@@ -267,8 +258,11 @@ export const Skills: React.FC = () => {
                           <div>
                             <div className="flex items-center justify-between mb-3 border-b border-zinc-200 dark:border-zinc-800/80 pb-2.5">
                               <div className="flex items-center gap-2.5">
-                                <div className="p-2 rounded-xl bg-white dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 shadow-sm">
-                                  {cat.icon}
+                                <div className="Btn cursor-default flex-shrink-0" style={{ transform: 'scale(0.75)', transformOrigin: 'left center' }}>
+                                  <div className={`BG ${cat.bgClass}`} />
+                                  <div className="svgContainer">
+                                    {cat.icon}
+                                  </div>
                                 </div>
                                 <h3 className="text-sm font-bold text-zinc-900 dark:text-white font-display">
                                   {cat.title}

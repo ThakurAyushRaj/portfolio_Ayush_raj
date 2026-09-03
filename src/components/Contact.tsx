@@ -109,7 +109,9 @@ export const Contact: React.FC = () => {
                 {/* Email Item with Copy */}
                 <div className="p-4 rounded-xl bg-zinc-950/90 border border-zinc-800 flex items-center justify-between gap-3 shadow-sm">
                   <div className="flex items-center gap-3.5 overflow-hidden">
-                    <SocialButton type="email" />
+                    <div style={{ transform: 'scale(0.9)', transformOrigin: 'left center' }}>
+                      <SocialButton type="email" />
+                    </div>
                     <div className="overflow-hidden">
                       <div className="text-xs font-mono text-zinc-400">Direct Email</div>
                       <div className="text-sm font-mono text-white truncate font-semibold">{directEmail}</div>
@@ -128,8 +130,11 @@ export const Contact: React.FC = () => {
                 {/* Phone Item */}
                 <div className="p-4 rounded-xl bg-zinc-950/90 border border-zinc-800 flex items-center justify-between gap-3 shadow-sm">
                   <div className="flex items-center gap-3.5 overflow-hidden">
-                    <div className="w-10 h-10 rounded-full bg-blue-500/10 text-blue-400 border border-blue-500/20 flex items-center justify-center flex-shrink-0 shadow-sm">
-                      <Phone className="w-4 h-4" />
+                    <div className="Btn cursor-default flex-shrink-0" style={{ transform: 'scale(0.9)', transformOrigin: 'left center' }}>
+                      <div className="BG bg-phone" />
+                      <div className="svgContainer">
+                        <Phone className="w-5 h-5 text-zinc-800 dark:text-white" />
+                      </div>
                     </div>
                     <div className="overflow-hidden">
                       <div className="text-xs font-mono text-zinc-400">Phone / WhatsApp</div>
@@ -150,8 +155,11 @@ export const Contact: React.FC = () => {
 
                 {/* Location Item */}
                 <div className="p-4 rounded-xl bg-zinc-950/90 border border-zinc-800 flex items-center gap-3.5 shadow-sm">
-                  <div className="w-10 h-10 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 flex items-center justify-center flex-shrink-0 shadow-sm">
-                    <MapPin className="w-4 h-4" />
+                  <div className="Btn cursor-default flex-shrink-0" style={{ transform: 'scale(0.9)', transformOrigin: 'left center' }}>
+                    <div className="BG bg-location" />
+                    <div className="svgContainer">
+                      <MapPin className="w-5 h-5 text-zinc-800 dark:text-white" />
+                    </div>
                   </div>
                   <div>
                     <div className="text-xs font-mono text-zinc-400">Location</div>
@@ -162,7 +170,9 @@ export const Contact: React.FC = () => {
                 {/* GitHub Item */}
                 <div className="p-4 rounded-xl bg-zinc-950/90 border border-zinc-800 flex items-center justify-between gap-3 shadow-sm">
                   <div className="flex items-center gap-3.5 overflow-hidden">
-                    <SocialButton type="github" />
+                    <div style={{ transform: 'scale(0.9)', transformOrigin: 'left center' }}>
+                      <SocialButton type="github" />
+                    </div>
                     <div>
                       <div className="text-xs font-mono text-zinc-400">GitHub Profile</div>
                       <a
@@ -180,7 +190,9 @@ export const Contact: React.FC = () => {
                 {/* LinkedIn Item */}
                 <div className="p-4 rounded-xl bg-zinc-950/90 border border-zinc-800 flex items-center justify-between gap-3 shadow-sm">
                   <div className="flex items-center gap-3.5 overflow-hidden">
-                    <SocialButton type="linkedin" />
+                    <div style={{ transform: 'scale(0.9)', transformOrigin: 'left center' }}>
+                      <SocialButton type="linkedin" />
+                    </div>
                     <div>
                       <div className="text-xs font-mono text-zinc-400">LinkedIn Profile</div>
                       <a

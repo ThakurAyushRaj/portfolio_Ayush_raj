@@ -19,7 +19,8 @@ const gradientMapping: Record<string, string> = {
   red: 'linear-gradient(hsl(3, 90%, 50%), hsl(348, 90%, 50%))',
   indigo: 'linear-gradient(hsl(253, 90%, 50%), hsl(238, 90%, 50%))',
   orange: 'linear-gradient(hsl(43, 90%, 50%), hsl(28, 90%, 50%))',
-  green: 'linear-gradient(hsl(123, 90%, 40%), hsl(108, 90%, 40%))'
+  green: 'linear-gradient(hsl(123, 90%, 40%), hsl(108, 90%, 40%))',
+  slate: 'linear-gradient(hsl(210, 10%, 30%), hsl(210, 10%, 15%))'
 };
 
 export const GlassIcons: React.FC<GlassIconsProps> = ({ items = [], className = '' }) => {
@@ -31,17 +32,17 @@ export const GlassIcons: React.FC<GlassIconsProps> = ({ items = [], className = 
   };
 
   return (
-    <div className={`grid gap-[5em] grid-cols-2 md:grid-cols-3 mx-auto py-[3em] overflow-visible ${className || ''}`}>
+    <div className={`flex flex-nowrap justify-start lg:justify-center items-center gap-x-5 md:gap-x-8 mx-auto pt-[2.5em] pb-[2.5em] px-4 overflow-x-auto overflow-y-visible w-full ${className || ''}`}>
       {items.map((item, index) => (
-        <button
-          key={index}
-          type="button"
-          aria-label={item.label}
-          onClick={item.onClick}
-          className={`relative bg-transparent outline-none border-none cursor-pointer w-[4.5em] h-[4.5em] [perspective:24em] [transform-style:preserve-3d] [-webkit-tap-highlight-color:transparent] group ${
-            item.customClass || ''
-          }`}
-        >
+          <button
+            key={index}
+            type="button"
+            aria-label={item.label}
+            onClick={item.onClick}
+            className={`relative bg-transparent outline-none border-none flex-shrink-0 cursor-pointer w-[3.5em] h-[3.5em] [perspective:24em] [transform-style:preserve-3d] [-webkit-tap-highlight-color:transparent] group ${
+              item.customClass || ''
+            }`}
+          >
           <span
             className="absolute top-0 left-0 w-full h-full rounded-[1.25em] block transition-[opacity,transform] duration-300 ease-[cubic-bezier(0.83,0,0.17,1)] origin-[100%_100%] rotate-[15deg] [will-change:transform] group-hover:[transform:rotate(25deg)_translate3d(-0.5em,-0.5em,0.5em)]"
             style={{

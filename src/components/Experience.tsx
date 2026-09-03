@@ -416,8 +416,11 @@ export const Experience: React.FC = () => {
           >
             <div className="space-y-3">
               <div className="flex items-center justify-between">
-                <div className="p-2.5 w-max rounded-xl bg-gradient-to-br from-blue-500/20 to-blue-600/10 text-blue-400 border border-blue-500/30 shadow-inner">
-                  <Server className="w-5 h-5" />
+                <div className="Btn cursor-default flex-shrink-0" style={{ transform: 'scale(0.85)', transformOrigin: 'left center' }}>
+                  <div className="BG bg-blue" />
+                  <div className="svgContainer">
+                    <Server className="w-5 h-5 text-zinc-800 dark:text-white" />
+                  </div>
                 </div>
                 <span className="text-[9px] font-mono font-bold tracking-widest text-blue-400 bg-blue-500/10 px-2 py-0.5 rounded-full border border-blue-500/20">
                   № 01 // ENTERPRISE
@@ -456,8 +459,11 @@ export const Experience: React.FC = () => {
           >
             <div className="space-y-3">
               <div className="flex items-center justify-between">
-                <div className="p-2.5 w-max rounded-xl bg-gradient-to-br from-emerald-500/20 to-emerald-600/10 text-emerald-400 border border-emerald-500/30 shadow-inner">
-                  <Cpu className="w-5 h-5" />
+                <div className="Btn cursor-default flex-shrink-0" style={{ transform: 'scale(0.85)', transformOrigin: 'left center' }}>
+                  <div className="BG bg-emerald" />
+                  <div className="svgContainer">
+                    <Cpu className="w-5 h-5 text-zinc-800 dark:text-white" />
+                  </div>
                 </div>
                 <span className="text-[9px] font-mono font-bold tracking-widest text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded-full border border-emerald-500/20">
                   № 02 // FULL STACK
@@ -496,8 +502,11 @@ export const Experience: React.FC = () => {
           >
             <div className="space-y-3">
               <div className="flex items-center justify-between">
-                <div className="p-2.5 w-max rounded-xl bg-gradient-to-br from-purple-500/20 to-purple-600/10 text-purple-400 border border-purple-500/30 shadow-inner">
-                  <Code className="w-5 h-5" />
+                <div className="Btn cursor-default flex-shrink-0" style={{ transform: 'scale(0.85)', transformOrigin: 'left center' }}>
+                  <div className="BG bg-purple" />
+                  <div className="svgContainer">
+                    <Code className="w-5 h-5 text-zinc-800 dark:text-white" />
+                  </div>
                 </div>
                 <span className="text-[9px] font-mono font-bold tracking-widest text-purple-400 bg-purple-500/10 px-2 py-0.5 rounded-full border border-purple-500/20">
                   № 03 // MOBILE & APIS
