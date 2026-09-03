@@ -9,7 +9,7 @@ import { Contact } from '@/components/Contact';
 import { Footer } from '@/components/Footer';
 import { CommandPalette } from '@/components/CommandPalette';
 import { SplashCursor } from '@/components/ui/SplashCursor';
-import { StarfieldBg } from '@/components/ui/StarfieldBg';
+import { Hero3DInteractive } from '@/components/ui/Hero3DInteractive';
 
 function App() {
   const [commandPaletteOpen, setCommandPaletteOpen] = useState(false);
@@ -46,10 +46,10 @@ function App() {
 
   return (
     <div className={`min-h-screen font-sans selection:bg-cyan-500/30 relative overflow-x-hidden transition-colors duration-500 ${
-      isDark ? 'bg-[#090a0f] text-zinc-100' : 'bg-[#f8fafc] text-slate-900 light'
+      isDark ? 'bg-black text-zinc-100' : 'bg-[#f8fafc] text-slate-900 light'
     }`}>
-      {/* Animated Uiverse.io Radial Starfield Background */}
-      <StarfieldBg />
+      {/* Interactive 3D Sphere Background */}
+      <Hero3DInteractive />
 
       {/* React Bits: Optimized Hardware-Accelerated Fluid Splash Cursor */}
       <SplashCursor

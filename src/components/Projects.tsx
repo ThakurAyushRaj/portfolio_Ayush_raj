@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { createPortal } from 'react-dom';
+import { motion, AnimatePresence, useMotionValue, useSpring, useTransform } from 'framer-motion';
 import { Github, Check, ArrowUpRight, AlertTriangle, ShieldCheck, Box, Cpu, Copy, Layers, Target, X, Terminal, BookOpen, ExternalLink, Activity, PhoneCall, MessageSquare, Database, Smartphone, Calendar, FileText } from 'lucide-react';
 
 interface ProjectCaseStudy {
@@ -24,198 +25,408 @@ interface ProjectCaseStudy {
 interface ProjectCardProps {
   project: ProjectCaseStudy;
   onOpenModal: (project: ProjectCaseStudy) => void;
+  isOpen: boolean;
+  onToggle: () => void;
 }
 
 // -------------------------------------------------------------
-// From Uiverse.io by PhyoTP - Enhanced Luxury 3D Blueprint Dossier Card
+// From Uiverse.io by dexter-st
 // -------------------------------------------------------------
-const BookCard: React.FC<ProjectCardProps> = ({ project, onOpenModal }) => {
-  const getThemeAccent = (category: string) => {
-    switch (category) {
-      case 'Production / aNquest':
-        return {
-          spine: 'border-l-blue-400',
-          badge: 'bg-blue-500/15 text-blue-300 border-blue-500/30',
-          accent: 'text-blue-400',
-          button: 'bg-gradient-to-r from-blue-500 to-indigo-500 hover:from-blue-400 hover:to-indigo-400 text-white shadow-blue-500/25',
-          glow: 'from-blue-500/20 via-indigo-500/10 to-transparent',
-          border: 'border-blue-500/30',
-          dot: 'bg-blue-400',
-        };
-      case 'Automation / Bot':
-        return {
-          spine: 'border-l-amber-400',
-          badge: 'bg-amber-500/15 text-amber-300 border-amber-500/30',
-          accent: 'text-amber-400',
-          button: 'bg-gradient-to-r from-amber-500 to-amber-400 hover:from-amber-400 hover:to-amber-300 text-zinc-950 shadow-amber-500/25',
-          glow: 'from-amber-500/20 via-orange-500/10 to-transparent',
-          border: 'border-amber-500/30',
-          dot: 'bg-amber-400',
-        };
-      case 'Mobile App':
-        return {
-          spine: 'border-l-purple-400',
-          badge: 'bg-purple-500/15 text-purple-300 border-purple-500/30',
-          accent: 'text-purple-400',
-          button: 'bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-400 hover:to-pink-400 text-white shadow-purple-500/25',
-          glow: 'from-purple-500/20 via-pink-500/10 to-transparent',
-          border: 'border-purple-500/30',
-          dot: 'bg-purple-400',
-        };
-      case 'Frontend':
-        return {
-          spine: 'border-l-emerald-400',
-          badge: 'bg-emerald-500/15 text-emerald-300 border-emerald-500/30',
-          accent: 'text-emerald-400',
-          button: 'bg-gradient-to-r from-emerald-500 to-teal-400 hover:from-emerald-400 hover:to-teal-300 text-zinc-950 shadow-emerald-500/25',
-          glow: 'from-emerald-500/20 via-teal-500/10 to-transparent',
-          border: 'border-emerald-500/30',
-          dot: 'bg-emerald-400',
-        };
-      default: // Full Stack
-        return {
-          spine: 'border-l-cyan-400',
-          badge: 'bg-cyan-500/15 text-cyan-300 border-cyan-500/30',
-          accent: 'text-cyan-400',
-          button: 'bg-gradient-to-r from-cyan-500 to-blue-500 hover:from-cyan-400 hover:to-blue-400 text-zinc-950 shadow-cyan-500/25',
-          glow: 'from-cyan-500/20 via-blue-500/10 to-transparent',
-          border: 'border-cyan-500/30',
-          dot: 'bg-cyan-400',
-        };
-    }
-  };
+const receiptStyles = `
+.wrapper {
+  --printer-color: #2a2c30;
+  --printer-color-2: #1e2022;
+  --receipt-color: #16181a;
 
-  const theme = getThemeAccent(project.category);
+  font-size: 14px;
+  position: relative;
+  user-select: none;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  z-index: 1;
+}
+
+.wrapper:has(.print-button:focus),
+.wrapper:hover {
+  z-index: 10;
+}
+
+.printer {
+  width: 320px;
+  height: 80px;
+  border-radius: 0 0 8px 8px;
+  position: relative;
+  margin-top: 40px;
+
+  background-color: var(--printer-color);
+  background-image: url(data:image/png;base64,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);
+  border: 2px solid var(--printer-color-2);
+  box-shadow:
+    0 16px 32px 0px #0002,
+    0 -30px 16px 0px #0001;
+}
+
+.printer::before {
+  content: "";
+  position: absolute;
+  top: -30px;
+  left: 0;
+  width: 100%;
+  height: 70px;
+  border-radius: 12px 12px 0 0;
+  border-bottom: 2px solid #0003;
+  box-shadow:
+    0 12px 16px -12px #fff5 inset,
+    0 -6px 16px -6px #0003 inset,
+    0 6px 8px -6px #0004;
+  box-sizing: border-box;
+  background-color: inherit;
+  background-image: inherit;
+  filter: brightness(1.12);
+  z-index: 2;
+}
+
+.printer::after {
+  content: "";
+  position: absolute;
+  top: 20px;
+  left: 30px;
+  width: 260px;
+  height: 40px;
+  border-radius: 0 0 4px 4px;
+  border-bottom: 1px solid #0003;
+  background-color: inherit;
+  background-image: linear-gradient(
+    to top,
+    var(--printer-color),
+    60%,
+    var(--printer-color-2)
+  );
+  box-shadow: 0 4px 4px -2px #0004;
+  z-index: 1;
+}
+
+.printer-display {
+  z-index: 2;
+  display: flex;
+  padding: 6px 8px;
+  position: absolute;
+  top: -10px;
+  left: 30px;
+  width: 160px;
+  height: 32px;
+  background-color: #000;
+  background-image: linear-gradient(transparent 0, #fff2 90%, transparent 100%);
+  background-size: 100% 8px;
+  background-repeat: no-repeat;
+  border: 3px solid var(--printer-color-2);
+  border-radius: 6px;
+  box-sizing: border-box;
+  box-shadow:
+    -1px -1px 2px 0 #fff9 inset,
+    1px 1px 5px 1px #000 inset,
+    0 0 1px 2px #0002;
+  font-family: "Courier New", Courier, monospace;
+  font-size: 0.8em;
+  color: #5aff5a;
+  filter: drop-shadow(1px 1px 1px #0002);
+}
+
+.print-button {
+  z-index: 2;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2em;
+  position: absolute;
+  top: -30px;
+  right: 0;
+  margin: 16px;
+  border: 1px solid #0001;
+  border-radius: 6px;
+  width: 48px;
+  height: 36px;
+  background-color: var(--printer-color);
+  box-shadow:
+    1px 1px 2px 0 #fff8 inset,
+    -1px -1px 2px 0 #0002 inset,
+    0 2px 6px 0px #0002;
+  transition: box-shadow 0.1s ease-in-out, transform 0.1s ease-in-out;
+}
+
+.print-button:hover {
+  box-shadow:
+    2px 2px 2px 0 #fff9 inset,
+    -2px -2px 2px 0 #0002 inset,
+    0 2px 10px 0px #0002;
+  transform: scale(1.05);
+}
+.print-button:active,
+.print-button:focus {
+  box-shadow:
+    2px 2px 2px 0 #0002 inset,
+    -2px -2px 2px 0 #fff9 inset,
+    0 0px 4px 0px #fff9;
+  transform: scale(0.95);
+  outline: none;
+}
+
+.receipt-wrapper {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  margin-left: -100px;
+  filter: drop-shadow(0 0 12px #0001);
+  transform: translateY(-100%);
+  clip-path: inset(100% -100px -100px -100px);
+  transition: clip-path 0.5s;
+}
+
+.receipt {
+  z-index: 2;
+  position: relative;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+  padding: 16px;
+  width: 200px;
+  min-height: 160px;
+  font-size: 0.75em;
+  font-family: "Courier New", "Roboto Mono", monospace;
+  font-weight: 400;
+  color: #9ca3af;
+  background-color: var(--receipt-color);
+  box-shadow:
+    0 12px 12px 0 #0002,
+    0 24px 24px 0 #0003,
+    0 36px 36px 0 #0004;
+}
+
+.receipt:hover {
+  background-color: #1c1e22;
+}
+
+.receipt::before,
+.receipt::after {
+  --angle: 45deg;
+  content: "";
+  display: block;
+  position: absolute;
+  left: 0px;
+  width: 100%;
+  height: 8px;
+  background: linear-gradient(
+      calc(var(--angle) * -1),
+      var(--receipt-color) 4px,
+      transparent 0
+    ),
+    linear-gradient(var(--angle), var(--receipt-color) 4px, transparent 0);
+  background-position: 4px 0;
+  background-repeat: repeat-x;
+  background-size: 8px 8px;
+}
+.receipt::before {
+  top: -8px;
+  background-position: 4px 0;
+}
+.receipt::after {
+  bottom: -8px;
+  background-position: 0 100%;
+  --angle: 225deg;
+}
+
+.receipt-header,
+.receipt-subheader,
+.receipt-message {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.2em 0;
+}
+
+.receipt-header {
+  font-size: 1.1em;
+  font-weight: 600;
+}
+.receipt-subheader {
+  border-bottom: 1px dashed #ccc;
+}
+.receipt-message {
+  justify-content: center;
+  text-align: center;
+  padding: 0 1em;
+}
+
+.receipt-subtotal td {
+  border-top: 1px dashed #ccc;
+}
+.receipt-total td {
+  border-top: 1px dashed #ccc;
+  font-weight: 600;
+}
+
+.receipt-table {
+  font: inherit;
+  color: inherit;
+  text-align: left;
+  line-height: 1.5em;
+}
+.receipt-table th:last-child,
+.receipt-table td:last-child {
+  text-align: right;
+}
+
+.letter-wrapper {
+  position: inherit;
+  display: flex;
+}
+.letter {
+  display: inline-block;
+  opacity: 0;
+}
+
+/* Animations */
+.wrapper.is-open .receipt-wrapper {
+  animation:
+    print 1.2s 1 forwards ease-in,
+    display 0.4s 1 forwards cubic-bezier(0, 0.63, 0.96, 1.1);
+  animation-delay: 0s, 1.35s;
+}
+
+.wrapper.is-open .printer-message {
+  opacity: 0;
+}
+
+.wrapper.is-open .letter:nth-child(1) { animation-delay: 0.05s; }
+.wrapper.is-open .letter:nth-child(2) { animation-delay: 0.1s; }
+.wrapper.is-open .letter:nth-child(3) { animation-delay: 0.15s; }
+.wrapper.is-open .letter:nth-child(4) { animation-delay: 0.2s; }
+.wrapper.is-open .letter:nth-child(5) { animation-delay: 0.25s; }
+.wrapper.is-open .letter:nth-child(6) { animation-delay: 0.3s; }
+.wrapper.is-open .letter:nth-child(7) { animation-delay: 0.35s; }
+.wrapper.is-open .letter:nth-child(8) { animation-delay: 0.4s; }
+.wrapper.is-open .letter:nth-child(9) { animation-delay: 0.45s; }
+.wrapper.is-open .letter:nth-child(10) { animation-delay: 0.5s; }
+
+.wrapper.is-open .letter {
+  animation: show-text 0.6s 1 forwards linear;
+}
+
+@keyframes print {
+  100% {
+    transform: translateY(10%);
+    clip-path: inset(-20% -100px -100px -100px);
+  }
+}
+
+@keyframes display {
+  30% {
+    transform: translateY(22%) rotate3d(1, 0, 1, -5deg);
+  }
+  70% {
+    z-index: 5;
+  }
+  100% {
+    z-index: 5;
+    transform: translateY(-40%) scale(1.2);
+  }
+}
+
+@keyframes show-text {
+  10%,
+  100% {
+    opacity: 1;
+  }
+}
+`;
+
+const ProjectCard: React.FC<ProjectCardProps> = ({ project, onOpenModal, isOpen, onToggle }) => {
+  const displayTitle = project.title.toUpperCase();
 
   return (
-    <div
-      onClick={() => onOpenModal(project)}
-      tabIndex={0}
-      role="button"
-      onKeyDown={(e) => {
-        if (e.key === 'Enter' || e.key === ' ') {
-          e.preventDefault();
-          onOpenModal(project);
-        }
-      }}
-      className="book group relative p-4 flex flex-col justify-between select-none outline-none focus:ring-2 focus:ring-cyan-400/50 border border-white/5 hover:border-cyan-500/30 transition-colors"
-    >
-      {/* ----------------- INSIDE OF BOOK (Revealed when cover rotates -85deg) ----------------- */}
-      <div className="flex flex-col justify-between h-full space-y-2 z-10">
-        {/* Top Header Inside */}
-        <div className="flex items-center justify-between border-b border-white/10 pb-2">
-          <div className="flex items-center gap-2">
-            <span className="text-[10px] font-mono text-zinc-400 uppercase font-extrabold tracking-wider">
-              DOSSIER #{project.indexNum}
-            </span>
-            <span className="inline-flex items-center gap-1.5 px-1.5 py-0.5 rounded bg-zinc-900/90 border border-zinc-800 text-[8px] font-mono text-emerald-400 font-semibold">
-              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-              <span>{project.isProduction ? 'LIVE PRODUCTION' : 'OPEN SOURCE'}</span>
-            </span>
-          </div>
-          <span className={`px-2 py-0.5 rounded-md text-[8px] font-mono font-bold uppercase tracking-wider border shadow-sm ${theme.badge}`}>
-            {project.category}
-          </span>
-        </div>
-
-        {/* Synopsis & Tech Stack */}
-        <div className="space-y-1.5 my-auto">
-          <p className="text-[11px] text-zinc-300 line-clamp-2 leading-relaxed font-sans">
-            {project.description}
-          </p>
-          <div className="flex flex-wrap gap-1.5 pt-0.5">
-            {project.tags.slice(0, 4).map((tag) => (
-              <span
-                key={tag}
-                className="px-2 py-0.5 text-[8px] font-mono font-medium rounded-md bg-zinc-900/90 hover:bg-zinc-800 border border-zinc-800 text-zinc-300 shadow-sm transition-colors"
-              >
-                {tag}
+    <>
+      <style>{receiptStyles}</style>
+      <div className="w-full flex justify-center py-6 h-[160px]">
+        <div className={`wrapper ${isOpen ? 'is-open' : ''}`}>
+          <div className="printer">
+            
+            <div className="printer-display flex items-center" title={displayTitle}>
+              <span className="printer-message truncate w-full cursor-help">
+                {displayTitle}
               </span>
-            ))}
-          </div>
-        </div>
-
-        {/* Bottom Metrics & Action Button */}
-        <div className="pt-2 border-t border-white/10 flex items-center justify-between gap-2">
-          <div className="text-[9px] font-mono flex items-center gap-1.5">
-            <span className="text-zinc-400 uppercase">{project.metrics[0]?.label}:</span>
-            <span className={`font-bold ${theme.accent}`}>{project.metrics[0]?.value}</span>
-          </div>
-
-          <button
-            type="button"
-            onClick={(e) => {
-              e.stopPropagation();
-              onOpenModal(project);
-            }}
-            className={`py-1.5 px-3 rounded-lg text-[10px] font-mono font-bold flex items-center gap-1.5 transition-all shadow-md active:scale-95 ${theme.button}`}
-          >
-            <span>Open Blueprint</span>
-            <span>→</span>
-          </button>
-        </div>
-      </div>
-
-      {/* ----------------- FRONT COVER (Swings -85deg on hover) ----------------- */}
-      <div
-        className={`cover p-4 flex flex-col justify-between border-l-[6px] ${theme.spine} border-t border-r border-b border-white/10 relative overflow-hidden`}
-      >
-        {/* Subtle Spine Seam & Crease */}
-        <div className="absolute left-2.5 top-0 bottom-0 w-[1px] bg-white/15 pointer-events-none" />
-        <div className="absolute left-1 top-2.5 w-1 h-1 rounded-full bg-white/40 pointer-events-none" />
-        <div className="absolute left-1 bottom-2.5 w-1 h-1 rounded-full bg-white/40 pointer-events-none" />
-
-        {/* Ambient Top Glow */}
-        <div
-          className={`absolute -top-12 -right-12 w-28 h-28 bg-gradient-to-br ${theme.glow} blur-2xl rounded-full pointer-events-none`}
-        />
-
-        {/* Cover Top Meta */}
-        <div className="space-y-0.5 z-10 pl-2">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-1.5">
-              <span className="text-[10px] font-mono font-black text-white/70 tracking-widest uppercase">
-                № {project.indexNum}
-              </span>
-              <span className="text-[8px] font-mono text-zinc-500 uppercase tracking-widest">
-                // {project.company ? project.company.toUpperCase() : 'DOSSIER'}
+              <span className="letter-wrapper absolute top-1.5 left-2 pointer-events-none">
+                {"PRINTING...".split('').map((char, i) => <span key={i} className="letter">{char}</span>)}
               </span>
             </div>
-            <span
-              className={`px-2 py-0.5 rounded-md text-[8px] font-mono font-bold uppercase tracking-wider border shadow-sm backdrop-blur-sm ${theme.badge}`}
-            >
-              {project.category}
-            </span>
-          </div>
-        </div>
-
-        {/* Cover Center Content */}
-        <div className="space-y-1.5 z-10 pl-2 my-auto">
-          <div className="flex items-center gap-2.5">
-            <div className="w-8 h-8 rounded-xl bg-gradient-to-br from-zinc-900 to-black border border-white/15 flex items-center justify-center text-white/90 shadow-inner flex-shrink-0">
-              <Terminal className={`w-4 h-4 ${theme.accent}`} />
+            <button className="print-button" onClick={(e) => { e.stopPropagation(); onToggle(); }}>🖨️</button>
+            
+            <div className="receipt-wrapper">
+              <div className="receipt cursor-default">
+                <div className="receipt-header">
+                  <span className="truncate max-w-[120px]">{project.title}</span>
+                  <span>#{project.indexNum}</span>
+                </div>
+                <div className="receipt-subheader">
+                   <span className="truncate">{project.category}</span>
+                </div>
+                <table className="receipt-table text-[10px]">
+                  <tbody>
+                    <tr><td>Status</td><td>{project.isProduction ? 'Live' : 'OSS'}</td></tr>
+                    {project.tags.slice(0, 3).map((tag, i) => (
+                       <tr key={i}><td>Tag {i+1}</td><td>{tag.substring(0, 12)}</td></tr>
+                    ))}
+                  </tbody>
+                </table>
+                
+                <div className="w-full border-t border-dashed border-zinc-700 my-1"></div>
+                
+                <div className="flex flex-col gap-1 w-full mt-1">
+                  <button 
+                    onClick={(e) => { e.stopPropagation(); onOpenModal(project); }}
+                    className="w-full py-1 text-[10px] border border-zinc-700/80 hover:bg-zinc-800 uppercase font-bold tracking-wider rounded-sm transition-colors text-zinc-300"
+                  >
+                    More Info
+                  </button>
+                  
+                  {(project.liveUrl || project.github) && (
+                    <div className="flex gap-1 w-full">
+                      {project.liveUrl && (
+                        <a 
+                          href={project.liveUrl}
+                          target="_blank"
+                          rel="noreferrer"
+                          onClick={(e) => e.stopPropagation()}
+                          className="flex-1 py-1 text-center text-[9px] border border-zinc-700/80 hover:bg-zinc-800 uppercase font-bold tracking-wider rounded-sm transition-colors text-zinc-300"
+                        >
+                          Live
+                        </a>
+                      )}
+                      {project.github && (
+                        <a 
+                          href={project.github}
+                          target="_blank"
+                          rel="noreferrer"
+                          onClick={(e) => e.stopPropagation()}
+                          className="flex-1 py-1 text-center text-[9px] border border-zinc-700/80 hover:bg-zinc-800 uppercase font-bold tracking-wider rounded-sm transition-colors text-zinc-300"
+                        >
+                          Repo
+                        </a>
+                      )}
+                    </div>
+                  )}
+                </div>
+                
+                <div className="receipt-message text-[10px] mt-1 font-bold opacity-60">
+                   *** {project.company || "Independent"} ***
+                </div>
+              </div>
             </div>
-            <h3 className="text-sm sm:text-base font-display font-extrabold text-white tracking-tight leading-tight line-clamp-1">
-              {project.title}
-            </h3>
           </div>
-          <p className="text-[10px] font-mono text-zinc-400 line-clamp-2 leading-relaxed pl-0.5">
-            {project.subtitle}
-          </p>
-        </div>
-
-        {/* Cover Bottom Footer */}
-        <div className="pt-2 border-t border-white/10 z-10 pl-2 flex items-center justify-between">
-          <span className="text-[9px] font-mono text-zinc-400 font-medium">
-            {project.metrics[0]?.label}: <span className="text-zinc-200 font-bold">{project.metrics[0]?.value}</span>
-          </span>
-          <span className={`text-[9px] font-mono font-bold flex items-center gap-1.5 ${theme.accent}`}>
-            <span>Hover to Open</span>
-            <span>→</span>
-          </span>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 
@@ -242,48 +453,35 @@ const ProjectDetailModal: React.FC<{
     };
   }, [project, onClose]);
 
-  if (!project) return null;
-
   const handleCopyClone = () => {
+    if (!project) return;
     navigator.clipboard.writeText(`git clone ${project.github}`);
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
   };
 
-  return (
+  return createPortal(
     <AnimatePresence>
-      <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 overflow-y-auto">
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          onClick={onClose}
-          className="fixed inset-0 bg-black/85 backdrop-blur-md"
-        />
+      {project && (
+        <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 sm:p-6 overflow-y-auto">
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={onClose}
+            className="fixed inset-0 bg-black/85 backdrop-blur-md"
+          />
 
-        <motion.div
-          initial={{ opacity: 0, scale: 0.95, y: 20 }}
-          animate={{ opacity: 1, scale: 1, y: 0 }}
-          exit={{ opacity: 0, scale: 0.95, y: 20 }}
-          transition={{ duration: 0.3, ease: 'easeOut' }}
-          className="relative w-full max-w-3xl bg-zinc-950 border border-zinc-700/80 rounded-2xl shadow-2xl overflow-hidden z-10 my-8"
-        >
+          <motion.div
+            initial={{ opacity: 0, scale: 0.95, y: 20 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            exit={{ opacity: 0, scale: 0.95, y: 20 }}
+            transition={{ duration: 0.3, ease: 'easeOut' }}
+            className="relative w-full max-w-3xl bg-zinc-950 border border-zinc-700/80 rounded-2xl shadow-2xl overflow-hidden z-10 my-8"
+          >
           {/* Modal Header */}
           <div className="p-6 sm:p-8 bg-zinc-900/60 border-b border-zinc-800 flex items-start justify-between gap-4">
             <div className="space-y-2">
-              <div className="flex items-center gap-2 flex-wrap">
-                <span className="px-2.5 py-0.5 rounded text-[11px] font-mono font-semibold bg-cyan-500/10 text-cyan-400 border border-cyan-500/20 uppercase tracking-wider">
-                  № {project.indexNum} // {project.category}
-                </span>
-                {project.company && (
-                  <span className="px-2.5 py-0.5 rounded text-[11px] font-mono font-semibold bg-blue-500/10 text-blue-400 border border-blue-500/20">
-                    {project.company}
-                  </span>
-                )}
-                <span className="px-2.5 py-0.5 rounded text-[11px] font-mono font-semibold bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
-                  {project.isProduction ? 'Production System' : 'Open Source'}
-                </span>
-              </div>
               <h3 className="text-2xl sm:text-3xl font-display font-extrabold text-white">
                 {project.title}
               </h3>
@@ -431,16 +629,19 @@ const ProjectDetailModal: React.FC<{
                 </>
               )}
             </button>
-          </div>
-        </motion.div>
-      </div>
-    </AnimatePresence>
+            </div>
+          </motion.div>
+        </div>
+      )}
+    </AnimatePresence>,
+    document.body
   );
 };
 
 export const Projects: React.FC = () => {
   const [activeFilter, setActiveFilter] = useState<string>('All');
   const [selectedProject, setSelectedProject] = useState<ProjectCaseStudy | null>(null);
+  const [openPrinterId, setOpenPrinterId] = useState<string | null>(null);
 
   const caseStudies: ProjectCaseStudy[] = [
     {
@@ -753,11 +954,13 @@ export const Projects: React.FC = () => {
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -10 }}
                 transition={{ duration: 0.35, delay: index * 0.05, ease: [0.25, 1, 0.5, 1] }}
-                className="w-full flex justify-center"
+                className="w-full flex justify-center perspective-[1200px]"
               >
-                <BookCard
+                <ProjectCard
                   project={project}
                   onOpenModal={(p) => setSelectedProject(p)}
+                  isOpen={openPrinterId === project.id}
+                  onToggle={() => setOpenPrinterId(openPrinterId === project.id ? null : project.id)}
                 />
               </motion.div>
             ))}

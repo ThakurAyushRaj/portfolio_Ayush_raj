@@ -1,5 +1,5 @@
 import React from 'react';
-import { motion } from 'framer-motion';
+import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion';
 import { Briefcase, Calendar, CheckCircle2, Building2, Code, Cpu, Server, MapPin } from 'lucide-react';
 import { ResumeCard } from '@/components/ui/ResumeCard';
 
@@ -13,6 +13,359 @@ interface ExperienceItem {
   achievements: string[];
   skills: string[];
 }
+
+const browserStyles = `
+/* From Uiverse.io by arthur_6104 */ 
+.browser {
+  width: 100%;
+  height: auto;
+  background: rgba(18, 18, 22, 0.4);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border-radius: 7px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  position: relative;
+  box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* tabs-head */
+.tabs-head {
+  background-color: rgba(30, 30, 35, 0.6);
+  height: 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
+  padding-left: 20px;
+}
+
+.tabs-head .tab-open {
+  width: 150px;
+  height: 34px;
+  border-radius: 7px 7px 0 0;
+  background-color: rgba(60, 60, 65, 0.7);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  border-left: 1px solid rgba(255, 255, 255, 0.05);
+  border-right: 1px solid rgba(255, 255, 255, 0.05);
+  display: flex;
+  gap: 5px;
+  align-items: start;
+  justify-content: space-between;
+  padding: 6px 12px;
+  position: relative;
+}
+
+.tabs-head .tab-open .close-tab {
+  color: #fff;
+  font-size: 10px;
+  padding: 1px 5px;
+  border-radius: 50%;
+  cursor: default;
+  transition: 0.2s ease;
+}
+.tabs-head .tab-open .close-tab:hover {
+  background-color: #5d5d5d;
+}
+
+.tabs-head .tab-open .rounded-l {
+  position: absolute;
+  background-color: rgba(60, 60, 65, 0.7);
+  width: 20px;
+  height: 24px;
+  top: 0;
+  right: 0;
+  transform: translate(100%);
+  overflow: hidden;
+}
+.tabs-head .tab-open .rounded-l .mask-round {
+  width: 100%;
+  height: 100%;
+  background-color: rgb(24, 24, 27); /* Solid fallback so it masks cleanly */
+  border-radius: 0 0 0 7px;
+}
+
+.tabs-head .tab-open .rounded-r {
+  position: absolute;
+  background-color: rgba(60, 60, 65, 0.7);
+  width: 20px;
+  height: 24px;
+  top: 0;
+  left: 0;
+  transform: translate(-100%);
+  overflow: hidden;
+}
+
+.tabs-head .tab-open .rounded-r .mask-round {
+  width: 100%;
+  height: 100%;
+  background-color: rgb(24, 24, 27); /* Solid fallback so it masks cleanly */
+  border-radius: 0 0 7px 0;
+}
+
+.tabs-head .tab-open span {
+  color: #fff;
+  font-size: 11px;
+  font-family: monospace;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.tabs-head .window-opt {
+  display: flex;
+}
+
+.tabs-head .window-opt button {
+  height: 30px;
+  width: 30px;
+  border: none;
+  background-color: transparent;
+  transition: 0.1s ease-out;
+  color: #fff;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.tabs-head .window-opt button:hover {
+  background-color: #515151c8;
+}
+
+.tabs-head .window-opt .window-close:hover {
+  background-color: rgb(255, 52, 52);
+}
+
+/* head-browser */
+.head-browser {
+  position: absolute;
+  top: 30px;
+  width: 100%;
+  height: 40px;
+  background-color: rgba(60, 60, 65, 0.7);
+  backdrop-filter: blur(10px);
+  padding: 7px;
+  display: flex;
+  border-radius: 7px 7px 0 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  gap: 5px;
+  z-index: 10;
+}
+
+.head-browser input {
+  background-color: rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  height: 100%;
+  border-radius: 20px;
+  outline: none;
+  color: #fff;
+  padding: 0 15px;
+  flex: 1;
+  transition: 0.2s ease-in-out;
+  font-family: monospace;
+  font-size: 12px;
+}
+
+.head-browser input:hover {
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.head-browser input:focus {
+  border-color: rgba(59, 130, 246, 0.5);
+  background-color: rgba(0, 0, 0, 0.5);
+  transition: none;
+}
+
+.head-browser input::placeholder {
+  color: #fff;
+}
+
+.head-browser button {
+  width: 27px;
+  height: 25px;
+  border: none;
+  background-color: transparent;
+  color: #fff;
+  border-radius: 50%;
+  transition: 0.2s ease-in-out;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.head-browser button:hover {
+  background-color: #5d5d5d;
+}
+.head-browser .star {
+  color: #fff;
+  position: absolute;
+  right: 45px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 15px;
+  opacity: 0.7;
+}
+
+.browser-content {
+  margin-top: 70px;
+  padding: 24px;
+  background: transparent;
+}
+`;
+
+const ExperienceCard: React.FC<{ exp: ExperienceItem; idx: number }> = ({ exp, idx }) => {
+  const ref = React.useRef<HTMLDivElement>(null);
+  const x = useMotionValue(0);
+  const y = useMotionValue(0);
+
+  const mouseXSpring = useSpring(x, { stiffness: 400, damping: 30 });
+  const mouseYSpring = useSpring(y, { stiffness: 400, damping: 30 });
+
+  const rotateX = useTransform(mouseYSpring, [-0.5, 0.5], ["6deg", "-6deg"]);
+  const rotateY = useTransform(mouseXSpring, [-0.5, 0.5], ["-6deg", "6deg"]);
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (!ref.current) return;
+    const rect = ref.current.getBoundingClientRect();
+    const width = rect.width;
+    const height = rect.height;
+    const mouseX = e.clientX - rect.left;
+    const mouseY = e.clientY - rect.top;
+    
+    x.set(mouseX / width - 0.5);
+    y.set(mouseY / height - 0.5);
+  };
+
+  const handleMouseLeave = () => {
+    x.set(0);
+    y.set(0);
+  };
+
+  const browserUrl = `https://${exp.company.toLowerCase().split(' ').join('')}.com/${exp.role.toLowerCase().split(' ').join('-')}`;
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, x: -20 }}
+      whileInView={{ opacity: 1, x: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.5, delay: idx * 0.15 }}
+      className="relative group perspective-[1200px]"
+    >
+      {/* Timeline Marker Dot */}
+      <div className="absolute -left-[31px] md:-left-[47px] top-1.5 w-5 h-5 rounded-full bg-zinc-950 border-2 border-blue-500 flex items-center justify-center shadow-md shadow-blue-500/20 group-hover:scale-110 transition-transform z-10">
+        <div className="w-2 h-2 rounded-full bg-blue-400" />
+      </div>
+
+      {/* Injecting the Uiverse browser styles */}
+      <style>{browserStyles}</style>
+
+      {/* Browser Card Design */}
+      <motion.div
+        ref={ref}
+        onMouseMove={handleMouseMove}
+        onMouseLeave={handleMouseLeave}
+        style={{
+          rotateX,
+          rotateY,
+          transformStyle: "preserve-3d",
+        }}
+      >
+        <div className="browser">
+          {/* Top Tabs Bar */}
+          <div className="tabs-head">
+            <div className="tab-open">
+              <span>{exp.company}.com</span>
+              <button className="close-tab">x</button>
+              <div className="rounded-l"><div className="mask-round"></div></div>
+              <div className="rounded-r"><div className="mask-round"></div></div>
+            </div>
+            <div className="window-opt">
+              <button className="window-minimize">-</button>
+              <button className="window-maximize">□</button>
+              <button className="window-close">x</button>
+            </div>
+          </div>
+
+          {/* Browser Navigation Bar */}
+          <div className="head-browser">
+            <button>←</button>
+            <button>→</button>
+            <button>↻</button>
+            <input type="text" readOnly value={browserUrl} />
+            <div className="star">☆</div>
+          </div>
+
+          {/* Browser Content Area (The actual experience data) */}
+          <div className="browser-content space-y-5">
+            {/* Header info */}
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-zinc-700/60 pb-4">
+              <div>
+                <div className="flex items-center gap-3">
+                  <span className={`px-2.5 py-0.5 rounded text-[11px] font-mono font-semibold uppercase tracking-wider ${
+                    exp.type === 'SDE Role' 
+                      ? 'bg-blue-500/10 text-blue-400 border border-blue-500/20'
+                      : 'bg-emerald-500/10 text-emerald-400 border border-emerald-500/20'
+                  }`}>
+                    {exp.type}
+                  </span>
+                </div>
+                <h3 className="text-xl font-bold text-white mt-2 font-display">{exp.role}</h3>
+                <div className="flex flex-wrap items-center gap-3 text-zinc-400 text-sm mt-1">
+                  <div className="flex items-center gap-1.5 font-semibold text-zinc-300">
+                    <Building2 className="w-4 h-4 text-blue-400" />
+                    <span>{exp.company}</span>
+                  </div>
+                  <span>•</span>
+                  <div className="flex items-center gap-1.5 text-zinc-400 text-xs font-mono">
+                    <MapPin className="w-3.5 h-3.5 text-zinc-500" />
+                    <span>{exp.location}</span>
+                  </div>
+                </div>
+              </div>
+
+              <div className="flex items-center gap-2 text-xs font-mono text-zinc-400 bg-zinc-900 px-3 py-1.5 rounded-lg border border-zinc-700 w-max">
+                <Calendar className="w-3.5 h-3.5 text-blue-400" />
+                <span>{exp.period}</span>
+              </div>
+            </div>
+
+            {/* Role Description */}
+            <p className="text-zinc-300 text-sm leading-relaxed">
+              {exp.description}
+            </p>
+
+            {/* Key Achievements Bullet points */}
+            <div className="space-y-3">
+              <h4 className="text-xs font-mono font-semibold text-zinc-400 uppercase tracking-wider">Key Achievements</h4>
+              <ul className="grid grid-cols-1 gap-2.5">
+                {exp.achievements.map((item, itemIdx) => (
+                  <li key={itemIdx} className="flex items-start gap-3 text-sm text-zinc-300">
+                    <CheckCircle2 className="w-4 h-4 text-blue-400 flex-shrink-0 mt-0.5" />
+                    <span className="leading-snug">{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            {/* Skills Tags */}
+            <div className="pt-2 flex flex-wrap gap-2">
+              {exp.skills.map((skill) => (
+                <span
+                  key={skill}
+                  className="px-2.5 py-1 text-xs font-mono rounded-md bg-zinc-800 text-zinc-200 border border-zinc-700"
+                >
+                  {skill}
+                </span>
+              ))}
+            </div>
+          </div>
+        </div>
+      </motion.div>
+    </motion.div>
+  );
+};
 
 export const Experience: React.FC = () => {
   const experiences: ExperienceItem[] = [
@@ -208,84 +561,7 @@ export const Experience: React.FC = () => {
 
           <div className="relative border-l-2 border-zinc-800/80 ml-3 md:ml-6 space-y-12 pl-6 md:pl-10">
             {experiences.map((exp, idx) => (
-              <motion.div
-                key={idx}
-                initial={{ opacity: 0, x: -20 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: idx * 0.15 }}
-                className="relative group"
-              >
-                {/* Timeline Marker Dot */}
-                <div className="absolute -left-[31px] md:-left-[47px] top-1.5 w-5 h-5 rounded-full bg-zinc-950 border-2 border-blue-500 flex items-center justify-center shadow-md shadow-blue-500/20 group-hover:scale-110 transition-transform">
-                  <div className="w-2 h-2 rounded-full bg-blue-400" />
-                </div>
-
-                {/* Experience Card */}
-                <div className="p-6 md:p-8 rounded-2xl bg-zinc-900/50 border border-zinc-800/80 hover:border-zinc-700/80 transition-all space-y-6 shadow-xl">
-                  {/* Header info */}
-                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-zinc-800/60 pb-5">
-                    <div>
-                      <div className="flex items-center gap-3">
-                        <span className={`px-2.5 py-0.5 rounded text-[11px] font-mono font-semibold uppercase tracking-wider ${
-                          exp.type === 'SDE Role' 
-                            ? 'bg-blue-500/10 text-blue-400 border border-blue-500/20'
-                            : 'bg-emerald-500/10 text-emerald-400 border border-emerald-500/20'
-                        }`}>
-                          {exp.type}
-                        </span>
-                      </div>
-                      <h3 className="text-xl sm:text-2xl font-bold text-white mt-2 font-display">{exp.role}</h3>
-                      <div className="flex flex-wrap items-center gap-3 text-zinc-400 text-sm mt-1">
-                        <div className="flex items-center gap-1.5 font-semibold text-zinc-200">
-                          <Building2 className="w-4 h-4 text-blue-400" />
-                          <span>{exp.company}</span>
-                        </div>
-                        <span>•</span>
-                        <div className="flex items-center gap-1.5 text-zinc-400 text-xs font-mono">
-                          <MapPin className="w-3.5 h-3.5 text-zinc-500" />
-                          <span>{exp.location}</span>
-                        </div>
-                      </div>
-                    </div>
-
-                    <div className="flex items-center gap-2 text-xs font-mono text-zinc-400 bg-zinc-950/80 px-3 py-1.5 rounded-lg border border-zinc-800 w-max">
-                      <Calendar className="w-3.5 h-3.5 text-blue-400" />
-                      <span>{exp.period}</span>
-                    </div>
-                  </div>
-
-                  {/* Role Description */}
-                  <p className="text-zinc-300 text-sm md:text-base leading-relaxed">
-                    {exp.description}
-                  </p>
-
-                  {/* Key Achievements Bullet points */}
-                  <div className="space-y-3">
-                    <h4 className="text-xs font-mono font-semibold text-zinc-400 uppercase tracking-wider">Key Engineering Achievements</h4>
-                    <ul className="grid grid-cols-1 gap-2.5">
-                      {exp.achievements.map((item, itemIdx) => (
-                        <li key={itemIdx} className="flex items-start gap-3 text-sm text-zinc-300">
-                          <CheckCircle2 className="w-4 h-4 text-blue-400 flex-shrink-0 mt-0.5" />
-                          <span className="leading-snug">{item}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-
-                  {/* Skills Tags */}
-                  <div className="pt-2 flex flex-wrap gap-2">
-                    {exp.skills.map((skill) => (
-                      <span
-                        key={skill}
-                        className="px-2.5 py-1 text-xs font-mono rounded-md bg-zinc-950 text-zinc-300 border border-zinc-800"
-                      >
-                        {skill}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-              </motion.div>
+              <ExperienceCard key={idx} exp={exp} idx={idx} />
             ))}
           </div>
         </div>

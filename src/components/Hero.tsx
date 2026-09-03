@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ArrowRight, Code2 } from 'lucide-react';
 import { SocialLinksGroup } from '@/components/ui/SocialButton';
-import { Hero3DInteractiveMesh } from '@/components/ui/Hero3DInteractiveMesh';
 
 const ROLES = [
   'Software Development Engineer @ aNquest Media',
@@ -35,14 +34,14 @@ export const Hero: React.FC = () => {
   };
 
   return (
-    <section id="hero" className="relative pt-28 md:pt-36 pb-20 min-h-[92vh] flex flex-col justify-center overflow-visible">
+    <section id="hero" className="relative pt-28 md:pt-36 pb-20 min-h-[92vh] flex flex-col justify-center overflow-hidden">
       {/* Soft Ambient Background Glow Spheres */}
-      <div className="absolute top-10 left-10 w-96 h-96 bg-cyan-500/10 rounded-full blur-[140px] pointer-events-none" />
-      <div className="absolute bottom-10 right-10 w-96 h-96 bg-purple-500/10 rounded-full blur-[140px] pointer-events-none" />
+      <div className="absolute top-10 left-10 w-96 h-96 bg-cyan-500/10 rounded-full blur-[140px] pointer-events-none z-0" />
+      <div className="absolute bottom-10 right-10 w-96 h-96 bg-purple-500/10 rounded-full blur-[140px] pointer-events-none z-0" />
 
-      <div className="max-w-6xl mx-auto px-4 md:px-6 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center relative z-10">
-        {/* Left Column: Bio, Pitch & Interactive Role Rotator */}
-        <div className="lg:col-span-7 space-y-8">
+      <div className="max-w-6xl mx-auto px-4 md:px-6 relative z-10 w-full">
+        {/* Main Content */}
+        <div className="max-w-3xl space-y-8 pointer-events-auto">
           {/* Status Badge */}
           <motion.div
             initial={{ opacity: 0, y: -10 }}
@@ -165,16 +164,6 @@ export const Hero: React.FC = () => {
             </div>
           </motion.div>
         </div>
-
-        {/* Right Column: 3D Interactive Torus Mesh & Hologram Object */}
-        <motion.div
-          initial={{ opacity: 0, scale: 0.95 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.7, delay: 0.3 }}
-          className="lg:col-span-5 relative"
-        >
-          <Hero3DInteractiveMesh />
-        </motion.div>
       </div>
     </section>
   );
