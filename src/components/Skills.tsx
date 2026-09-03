@@ -162,7 +162,8 @@ export const Skills: React.FC = () => {
     }
   ];
 
-  const filterTabs = ['All', 'Frontend', 'Backend', 'Database', 'Mobile', 'Cloud & DevOps', 'Tools & Methods'];
+
+
 
   const filteredCategories = selectedCategory === 'All'
     ? categories

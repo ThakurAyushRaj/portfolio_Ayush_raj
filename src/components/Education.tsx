@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { GraduationCap, MapPin, CheckCircle2, Award, BookOpen, Sparkles } from 'lucide-react';
+import { GraduationCap, MapPin, CheckCircle2 } from 'lucide-react';
 
 interface EducationItem {
   degree: string;

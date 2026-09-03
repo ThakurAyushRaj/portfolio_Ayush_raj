@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { createPortal } from 'react-dom';
-import { motion, AnimatePresence, useMotionValue, useSpring, useTransform } from 'framer-motion';
-import { Github, Check, ArrowUpRight, AlertTriangle, ShieldCheck, Box, Cpu, Copy, Layers, Target, X, Terminal, BookOpen, ExternalLink, Activity, PhoneCall, MessageSquare, Database, Smartphone, Calendar, FileText, LayoutGrid, Building2, Bot, Code2 } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Github, Check, ArrowUpRight, AlertTriangle, ShieldCheck, Cpu, Copy, Layers, X, BookOpen, ExternalLink, Smartphone, LayoutGrid, Building2, Bot, Code2 } from 'lucide-react';
 import { GlassIcons, GlassIconsItem } from '@/components/ui/glass-icons';
 
 interface ProjectCaseStudy {
@@ -706,8 +706,6 @@ export const Projects: React.FC = () => {
       colorTo: '#020617'
     }
   ];
-
-  const categories = ['All', 'Production / aNquest', 'Full Stack', 'Automation / Bot', 'Mobile App', 'Frontend'];
 
   const filteredProjects = activeFilter === 'All' ? caseStudies : caseStudies.filter(p => p.category === activeFilter);
 

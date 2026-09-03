@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { AnimatePresence } from 'framer-motion';
 import { Navbar } from '@/components/Navbar';
 import { Hero } from '@/components/Hero';
 import { Experience } from '@/components/Experience';
@@ -10,8 +11,10 @@ import { Footer } from '@/components/Footer';
 import { CommandPalette } from '@/components/CommandPalette';
 import { SplashCursor } from '@/components/ui/SplashCursor';
 import { Hero3DInteractive } from '@/components/ui/Hero3DInteractive';
+import { SplashScreen } from '@/components/SplashScreen';
 
 function App() {
+  const [appLoaded, setAppLoaded] = useState(false);
   const [commandPaletteOpen, setCommandPaletteOpen] = useState(false);
   const [isDark, setIsDark] = useState<boolean>(() => {
     const saved = localStorage.getItem('portfolio-theme');
@@ -44,10 +47,22 @@ function App() {
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, []);
 
+  // Simulate loading screen
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setAppLoaded(true);
+    }, 3000);
+    return () => clearTimeout(timer);
+  }, []);
+
   return (
     <div className={`min-h-screen font-sans selection:bg-cyan-500/30 relative overflow-x-hidden transition-colors duration-500 ${
       isDark ? 'bg-black text-zinc-100' : 'bg-[#f8fafc] text-slate-900 light'
     }`}>
+      <AnimatePresence mode="wait">
+        {!appLoaded && <SplashScreen key="splash" />}
+      </AnimatePresence>
+
       {/* Interactive 3D Sphere Background */}
       <Hero3DInteractive />
 
