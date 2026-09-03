@@ -24,11 +24,11 @@ export const SocialButton: React.FC<SocialButtonProps> = ({
   const getIcon = () => {
     switch (type) {
       case 'email':
-        return <Mail className="w-5 h-5 text-white" />;
+        return <Mail className="w-5 h-5 text-zinc-800 dark:text-white" />;
       case 'github':
-        return <Github className="w-5 h-5 text-white" />;
+        return <Github className="w-5 h-5 text-zinc-800 dark:text-white" />;
       case 'linkedin':
-        return <Linkedin className="w-5 h-5 text-white" />;
+        return <Linkedin className="w-5 h-5 text-zinc-800 dark:text-white" />;
     }
   };
 

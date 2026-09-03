@@ -20,6 +20,8 @@ interface ProjectCaseStudy {
   github: string;
   liveUrl?: string;
   category: 'Production / aNquest' | 'Full Stack' | 'Automation / Bot' | 'Mobile App' | 'Frontend';
+  colorFrom: string;
+  colorTo: string;
 }
 
 interface ProjectCardProps {
@@ -33,397 +35,197 @@ interface ProjectCardProps {
 // From Uiverse.io by dexter-st
 // -------------------------------------------------------------
 const receiptStyles = `
-.wrapper {
-  --printer-color: #2a2c30;
-  --printer-color-2: #1e2022;
-  --receipt-color: #16181a;
-
-  font-size: 14px;
+.card {
+  width: 100%;
+  max-width: 370px;
+  height: 270px;
   position: relative;
-  user-select: none;
   display: flex;
   justify-content: center;
-  width: 100%;
-  z-index: 1;
+  padding: 20px;
+  border-radius: 15px;
+  transition: all 0.5s ease;
+  margin: 0 auto;
 }
 
-.wrapper:has(.print-button:focus),
-.wrapper:hover {
-  z-index: 10;
-}
-
-.printer {
-  width: 320px;
-  height: 80px;
-  border-radius: 0 0 8px 8px;
-  position: relative;
-  margin-top: 40px;
-
-  background-color: var(--printer-color);
-  background-image: url(data:image/png;base64,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);
-  border: 2px solid var(--printer-color-2);
-  box-shadow:
-    0 16px 32px 0px #0002,
-    0 -30px 16px 0px #0001;
-}
-
-.printer::before {
-  content: "";
+.card::before {
+  content: attr(data-category);
   position: absolute;
-  top: -30px;
-  left: 0;
-  width: 100%;
-  height: 70px;
-  border-radius: 12px 12px 0 0;
-  border-bottom: 2px solid #0003;
-  box-shadow:
-    0 12px 16px -12px #fff5 inset,
-    0 -6px 16px -6px #0003 inset,
-    0 6px 8px -6px #0004;
-  box-sizing: border-box;
-  background-color: inherit;
-  background-image: inherit;
-  filter: brightness(1.12);
-  z-index: 2;
-}
-
-.printer::after {
-  content: "";
-  position: absolute;
-  top: 20px;
-  left: 30px;
-  width: 260px;
+  width: auto;
+  min-width: 60px;
+  padding: 0 10px;
   height: 40px;
-  border-radius: 0 0 4px 4px;
-  border-bottom: 1px solid #0003;
-  background-color: inherit;
-  background-image: linear-gradient(
-    to top,
-    var(--printer-color),
-    60%,
-    var(--printer-color-2)
-  );
-  box-shadow: 0 4px 4px -2px #0004;
-  z-index: 1;
-}
-
-.printer-display {
-  z-index: 2;
-  display: flex;
-  padding: 6px 8px;
-  position: absolute;
+  background-color: #0f172a;
   top: -10px;
-  left: 30px;
-  width: 160px;
-  height: 32px;
-  background-color: #000;
-  background-image: linear-gradient(transparent 0, #fff2 90%, transparent 100%);
-  background-size: 100% 8px;
-  background-repeat: no-repeat;
-  border: 3px solid var(--printer-color-2);
-  border-radius: 6px;
-  box-sizing: border-box;
-  box-shadow:
-    -1px -1px 2px 0 #fff9 inset,
-    1px 1px 5px 1px #000 inset,
-    0 0 1px 2px #0002;
-  font-family: "Courier New", Courier, monospace;
-  font-size: 0.8em;
-  color: #5aff5a;
-  filter: drop-shadow(1px 1px 1px #0002);
-}
-
-.print-button {
-  z-index: 2;
-  cursor: pointer;
+  left: 10px;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1.2em;
+  color: #fff;
+  font-size: 10px;
+  font-weight: bold;
+  text-transform: uppercase;
+  transition: all 0.5s ease;
+  box-sizing: border-box;
+}
+
+.card::after {
+  content: '';
   position: absolute;
-  top: -30px;
-  right: 0;
-  margin: 16px;
-  border: 1px solid #0001;
-  border-radius: 6px;
-  width: 48px;
-  height: 36px;
-  background-color: var(--printer-color);
-  box-shadow:
-    1px 1px 2px 0 #fff8 inset,
-    -1px -1px 2px 0 #0002 inset,
-    0 2px 6px 0px #0002;
-  transition: box-shadow 0.1s ease-in-out, transform 0.1s ease-in-out;
+  top: -10px;
+  left: 10px;
+  width: 0;
+  height: 0;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  border-top: 10px solid #020617;
+  transform: translateY(40px);
+  z-index: -1;
+  transition: all 0.5s ease;
 }
 
-.print-button:hover {
-  box-shadow:
-    2px 2px 2px 0 #fff9 inset,
-    -2px -2px 2px 0 #0002 inset,
-    0 2px 10px 0px #0002;
-  transform: scale(1.05);
-}
-.print-button:active,
-.print-button:focus {
-  box-shadow:
-    2px 2px 2px 0 #0002 inset,
-    -2px -2px 2px 0 #fff9 inset,
-    0 0px 4px 0px #fff9;
-  transform: scale(0.95);
-  outline: none;
+.svg-icon {
+  width: 5em;
+  height: 5em;
+  fill: rgba(255, 255, 255, 0.15);
 }
 
-.receipt-wrapper {
+.projectSvgContainer {
+  height: 100px;
+  width: 100px;
   position: absolute;
-  top: 0;
-  left: 50%;
-  margin-left: -100px;
-  filter: drop-shadow(0 0 12px #0001);
-  transform: translateY(-100%);
-  clip-path: inset(100% -100px -100px -100px);
-  transition: clip-path 0.5s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.receipt {
-  z-index: 2;
-  position: relative;
-  cursor: pointer;
+.projectSvgContainer svg {
+  position: absolute;
+  overflow: visible;
+}
+
+.dartboard {
+  width: 2em;
+  height: 2em;
+  padding: 6px;
+  border: 3px solid rgba(255, 255, 255, 0.15);
+  border-radius: 50%;
+  transition: all 0.5s ease;
+  transform: scale(2) rotate(34deg);
+}
+
+.eyehole {
+  transform: scale(1.2) rotate(-270deg);
+  transition: all 0.5s ease;
+}
+
+.batman {
+  transition: all .4s ease-in;
+  transform: rotate(55deg) translate(240px, -45px) scale(1.2);
+}
+
+.svg-fill-primary {
+  fill: rgba(255, 255, 255, 0.2);
+}
+
+.card-info {
   display: flex;
   flex-direction: column;
-  gap: 1em;
-  padding: 16px;
-  width: 200px;
-  min-height: 160px;
-  font-size: 0.75em;
-  font-family: "Courier New", "Roboto Mono", monospace;
-  font-weight: 400;
-  color: #9ca3af;
-  background-color: var(--receipt-color);
-  box-shadow:
-    0 12px 12px 0 #0002,
-    0 24px 24px 0 #0003,
-    0 36px 36px 0 #0004;
-}
-
-.receipt:hover {
-  background-color: #1c1e22;
-}
-
-.receipt::before,
-.receipt::after {
-  --angle: 45deg;
-  content: "";
-  display: block;
-  position: absolute;
-  left: 0px;
-  width: 100%;
-  height: 8px;
-  background: linear-gradient(
-      calc(var(--angle) * -1),
-      var(--receipt-color) 4px,
-      transparent 0
-    ),
-    linear-gradient(var(--angle), var(--receipt-color) 4px, transparent 0);
-  background-position: 4px 0;
-  background-repeat: repeat-x;
-  background-size: 8px 8px;
-}
-.receipt::before {
-  top: -8px;
-  background-position: 4px 0;
-}
-.receipt::after {
-  bottom: -8px;
-  background-position: 0 100%;
-  --angle: 225deg;
-}
-
-.receipt-header,
-.receipt-subheader,
-.receipt-message {
-  display: flex;
-  justify-content: space-between;
-  padding: 0.2em 0;
-}
-
-.receipt-header {
-  font-size: 1.1em;
-  font-weight: 600;
-}
-.receipt-subheader {
-  border-bottom: 1px dashed #ccc;
-}
-.receipt-message {
-  justify-content: center;
+  justify-content: flex-end;
   text-align: center;
-  padding: 0 1em;
+  gap: 10px;
+  align-items: center;
+  height: 100%;
 }
 
-.receipt-subtotal td {
-  border-top: 1px dashed #ccc;
-}
-.receipt-total td {
-  border-top: 1px dashed #ccc;
-  font-weight: 600;
-}
-
-.receipt-table {
-  font: inherit;
-  color: inherit;
-  text-align: left;
-  line-height: 1.5em;
-}
-.receipt-table th:last-child,
-.receipt-table td:last-child {
-  text-align: right;
+.card span.card-title {
+  font-size: 20px;
+  font-weight: 800;
+  text-transform: uppercase;
+  color: #f8fafc;
+  line-height: 1.1;
+  text-shadow: 0 1px 3px rgba(0,0,0,0.8);
 }
 
-.letter-wrapper {
-  position: inherit;
-  display: flex;
-}
-.letter {
-  display: inline-block;
-  opacity: 0;
-}
-
-/* Animations */
-.wrapper.is-open .receipt-wrapper {
-  animation:
-    print 1.2s 1 forwards ease-in,
-    display 0.4s 1 forwards cubic-bezier(0, 0.63, 0.96, 1.1);
-  animation-delay: 0s, 1.35s;
+.card-info p {
+  color: #cbd5e1;
+  font-weight: 500;
+  font-size: 13px;
+  margin: 0;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 
-.wrapper.is-open .printer-message {
-  opacity: 0;
+.card-info .challengeButton {
+  text-decoration: none;
+  background-color: rgba(255,255,255,0.1);
+  color: white;
+  padding: 6px 18px;
+  border-radius: 10px;
+  box-sizing: border-box;
+  transition: all 0.5s ease;
+  border: 1px solid rgba(255,255,255,0.2);
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 12px;
+  text-transform: uppercase;
 }
 
-.wrapper.is-open .letter:nth-child(1) { animation-delay: 0.05s; }
-.wrapper.is-open .letter:nth-child(2) { animation-delay: 0.1s; }
-.wrapper.is-open .letter:nth-child(3) { animation-delay: 0.15s; }
-.wrapper.is-open .letter:nth-child(4) { animation-delay: 0.2s; }
-.wrapper.is-open .letter:nth-child(5) { animation-delay: 0.25s; }
-.wrapper.is-open .letter:nth-child(6) { animation-delay: 0.3s; }
-.wrapper.is-open .letter:nth-child(7) { animation-delay: 0.35s; }
-.wrapper.is-open .letter:nth-child(8) { animation-delay: 0.4s; }
-.wrapper.is-open .letter:nth-child(9) { animation-delay: 0.45s; }
-.wrapper.is-open .letter:nth-child(10) { animation-delay: 0.5s; }
-
-.wrapper.is-open .letter {
-  animation: show-text 0.6s 1 forwards linear;
+.card:hover {
+  box-shadow: 10px 10px 15px 0px rgba(0,0,0,0.5);
 }
 
-@keyframes print {
-  100% {
-    transform: translateY(10%);
-    clip-path: inset(-20% -100px -100px -100px);
-  }
+.card:hover .batman {
+  transform: rotate(-50deg) translate(12px, 2px);
 }
 
-@keyframes display {
-  30% {
-    transform: translateY(22%) rotate3d(1, 0, 1, -5deg);
-  }
-  70% {
-    z-index: 5;
-  }
-  100% {
-    z-index: 5;
-    transform: translateY(-40%) scale(1.2);
-  }
+.card:hover .eyehole {
+  transform: scale(1);
 }
 
-@keyframes show-text {
-  10%,
-  100% {
-    opacity: 1;
-  }
+.card:hover .dartboard {
+  transform: scale(1) rotate(0deg) translate(0, 0);
+}
+
+.challengeButton:hover {
+  background-color: rgba(255,255,255,0.25);
+}
+
+.card:hover::before {
+  background-color: #020617;
+  top: -15px;
+}
+.card:hover::after {
+  transform: translateY(45px);
 }
 `;
 
-const ProjectCard: React.FC<ProjectCardProps> = ({ project, onOpenModal, isOpen, onToggle }) => {
-  const displayTitle = project.title.toUpperCase();
-
+const ProjectCard: React.FC<ProjectCardProps> = ({ project, onOpenModal }) => {
   return (
     <>
       <style>{receiptStyles}</style>
-      <div className="w-full flex justify-center py-6 h-[160px]">
-        <div className={`wrapper ${isOpen ? 'is-open' : ''}`}>
-          <div className="printer">
-            
-            <div className="printer-display flex items-center" title={displayTitle}>
-              <span className="printer-message truncate w-full cursor-help">
-                {displayTitle}
-              </span>
-              <span className="letter-wrapper absolute top-1.5 left-2 pointer-events-none">
-                {"PRINTING...".split('').map((char, i) => <span key={i} className="letter">{char}</span>)}
-              </span>
-            </div>
-            <button className="print-button" onClick={(e) => { e.stopPropagation(); onToggle(); }}>🖨️</button>
-            
-            <div className="receipt-wrapper">
-              <div className="receipt cursor-default">
-                <div className="receipt-header">
-                  <span className="truncate max-w-[120px]">{project.title}</span>
-                  <span>#{project.indexNum}</span>
-                </div>
-                <div className="receipt-subheader">
-                   <span className="truncate">{project.category}</span>
-                </div>
-                <table className="receipt-table text-[10px]">
-                  <tbody>
-                    <tr><td>Status</td><td>{project.isProduction ? 'Live' : 'OSS'}</td></tr>
-                    {project.tags.slice(0, 3).map((tag, i) => (
-                       <tr key={i}><td>Tag {i+1}</td><td>{tag.substring(0, 12)}</td></tr>
-                    ))}
-                  </tbody>
-                </table>
-                
-                <div className="w-full border-t border-dashed border-zinc-700 my-1"></div>
-                
-                <div className="flex flex-col gap-1 w-full mt-1">
-                  <button 
-                    onClick={(e) => { e.stopPropagation(); onOpenModal(project); }}
-                    className="w-full py-1 text-[10px] border border-zinc-700/80 hover:bg-zinc-800 uppercase font-bold tracking-wider rounded-sm transition-colors text-zinc-300"
-                  >
-                    More Info
-                  </button>
-                  
-                  {(project.liveUrl || project.github) && (
-                    <div className="flex gap-1 w-full">
-                      {project.liveUrl && (
-                        <a 
-                          href={project.liveUrl}
-                          target="_blank"
-                          rel="noreferrer"
-                          onClick={(e) => e.stopPropagation()}
-                          className="flex-1 py-1 text-center text-[9px] border border-zinc-700/80 hover:bg-zinc-800 uppercase font-bold tracking-wider rounded-sm transition-colors text-zinc-300"
-                        >
-                          Live
-                        </a>
-                      )}
-                      {project.github && (
-                        <a 
-                          href={project.github}
-                          target="_blank"
-                          rel="noreferrer"
-                          onClick={(e) => e.stopPropagation()}
-                          className="flex-1 py-1 text-center text-[9px] border border-zinc-700/80 hover:bg-zinc-800 uppercase font-bold tracking-wider rounded-sm transition-colors text-zinc-300"
-                        >
-                          Repo
-                        </a>
-                      )}
-                    </div>
-                  )}
-                </div>
-                
-                <div className="receipt-message text-[10px] mt-1 font-bold opacity-60">
-                   *** {project.company || "Independent"} ***
-                </div>
-              </div>
-            </div>
-          </div>
+      <div 
+        className="card" 
+        data-category={project.category} 
+        style={{ background: `linear-gradient(120deg, ${project.colorFrom} 0%, ${project.colorTo} 100%)` }}
+      >
+        <div className="projectSvgContainer">
+          <svg className="svg-icon dartboard" viewBox="0 0 20 20">
+            <path d="M14.613,10c0,0.23-0.188,0.419-0.419,0.419H10.42v3.774c0,0.23-0.189,0.42-0.42,0.42s-0.419-0.189-0.419-0.42v-3.774H5.806c-0.23,0-0.419-0.189-0.419-0.419s0.189-0.419,0.419-0.419h3.775V5.806c0-0.23,0.189-0.419,0.419-0.419s0.42,0.189,0.42,0.419v3.775h3.774C14.425,9.581,14.613,9.77,14.613,10 M17.969,10c0,4.401-3.567,7.969-7.969,7.969c-4.402,0-7.969-3.567-7.969-7.969c0-4.402,3.567-7.969,7.969-7.969C14.401,2.031,17.969,5.598,17.969,10 M17.13,10c0-3.932-3.198-7.13-7.13-7.13S2.87,6.068,2.87,10c0,3.933,3.198,7.13,7.13,7.13S17.13,13.933,17.13,10"></path>
+          </svg>
+          <svg className="svg-icon eyehole" viewBox="0 0 20 20">
+            <path d="M17.659,9.597h-1.224c-0.199-3.235-2.797-5.833-6.032-6.033V2.341c0-0.222-0.182-0.403-0.403-0.403S9.597,2.119,9.597,2.341v1.223c-3.235,0.2-5.833,2.798-6.033,6.033H2.341c-0.222,0-0.403,0.182-0.403,0.403s0.182,0.403,0.403,0.403h1.223c0.2,3.235,2.798,5.833,6.033,6.032v1.224c0,0.222,0.182,0.403,0.403,0.403s0.403-0.182,0.403-0.403v-1.224c3.235-0.199,5.833-2.797,6.032-6.032h1.224c0.222,0,0.403-0.182,0.403-0.403S17.881,9.597,17.659,9.597 M14.435,10.403h1.193c-0.198,2.791-2.434,5.026-5.225,5.225v-1.193c0-0.222-0.182-0.403-0.403-0.403s-0.403,0.182-0.403,0.403v1.193c-2.792-0.198-5.027-2.434-5.224-5.225h1.193c0.222,0,0.403-0.182,0.403-0.403S5.787,9.597,5.565,9.597H4.373C4.57,6.805,6.805,4.57,9.597,4.373v1.193c0,0.222,0.182,0.403,0.403,0.403s0.403-0.182,0.403-0.403V4.373c2.791,0.197,5.026,2.433,5.225,5.224h-1.193c-0.222,0-0.403,0.182-0.403,0.403S14.213,10.403,14.435,10.403"></path>
+          </svg>
+          <svg className="svg-icon batman">
+            <path className="svg-fill-primary" d="M86.578,41.004s-8.219,.295-8.607,7.685c0,0-9.824-4.379-11.571,7.874,0,0-8.653-5.402-14.586,9.744l-1.861-3.908-1.861,3.908c-5.933-15.146-14.586-9.744-14.586-9.744-1.752-12.253-11.571-7.874-11.571-7.874-.366-6.927-7.609-7.621-8.514-7.68,11.643,.442,15.904-7.314,15.904-7.314,3.015,13.499,14.097,14.603,14.097,14.603l2.43-9.335,1.461,4.379h5.28l1.457-4.379,2.43,9.335s11.087-1.103,14.102-14.603c0,0,4.282,7.798,15.996,7.31Z"></path>
+          </svg>
+        </div>
+        <div className="card-info">
+          <span className="card-title">{project.title}</span>
+          <p>{project.subtitle}</p>
+          <button onClick={() => onOpenModal(project)} className="challengeButton">More Info</button>
         </div>
       </div>
     </>
@@ -469,7 +271,7 @@ const ProjectDetailModal: React.FC<{
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             onClick={onClose}
-            className="fixed inset-0 bg-black/85 backdrop-blur-md"
+            className="fixed inset-0 bg-white/80 dark:bg-black/85 backdrop-blur-md"
           />
 
           <motion.div
@@ -477,22 +279,22 @@ const ProjectDetailModal: React.FC<{
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.95, y: 20 }}
             transition={{ duration: 0.3, ease: 'easeOut' }}
-            className="relative w-full max-w-3xl bg-zinc-950 border border-zinc-700/80 rounded-2xl shadow-2xl overflow-hidden z-10 my-8"
+            className="relative w-full max-w-3xl bg-white dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-700/80 rounded-2xl shadow-2xl overflow-hidden z-10 my-8"
           >
           {/* Modal Header */}
-          <div className="p-6 sm:p-8 bg-zinc-900/60 border-b border-zinc-800 flex items-start justify-between gap-4">
+          <div className="p-6 sm:p-8 bg-zinc-50 dark:bg-zinc-900/60 border-b border-zinc-200 dark:border-zinc-800 flex items-start justify-between gap-4">
             <div className="space-y-2">
-              <h3 className="text-2xl sm:text-3xl font-display font-extrabold text-white">
+              <h3 className="text-2xl sm:text-3xl font-display font-extrabold text-zinc-900 dark:text-white">
                 {project.title}
               </h3>
-              <p className="text-sm font-mono text-zinc-400">
+              <p className="text-sm font-mono text-zinc-600 dark:text-zinc-400">
                 {project.subtitle}
               </p>
             </div>
 
             <button
               onClick={onClose}
-              className="p-2 rounded-xl bg-zinc-800/80 hover:bg-zinc-700 text-zinc-400 hover:text-white transition-colors border border-zinc-700/60"
+              className="p-2 rounded-xl bg-zinc-100 dark:bg-zinc-800/80 hover:bg-zinc-200 dark:hover:bg-zinc-700 text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white transition-colors border border-zinc-200 dark:border-zinc-700/60"
               aria-label="Close dialog"
             >
               <X className="w-5 h-5" />
@@ -504,42 +306,42 @@ const ProjectDetailModal: React.FC<{
             {/* Key Metrics Grid */}
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
               {project.metrics.map((metric, i) => (
-                <div key={i} className="p-3 rounded-xl bg-zinc-900/50 border border-zinc-800 text-center space-y-1">
-                  <div className="text-xs font-mono text-zinc-400 uppercase">{metric.label}</div>
-                  <div className="text-base sm:text-lg font-bold font-mono text-cyan-400">{metric.value}</div>
+                <div key={i} className="p-3 rounded-xl bg-zinc-50 dark:bg-zinc-900/50 border border-zinc-200 dark:border-zinc-800 text-center space-y-1">
+                  <div className="text-xs font-mono text-zinc-500 dark:text-zinc-400 uppercase">{metric.label}</div>
+                  <div className="text-base sm:text-lg font-bold font-mono text-cyan-600 dark:text-cyan-400">{metric.value}</div>
                 </div>
               ))}
             </div>
 
             {/* Architecture Overview */}
             <div className="space-y-2">
-              <div className="text-xs font-mono font-semibold text-zinc-400 uppercase tracking-wider flex items-center gap-1.5">
-                <Layers className="w-4 h-4 text-cyan-400" />
+              <div className="text-xs font-mono font-semibold text-zinc-500 dark:text-zinc-400 uppercase tracking-wider flex items-center gap-1.5">
+                <Layers className="w-4 h-4 text-cyan-600 dark:text-cyan-400" />
                 <span>System Architecture Overview</span>
               </div>
-              <p className="text-zinc-300 text-sm leading-relaxed">
+              <p className="text-zinc-700 dark:text-zinc-300 text-sm leading-relaxed">
                 {project.description}
               </p>
             </div>
 
             {/* Problem & Engineering Solution */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div className="p-4 rounded-xl bg-rose-950/15 border border-rose-500/25 space-y-2">
-                <div className="flex items-center gap-2 text-xs font-mono font-bold text-rose-400 uppercase">
+              <div className="p-4 rounded-xl bg-rose-50 dark:bg-rose-950/15 border border-rose-200 dark:border-rose-500/25 space-y-2">
+                <div className="flex items-center gap-2 text-xs font-mono font-bold text-rose-600 dark:text-rose-400 uppercase">
                   <AlertTriangle className="w-4 h-4" />
                   <span>Engineering Challenge</span>
                 </div>
-                <p className="text-xs text-zinc-300 leading-relaxed">
+                <p className="text-xs text-zinc-700 dark:text-zinc-300 leading-relaxed">
                   {project.problem}
                 </p>
               </div>
 
-              <div className="p-4 rounded-xl bg-emerald-950/15 border border-emerald-500/25 space-y-2">
-                <div className="flex items-center gap-2 text-xs font-mono font-bold text-emerald-400 uppercase">
+              <div className="p-4 rounded-xl bg-emerald-50 dark:bg-emerald-950/15 border border-emerald-200 dark:border-emerald-500/25 space-y-2">
+                <div className="flex items-center gap-2 text-xs font-mono font-bold text-emerald-600 dark:text-emerald-400 uppercase">
                   <ShieldCheck className="w-4 h-4" />
                   <span>Architectural Solution</span>
                 </div>
-                <p className="text-xs text-zinc-300 leading-relaxed">
+                <p className="text-xs text-zinc-700 dark:text-zinc-300 leading-relaxed">
                   {project.solution}
                 </p>
               </div>
@@ -547,14 +349,14 @@ const ProjectDetailModal: React.FC<{
 
             {/* Key Technical Features */}
             <div className="space-y-3">
-              <div className="text-xs font-mono font-semibold text-zinc-400 uppercase tracking-wider flex items-center gap-1.5">
-                <Cpu className="w-4 h-4 text-cyan-400" />
+              <div className="text-xs font-mono font-semibold text-zinc-500 dark:text-zinc-400 uppercase tracking-wider flex items-center gap-1.5">
+                <Cpu className="w-4 h-4 text-cyan-600 dark:text-cyan-400" />
                 <span>Key Technical Capabilities</span>
               </div>
               <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
                 {project.features.map((feat, i) => (
-                  <li key={i} className="flex items-start gap-2.5 p-2 rounded-lg bg-zinc-900/60 border border-zinc-800 text-xs text-zinc-300">
-                    <Check className="w-3.5 h-3.5 text-cyan-400 flex-shrink-0 mt-0.5" />
+                  <li key={i} className="flex items-start gap-2.5 p-2 rounded-lg bg-zinc-50 dark:bg-zinc-900/60 border border-zinc-200 dark:border-zinc-800 text-xs text-zinc-700 dark:text-zinc-300">
+                    <Check className="w-3.5 h-3.5 text-cyan-600 dark:text-cyan-400 flex-shrink-0 mt-0.5" />
                     <span>{feat}</span>
                   </li>
                 ))}
@@ -562,21 +364,21 @@ const ProjectDetailModal: React.FC<{
             </div>
 
             {/* Engineering Contribution */}
-            <div className="p-4 rounded-xl bg-zinc-900/80 border border-zinc-700/80 text-xs text-zinc-300 space-y-1">
-              <span className="font-mono text-cyan-400 font-semibold uppercase tracking-wider block">Engineering Role & Contribution:</span>
+            <div className="p-4 rounded-xl bg-zinc-50 dark:bg-zinc-900/80 border border-zinc-200 dark:border-zinc-700/80 text-xs text-zinc-700 dark:text-zinc-300 space-y-1">
+              <span className="font-mono text-cyan-600 dark:text-cyan-400 font-semibold uppercase tracking-wider block">Engineering Role & Contribution:</span>
               <p className="leading-relaxed">{project.contribution}</p>
             </div>
 
             {/* Technology Tags */}
-            <div className="space-y-2 pt-2 border-t border-zinc-800/80">
-              <div className="text-xs font-mono font-semibold text-zinc-400 uppercase tracking-wider">
+            <div className="space-y-2 pt-2 border-t border-zinc-200 dark:border-zinc-800/80">
+              <div className="text-xs font-mono font-semibold text-zinc-500 dark:text-zinc-400 uppercase tracking-wider">
                 Technology Stack
               </div>
               <div className="flex flex-wrap gap-2">
                 {project.tags.map((tag) => (
                   <span
                     key={tag}
-                    className="px-3 py-1 text-xs font-mono rounded-lg bg-zinc-900 text-zinc-300 border border-zinc-700"
+                    className="px-3 py-1 text-xs font-mono rounded-lg bg-zinc-100 dark:bg-zinc-900 text-zinc-700 dark:text-zinc-300 border border-zinc-200 dark:border-zinc-700"
                   >
                     {tag}
                   </span>
@@ -586,13 +388,13 @@ const ProjectDetailModal: React.FC<{
           </div>
 
           {/* Modal Footer Actions */}
-          <div className="p-6 bg-zinc-900 border-t border-zinc-800 flex flex-col sm:flex-row items-center justify-between gap-3">
+          <div className="p-6 bg-zinc-50 dark:bg-zinc-900 border-t border-zinc-200 dark:border-zinc-800 flex flex-col sm:flex-row items-center justify-between gap-3">
             <div className="flex items-center gap-3 w-full sm:w-auto">
               <a
                 href={project.github}
                 target="_blank"
                 rel="noreferrer"
-                className="flex-1 sm:flex-initial inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-cyan-500 hover:bg-cyan-400 text-zinc-950 font-bold text-xs font-mono transition-all shadow-lg shadow-cyan-500/25 min-h-[44px]"
+                className="flex-1 sm:flex-none inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl bg-cyan-600 dark:bg-cyan-500 hover:bg-cyan-700 dark:hover:bg-cyan-400 text-xs font-bold font-mono text-white dark:text-zinc-950 transition-colors shadow-lg shadow-cyan-500/25"
               >
                 <Github className="w-4 h-4" />
                 <span>View on GitHub</span>
@@ -604,7 +406,7 @@ const ProjectDetailModal: React.FC<{
                   href={project.liveUrl}
                   target="_blank"
                   rel="noreferrer"
-                  className="flex-1 sm:flex-initial inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-emerald-500/15 hover:bg-emerald-500/25 text-emerald-400 border border-emerald-500/30 text-xs font-mono font-bold transition-all min-h-[44px]"
+                  className="flex-1 sm:flex-none inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl bg-emerald-950/30 hover:bg-emerald-900/40 text-emerald-600 dark:text-emerald-400 border border-emerald-500/30 text-xs font-bold font-mono transition-colors"
                 >
                   <ExternalLink className="w-4 h-4" />
                   <span>Live Demo</span>
@@ -615,16 +417,16 @@ const ProjectDetailModal: React.FC<{
             <button
               type="button"
               onClick={handleCopyClone}
-              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-zinc-800 hover:bg-zinc-700 border border-zinc-700 text-xs font-mono text-zinc-300 transition-all min-h-[44px]"
+              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-zinc-100 dark:bg-zinc-800 hover:bg-zinc-200 dark:hover:bg-zinc-700 border border-zinc-200 dark:border-zinc-700/80 text-xs font-mono text-zinc-600 dark:text-zinc-300 transition-colors"
             >
               {copied ? (
                 <>
-                  <Check className="w-4 h-4 text-emerald-400" />
-                  <span className="text-emerald-400">git clone Copied!</span>
+                  <Check className="w-4 h-4 text-emerald-500" />
+                  <span className="text-emerald-500">Copied!</span>
                 </>
               ) : (
                 <>
-                  <Copy className="w-4 h-4 text-zinc-400" />
+                  <Copy className="w-4 h-4" />
                   <span>Copy git clone</span>
                 </>
               )}
@@ -669,7 +471,9 @@ export const Projects: React.FC = () => {
       ],
       contribution: 'Built responsive interfaces in React.js and backend RESTful APIs powering lead-management workflows with MongoDB/MySQL schema design at aNquest Media.',
       github: 'https://github.com/ThakurAyushRaj',
-      category: 'Production / aNquest'
+      category: 'Production / aNquest',
+      colorFrom: '#1e3a8a',
+      colorTo: '#172554'
     },
     {
       id: 'emr-healthcare',
@@ -696,7 +500,9 @@ export const Projects: React.FC = () => {
       ],
       contribution: 'Built interfaces and backend RESTful APIs powering patient-record workflows for healthcare clients with MongoDB/MySQL schema design at aNquest Media.',
       github: 'https://github.com/ThakurAyushRaj',
-      category: 'Production / aNquest'
+      category: 'Production / aNquest',
+      colorFrom: '#134e4a',
+      colorTo: '#042f2e'
     },
     {
       id: 'in-app-calling-bridge',
@@ -723,7 +529,9 @@ export const Projects: React.FC = () => {
       ],
       contribution: 'Architected and built in-app direct calling and number-masked bridge calling integrations on Vobiz Voice API at aNquest Media.',
       github: 'https://github.com/ThakurAyushRaj',
-      category: 'Production / aNquest'
+      category: 'Production / aNquest',
+      colorFrom: '#4c1d95',
+      colorTo: '#2e1065'
     },
     {
       id: 'whatsapp-automation',
@@ -750,7 +558,9 @@ export const Projects: React.FC = () => {
       ],
       contribution: 'Engineered lead follow-up automation on Meta WhatsApp Business API via Facebook Developer App at aNquest Media.',
       github: 'https://github.com/ThakurAyushRaj',
-      category: 'Production / aNquest'
+      category: 'Production / aNquest',
+      colorFrom: '#064e3b',
+      colorTo: '#022c22'
     },
     {
       id: 'erp-website',
@@ -777,7 +587,9 @@ export const Projects: React.FC = () => {
       contribution: 'Sole author of the unified ERP platform architecture, frontend modules, and data interfaces.',
       github: 'https://github.com/ThakurAyushRaj/ERP-Website',
       liveUrl: 'https://github.com/ThakurAyushRaj/ERP-Website',
-      category: 'Full Stack'
+      category: 'Full Stack',
+      colorFrom: '#78350f',
+      colorTo: '#451a03'
     },
     {
       id: 'slack-bot',
@@ -803,7 +615,9 @@ export const Projects: React.FC = () => {
       ],
       contribution: 'Built Slack bot logic, Google Sheets OAuth 2.0 sync engine, and hours calculation pipelines.',
       github: 'https://github.com/ThakurAyushRaj/SLACK-ATTENDANCE',
-      category: 'Automation / Bot'
+      category: 'Automation / Bot',
+      colorFrom: '#0f766e',
+      colorTo: '#042f2e'
     },
     {
       id: 'attendance-tracker-app',
@@ -829,7 +643,9 @@ export const Projects: React.FC = () => {
       ],
       contribution: 'Developed the React Native mobile client, integrated Firebase auth/data stores, and configured FCM push delivery.',
       github: 'https://github.com/ThakurAyushRaj/Google-Auth_FCM-Notification_Admin-Pannel_Attendence-Tracker_App-React-Native-',
-      category: 'Mobile App'
+      category: 'Mobile App',
+      colorFrom: '#27272a',
+      colorTo: '#18181b'
     },
     {
       id: 'calendar-todo-app',
@@ -855,7 +671,9 @@ export const Projects: React.FC = () => {
       ],
       contribution: 'Built the mobile user interface, Google Calendar API synchronization, and notification handlers.',
       github: 'https://github.com/ThakurAyushRaj/Google_Calendar_To-Do_App-React_Native',
-      category: 'Mobile App'
+      category: 'Mobile App',
+      colorFrom: '#881337',
+      colorTo: '#4c0519'
     },
     {
       id: 'blog-website',
@@ -882,7 +700,9 @@ export const Projects: React.FC = () => {
       contribution: 'Designed and built the full frontend blog experience with React, TypeScript, and Tailwind CSS.',
       github: 'https://github.com/ThakurAyushRaj/Blog-Website',
       liveUrl: 'https://github.com/ThakurAyushRaj/Blog-Website',
-      category: 'Frontend'
+      category: 'Frontend',
+      colorFrom: '#0f172a',
+      colorTo: '#020617'
     }
   ];
 
@@ -891,7 +711,7 @@ export const Projects: React.FC = () => {
   const filteredProjects = activeFilter === 'All' ? caseStudies : caseStudies.filter(p => p.category === activeFilter);
 
   return (
-    <section id="projects" className="py-24 border-t border-zinc-900/80 relative">
+    <section id="projects" className="py-24 border-t border-zinc-200 dark:border-zinc-900/80 relative">
       {/* Background ambient radial light */}
       <div className="absolute top-1/2 right-0 w-[500px] h-[350px] bg-blue-600/10 blur-[140px] rounded-full pointer-events-none -z-10" />
       <div className="absolute bottom-10 left-10 w-[400px] h-[300px] bg-cyan-600/10 blur-[130px] rounded-full pointer-events-none -z-10" />
@@ -900,15 +720,15 @@ export const Projects: React.FC = () => {
         {/* Section Header */}
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
           <div className="space-y-4">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-cyan-500/10 border border-cyan-500/20 text-xs font-mono text-cyan-400 backdrop-blur-md">
-              <BookOpen className="w-4 h-4 text-cyan-400" />
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-cyan-500/10 border border-cyan-500/20 text-xs font-mono text-cyan-600 dark:text-cyan-400 backdrop-blur-md">
+              <BookOpen className="w-4 h-4 text-cyan-600 dark:text-cyan-400" />
               <span>3D Architecture Dossiers</span>
             </div>
-            <h2 className="text-4xl sm:text-5xl font-display font-extrabold text-white tracking-tight">
+            <h2 className="text-4xl sm:text-5xl font-display font-extrabold text-zinc-900 dark:text-white tracking-tight">
               Production & Case <span className="text-gradient-multi">Studies</span>
             </h2>
-            <p className="text-zinc-300 max-w-2xl text-base leading-relaxed">
-              Explore the professional software platforms built at <strong className="text-zinc-200 font-semibold">aNquest Media</strong> and independent engineering blueprints across full-stack, mobile, and telecommunication systems.
+            <p className="text-zinc-600 dark:text-zinc-300 max-w-2xl text-base leading-relaxed">
+              Explore the professional software platforms built at <strong className="text-zinc-900 dark:text-zinc-200 font-semibold">aNquest Media</strong> and independent engineering blueprints across full-stack, mobile, and telecommunication systems.
             </p>
           </div>
 
@@ -916,9 +736,9 @@ export const Projects: React.FC = () => {
             href="https://github.com/ThakurAyushRaj"
             target="_blank"
             rel="noreferrer"
-            className="inline-flex items-center gap-2.5 px-5 py-3 rounded-xl bg-zinc-900 hover:bg-zinc-800 border border-zinc-700/80 text-xs font-mono text-zinc-200 hover:text-white transition-all shadow-md hover:-translate-y-0.5 w-max min-h-[44px]"
+            className="inline-flex items-center gap-2.5 px-5 py-3 rounded-xl bg-white dark:bg-zinc-900 hover:bg-zinc-50 dark:hover:bg-zinc-800 border border-zinc-200 dark:border-zinc-700/80 text-xs font-mono text-zinc-700 dark:text-zinc-200 hover:text-zinc-900 dark:hover:text-white transition-all shadow-md hover:-translate-y-0.5 w-max min-h-[44px]"
           >
-            <Github className="w-4 h-4 text-cyan-400" />
+            <Github className="w-4 h-4 text-cyan-600 dark:text-cyan-400" />
             <span>View All GitHub Repos</span>
             <ArrowUpRight className="w-3.5 h-3.5" />
           </a>
@@ -934,8 +754,8 @@ export const Projects: React.FC = () => {
                 onClick={() => setActiveFilter(cat)}
                 className={`relative px-5 py-2.5 rounded-xl text-xs font-mono transition-all min-h-[40px] ${
                   isSelected
-                    ? 'bg-cyan-500 text-zinc-950 font-bold shadow-lg shadow-cyan-500/25 border border-cyan-400'
-                    : 'bg-zinc-900/80 hover:bg-zinc-800 text-zinc-400 hover:text-zinc-200 border border-zinc-800/80'
+                    ? 'bg-cyan-500 text-white dark:text-zinc-950 font-bold shadow-lg shadow-cyan-500/25 border border-cyan-400'
+                    : 'bg-white dark:bg-zinc-900/80 hover:bg-zinc-50 dark:hover:bg-zinc-800 text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-200 border border-zinc-200 dark:border-zinc-800/80'
                 }`}
               >
                 {cat}

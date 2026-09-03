@@ -19,9 +19,6 @@ const browserStyles = `
 .browser {
   width: 100%;
   height: auto;
-  background: rgba(18, 18, 22, 0.4);
-  backdrop-filter: blur(24px);
-  -webkit-backdrop-filter: blur(24px);
   border-radius: 7px;
   display: flex;
   flex-direction: column;
@@ -33,7 +30,6 @@ const browserStyles = `
 
 /* tabs-head */
 .tabs-head {
-  background-color: rgba(30, 30, 35, 0.6);
   height: 40px;
   display: flex;
   justify-content: space-between;
@@ -45,10 +41,6 @@ const browserStyles = `
   width: 150px;
   height: 34px;
   border-radius: 7px 7px 0 0;
-  background-color: rgba(60, 60, 65, 0.7);
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
-  border-left: 1px solid rgba(255, 255, 255, 0.05);
-  border-right: 1px solid rgba(255, 255, 255, 0.05);
   display: flex;
   gap: 5px;
   align-items: start;
@@ -58,7 +50,6 @@ const browserStyles = `
 }
 
 .tabs-head .tab-open .close-tab {
-  color: #fff;
   font-size: 10px;
   padding: 1px 5px;
   border-radius: 50%;
@@ -71,7 +62,6 @@ const browserStyles = `
 
 .tabs-head .tab-open .rounded-l {
   position: absolute;
-  background-color: rgba(60, 60, 65, 0.7);
   width: 20px;
   height: 24px;
   top: 0;
@@ -82,13 +72,11 @@ const browserStyles = `
 .tabs-head .tab-open .rounded-l .mask-round {
   width: 100%;
   height: 100%;
-  background-color: rgb(24, 24, 27); /* Solid fallback so it masks cleanly */
   border-radius: 0 0 0 7px;
 }
 
 .tabs-head .tab-open .rounded-r {
   position: absolute;
-  background-color: rgba(60, 60, 65, 0.7);
   width: 20px;
   height: 24px;
   top: 0;
@@ -100,12 +88,10 @@ const browserStyles = `
 .tabs-head .tab-open .rounded-r .mask-round {
   width: 100%;
   height: 100%;
-  background-color: rgb(24, 24, 27); /* Solid fallback so it masks cleanly */
   border-radius: 0 0 7px 0;
 }
 
 .tabs-head .tab-open span {
-  color: #fff;
   font-size: 11px;
   font-family: monospace;
   white-space: nowrap;
@@ -123,7 +109,6 @@ const browserStyles = `
   border: none;
   background-color: transparent;
   transition: 0.1s ease-out;
-  color: #fff;
   margin-bottom: 10px;
   display: flex;
   align-items: center;
@@ -144,23 +129,17 @@ const browserStyles = `
   top: 30px;
   width: 100%;
   height: 40px;
-  background-color: rgba(60, 60, 65, 0.7);
-  backdrop-filter: blur(10px);
   padding: 7px;
   display: flex;
   border-radius: 7px 7px 0 0;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
   gap: 5px;
   z-index: 10;
 }
 
 .head-browser input {
-  background-color: rgba(0, 0, 0, 0.3);
-  border: 1px solid rgba(255, 255, 255, 0.1);
   height: 100%;
   border-radius: 20px;
   outline: none;
-  color: #fff;
   padding: 0 15px;
   flex: 1;
   transition: 0.2s ease-in-out;
@@ -168,18 +147,8 @@ const browserStyles = `
   font-size: 12px;
 }
 
-.head-browser input:hover {
-  background-color: rgba(0, 0, 0, 0.5);
-}
-
 .head-browser input:focus {
-  border-color: rgba(59, 130, 246, 0.5);
-  background-color: rgba(0, 0, 0, 0.5);
   transition: none;
-}
-
-.head-browser input::placeholder {
-  color: #fff;
 }
 
 .head-browser button {
@@ -187,7 +156,6 @@ const browserStyles = `
   height: 25px;
   border: none;
   background-color: transparent;
-  color: #fff;
   border-radius: 50%;
   transition: 0.2s ease-in-out;
   display: flex;
@@ -199,7 +167,6 @@ const browserStyles = `
   background-color: #5d5d5d;
 }
 .head-browser .star {
-  color: #fff;
   position: absolute;
   right: 45px;
   top: 50%;
@@ -272,14 +239,14 @@ const ExperienceCard: React.FC<{ exp: ExperienceItem; idx: number }> = ({ exp, i
           transformStyle: "preserve-3d",
         }}
       >
-        <div className="browser">
+        <div className="browser glass-panel">
           {/* Top Tabs Bar */}
-          <div className="tabs-head">
-            <div className="tab-open">
-              <span>{exp.company}.com</span>
-              <button className="close-tab">x</button>
-              <div className="rounded-l"><div className="mask-round"></div></div>
-              <div className="rounded-r"><div className="mask-round"></div></div>
+          <div className="tabs-head border-b border-black/10 dark:border-zinc-800/50">
+            <div className="tab-open bg-white/70 dark:bg-zinc-800/80 border-t border-x border-black/10 dark:border-zinc-700/50 text-black dark:text-white">
+              <span className="text-black dark:text-white">{exp.company}.com</span>
+              <button className="close-tab text-black/60 hover:text-black dark:text-zinc-600 dark:hover:text-white">x</button>
+              <div className="rounded-l bg-white/70 dark:bg-zinc-800/80"><div className="mask-round bg-black/5 dark:bg-zinc-900/40"></div></div>
+              <div className="rounded-r bg-white/70 dark:bg-zinc-800/80"><div className="mask-round bg-black/5 dark:bg-zinc-900/40"></div></div>
             </div>
             <div className="window-opt">
               <button className="window-minimize">-</button>
@@ -289,12 +256,17 @@ const ExperienceCard: React.FC<{ exp: ExperienceItem; idx: number }> = ({ exp, i
           </div>
 
           {/* Browser Navigation Bar */}
-          <div className="head-browser">
-            <button>←</button>
-            <button>→</button>
-            <button>↻</button>
-            <input type="text" readOnly value={browserUrl} />
-            <div className="star">☆</div>
+          <div className="head-browser bg-white/70 dark:bg-zinc-800/80 border-b border-black/10 dark:border-zinc-700/50 backdrop-blur-md">
+            <button className="text-black/60 hover:text-black dark:text-zinc-600 dark:hover:text-white">←</button>
+            <button className="text-black/60 hover:text-black dark:text-zinc-600 dark:hover:text-white">→</button>
+            <button className="text-black/60 hover:text-black dark:text-zinc-600 dark:hover:text-white">↻</button>
+            <input 
+              type="text" 
+              readOnly 
+              value={browserUrl} 
+              className="bg-white/50 dark:bg-black/30 border border-black/10 dark:border-white/10 text-black dark:text-white focus:border-black/30"
+            />
+            <div className="star text-black/40 dark:text-zinc-400">☆</div>
           </div>
 
           {/* Browser Content Area (The actual experience data) */}
@@ -311,38 +283,38 @@ const ExperienceCard: React.FC<{ exp: ExperienceItem; idx: number }> = ({ exp, i
                     {exp.type}
                   </span>
                 </div>
-                <h3 className="text-xl font-bold text-white mt-2 font-display">{exp.role}</h3>
-                <div className="flex flex-wrap items-center gap-3 text-zinc-400 text-sm mt-1">
-                  <div className="flex items-center gap-1.5 font-semibold text-zinc-300">
-                    <Building2 className="w-4 h-4 text-blue-400" />
+                <h3 className="text-xl font-bold text-black dark:text-white mt-2 font-display">{exp.role}</h3>
+                <div className="flex flex-wrap items-center gap-3 text-black/80 dark:text-zinc-400 text-sm mt-1">
+                  <div className="flex items-center gap-1.5 font-semibold text-black dark:text-zinc-300">
+                    <Building2 className="w-4 h-4 text-black/70 dark:text-blue-400" />
                     <span>{exp.company}</span>
                   </div>
                   <span>•</span>
-                  <div className="flex items-center gap-1.5 text-zinc-400 text-xs font-mono">
-                    <MapPin className="w-3.5 h-3.5 text-zinc-500" />
+                  <div className="flex items-center gap-1.5 text-black/70 dark:text-zinc-400 text-xs font-mono">
+                    <MapPin className="w-3.5 h-3.5 text-black/50 dark:text-zinc-500" />
                     <span>{exp.location}</span>
                   </div>
                 </div>
               </div>
 
-              <div className="flex items-center gap-2 text-xs font-mono text-zinc-400 bg-zinc-900 px-3 py-1.5 rounded-lg border border-zinc-700 w-max">
-                <Calendar className="w-3.5 h-3.5 text-blue-400" />
+              <div className="flex items-center gap-2 text-xs font-mono text-black dark:text-zinc-400 bg-black/5 dark:bg-zinc-900 px-3 py-1.5 rounded-lg border border-black/10 dark:border-zinc-700 w-max">
+                <Calendar className="w-3.5 h-3.5 text-black/70 dark:text-blue-400" />
                 <span>{exp.period}</span>
               </div>
             </div>
 
             {/* Role Description */}
-            <p className="text-zinc-300 text-sm leading-relaxed">
+            <p className="text-black/80 dark:text-zinc-300 text-sm leading-relaxed font-medium">
               {exp.description}
             </p>
 
             {/* Key Achievements Bullet points */}
             <div className="space-y-3">
-              <h4 className="text-xs font-mono font-semibold text-zinc-400 uppercase tracking-wider">Key Achievements</h4>
+              <h4 className="text-xs font-mono font-semibold text-black/60 dark:text-zinc-400 uppercase tracking-wider">Key Achievements</h4>
               <ul className="grid grid-cols-1 gap-2.5">
                 {exp.achievements.map((item, itemIdx) => (
-                  <li key={itemIdx} className="flex items-start gap-3 text-sm text-zinc-300">
-                    <CheckCircle2 className="w-4 h-4 text-blue-400 flex-shrink-0 mt-0.5" />
+                  <li key={itemIdx} className="flex items-start gap-3 text-sm text-black/80 dark:text-zinc-300 font-medium">
+                    <CheckCircle2 className="w-4 h-4 text-black/50 dark:text-blue-400 flex-shrink-0 mt-0.5" />
                     <span className="leading-snug">{item}</span>
                   </li>
                 ))}
@@ -354,7 +326,7 @@ const ExperienceCard: React.FC<{ exp: ExperienceItem; idx: number }> = ({ exp, i
               {exp.skills.map((skill) => (
                 <span
                   key={skill}
-                  className="px-2.5 py-1 text-xs font-mono rounded-md bg-zinc-800 text-zinc-200 border border-zinc-700"
+                  className="px-2.5 py-1 text-xs font-mono rounded-md bg-black/5 dark:bg-zinc-800 text-black dark:text-zinc-200 border border-black/10 dark:border-zinc-700"
                 >
                   {skill}
                 </span>

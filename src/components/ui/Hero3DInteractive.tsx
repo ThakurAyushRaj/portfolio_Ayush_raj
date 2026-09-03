@@ -157,9 +157,10 @@ export const Hero3DInteractive: React.FC = () => {
   }, []);
 
   return (
-    <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden select-none bg-black">
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_rgba(0,240,255,0.05)_0%,_rgba(0,0,0,0)_60%)] pointer-events-none" />
-      <div ref={containerRef} className="absolute inset-0 w-full h-full block will-change-transform" />
+    <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden select-none">
+      <div ref={containerRef} className="absolute inset-0" />
+      {/* Fallback ambient glow matching the lighting */}
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(0,240,255,0.05)_0%,transparent_100%)] mix-blend-screen" />
     </div>
   );
 };

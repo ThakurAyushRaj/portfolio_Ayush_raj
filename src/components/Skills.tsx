@@ -160,29 +160,29 @@ export const Skills: React.FC = () => {
   };
 
   return (
-    <section id="skills" className="py-24 border-t border-zinc-900/80 relative">
+    <section id="skills" className="py-24 border-t border-zinc-200 dark:border-zinc-900/80 relative">
       {/* Background radial highlight */}
       <div className="absolute top-1/3 left-0 w-[400px] h-[250px] bg-emerald-600/10 blur-[120px] rounded-full pointer-events-none -z-10" />
 
       <div className="space-y-12">
         {/* Header */}
         <div className="space-y-4">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-amber-500/10 border border-amber-500/20 text-xs font-mono text-amber-400 backdrop-blur-md">
-            <Sparkles className="w-4 h-4 text-amber-400" />
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-amber-500/10 border border-amber-500/20 text-xs font-mono text-amber-600 dark:text-amber-400 backdrop-blur-md">
+            <Sparkles className="w-4 h-4 text-amber-600 dark:text-amber-400" />
             <span>Technical Stack Architecture</span>
           </div>
-          <h2 className="text-4xl sm:text-5xl font-display font-extrabold text-white tracking-tight">
+          <h2 className="text-4xl sm:text-5xl font-display font-extrabold text-zinc-900 dark:text-white tracking-tight">
             Tech Stack & <span className="text-gradient-emerald">Capabilities</span>
           </h2>
-          <p className="text-zinc-300 max-w-2xl text-base leading-relaxed">
+          <p className="text-zinc-600 dark:text-zinc-300 max-w-2xl text-base leading-relaxed">
             Click any 3D glass icon below or select a category tab to dynamically filter technical skills. Hover or tap cards to flip them.
           </p>
         </div>
 
         {/* React Bits GlassIcons Interactive Hub */}
-        <div className="p-6 sm:p-8 rounded-2xl glass-panel border border-zinc-800/80 shadow-2xl relative overflow-visible">
+        <div className="p-6 sm:p-8 rounded-2xl bg-zinc-50/50 dark:glass-panel border border-zinc-200 dark:border-zinc-800/80 shadow-2xl relative overflow-visible">
           <div className="flex items-center justify-between px-2 mb-2">
-            <span className="text-xs font-mono font-semibold text-zinc-400 uppercase tracking-wider">
+            <span className="text-xs font-mono font-semibold text-zinc-500 dark:text-zinc-400 uppercase tracking-wider">
               Interactive 3D Glass Stack Hub
             </span>
             <span className="text-[10px] font-mono text-blue-400 bg-blue-500/10 px-2 py-0.5 rounded border border-blue-500/20">
@@ -232,7 +232,7 @@ export const Skills: React.FC = () => {
                       <div className={`flip-card-front flex flex-col justify-between ${cat.topBorderClass}`}>
                         <div className="space-y-4">
                           <div className="flex items-center justify-between">
-                            <div className="p-3 rounded-2xl bg-zinc-950 border border-zinc-800/80 shadow-md">
+                            <div className="p-3 rounded-2xl bg-white dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800/80 shadow-md">
                               {cat.icon}
                             </div>
                             <span className={`text-[10px] font-mono font-semibold px-2.5 py-1 rounded-full border ${cat.badgeBg}`}>
@@ -241,20 +241,20 @@ export const Skills: React.FC = () => {
                           </div>
 
                           {/* HEADING */}
-                          <h3 className="title text-left text-white font-display pt-2 text-xl font-bold tracking-tight">
+                          <h3 className="title text-left text-zinc-900 dark:text-white font-display pt-2 text-xl font-bold tracking-tight">
                             {cat.title}
                           </h3>
 
                           {/* SUB-HEADING / DESCRIPTION */}
-                          <p className="text-xs text-zinc-300 leading-relaxed pt-1">
+                          <p className="text-xs text-zinc-600 dark:text-zinc-300 leading-relaxed pt-1">
                             {cat.description}
                           </p>
                         </div>
 
                         {/* CARD FRONT FOOTER HINT */}
-                        <div className="pt-4 border-t border-zinc-800/80 flex items-center justify-between text-xs font-mono text-zinc-400">
-                          <span className="flex items-center gap-1.5 text-blue-400 font-medium">
-                            <RotateCw className="w-3.5 h-3.5 animate-spin-slow text-blue-400" />
+                        <div className="pt-4 border-t border-zinc-200 dark:border-zinc-800/80 flex items-center justify-between text-xs font-mono text-zinc-500 dark:text-zinc-400">
+                          <span className="flex items-center gap-1.5 text-blue-600 dark:text-blue-400 font-medium">
+                            <RotateCw className="w-3.5 h-3.5 animate-spin-slow text-blue-600 dark:text-blue-400" />
                             Hover for Tech Stack
                           </span>
                           <span className="text-[10px] text-zinc-500 font-mono">3D Flip ➔</span>
@@ -265,12 +265,12 @@ export const Skills: React.FC = () => {
                       <div className={`flip-card-back ${cat.topBorderClass}`}>
                         <div className="space-y-3 flex-1 flex flex-col justify-between overflow-hidden">
                           <div>
-                            <div className="flex items-center justify-between mb-3 border-b border-zinc-800/80 pb-2.5">
+                            <div className="flex items-center justify-between mb-3 border-b border-zinc-200 dark:border-zinc-800/80 pb-2.5">
                               <div className="flex items-center gap-2.5">
-                                <div className="p-2 rounded-xl bg-zinc-950 border border-zinc-800 shadow-sm">
+                                <div className="p-2 rounded-xl bg-white dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 shadow-sm">
                                   {cat.icon}
                                 </div>
-                                <h3 className="text-sm font-bold text-white font-display">
+                                <h3 className="text-sm font-bold text-zinc-900 dark:text-white font-display">
                                   {cat.title}
                                 </h3>
                               </div>
@@ -280,17 +280,21 @@ export const Skills: React.FC = () => {
                             </div>
 
                             {/* DETAILED TECH STACK LIST - EXACT SAME STYLE FOR ALL ITEMS */}
-                            <div className="space-y-2 max-h-[250px] overflow-y-auto pr-1">
-                              {cat.skills.map((skill) => (
-                                <div
-                                  key={skill.name}
-                                  className="flex items-center justify-between p-2.5 rounded-xl border border-blue-500/60 bg-zinc-950 text-white font-semibold text-[11px] font-mono transition-all shadow-sm hover:border-blue-400"
+                            <div className="space-y-1.5 overflow-y-auto max-h-[160px] pr-1 pb-1">
+                              {cat.skills.map((skill, i) => (
+                                <div 
+                                  key={i}
+                                  className={`flex items-center justify-between p-2 rounded-lg text-xs font-mono transition-colors ${
+                                    skill.highlight 
+                                      ? 'bg-zinc-100 dark:bg-zinc-800/80 text-zinc-900 dark:text-zinc-100 border border-zinc-200 dark:border-zinc-700/50' 
+                                      : 'text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-300'
+                                  }`}
                                 >
-                                  <div className="flex items-center gap-2.5">
-                                    <CheckCircle2 className="w-3.5 h-3.5 text-blue-400 shrink-0" />
+                                  <div className="flex items-center gap-2">
+                                    <CheckCircle2 className="w-3.5 h-3.5 text-blue-500 dark:text-blue-400 shrink-0" />
                                     <span>{skill.name}</span>
                                   </div>
-                                  <span className="text-[9px] text-zinc-300 bg-zinc-900 px-2.5 py-0.5 rounded-md border border-zinc-700 font-sans font-medium">
+                                  <span className="text-[9px] text-zinc-600 dark:text-zinc-300 bg-white dark:bg-zinc-900 px-2.5 py-0.5 rounded-md border border-zinc-200 dark:border-zinc-700 font-sans font-medium">
                                     {skill.level}
                                   </span>
                                 </div>
@@ -299,9 +303,9 @@ export const Skills: React.FC = () => {
                           </div>
 
                           {/* CARD BACK FOOTER */}
-                          <div className="pt-2 border-t border-zinc-800/80 flex items-center justify-between text-xs font-mono text-zinc-400">
-                            <span className="flex items-center gap-1.5 text-emerald-400 font-medium">
-                              <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400" />
+                          <div className="pt-2 border-t border-zinc-200 dark:border-zinc-800/80 flex items-center justify-between text-xs font-mono text-zinc-500 dark:text-zinc-400">
+                            <span className="flex items-center gap-1.5 text-emerald-600 dark:text-emerald-400 font-medium">
+                              <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400" />
                               Tech Stack Revealed
                             </span>
                             <span className="text-[10px] text-zinc-500 font-mono">Flip Back ↩</span>
