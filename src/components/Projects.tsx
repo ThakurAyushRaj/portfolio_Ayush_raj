@@ -672,6 +672,7 @@ export const Projects: React.FC = () => {
       ],
       contribution: 'Developed the React Native mobile client, integrated Firebase auth/data stores, and configured FCM push delivery.',
       github: 'https://github.com/ThakurAyushRaj/Google-Auth_FCM-Notification_Admin-Pannel_Attendence-Tracker_App-React-Native-',
+      cloneUrl: 'https://github.com/ThakurAyushRaj/Google-Auth_FCM-Notification_Admin-Pannel_Attendence-Tracker_App-React-Native-.git',
       category: 'Mobile App',
       colorFrom: '#27272a',
       colorTo: '#18181b'
