@@ -643,6 +643,7 @@ export const Projects: React.FC = () => {
       ],
       contribution: 'Built Slack bot logic, Google Sheets OAuth 2.0 sync engine, and hours calculation pipelines.',
       github: 'https://github.com/ThakurAyushRaj/SLACK-ATTENDANCE',
+      cloneUrl: 'https://github.com/ThakurAyushRaj/SLACK-ATTENDANCE.git',
       category: 'Automation / Bot',
       colorFrom: '#0f766e',
       colorTo: '#042f2e'
