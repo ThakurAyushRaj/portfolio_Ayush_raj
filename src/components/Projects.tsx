@@ -730,7 +730,8 @@ export const Projects: React.FC = () => {
       ],
       contribution: 'Designed and built the full frontend blog experience with React, TypeScript, and Tailwind CSS.',
       github: 'https://github.com/ThakurAyushRaj/Blog-Website',
-      liveUrl: 'https://github.com/ThakurAyushRaj/Blog-Website',
+      cloneUrl: 'https://github.com/ThakurAyushRaj/Blog-Website.git',
+      liveUrl: 'https://blog-website-murex-sigma.vercel.app/',
       category: 'Frontend',
       colorFrom: '#0f172a',
       colorTo: '#020617'
