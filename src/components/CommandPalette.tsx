@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef, useId } from 'react';
-import { Search, ArrowRight, Github, Mail, FileText, Code2, User, Briefcase, Sparkles, X } from 'lucide-react';
+import { Search, ArrowRight, Github, Mail, FileText, Code2, User, Briefcase, Sparkles, X, ExternalLink } from 'lucide-react';
 
 interface CommandItem {
   id: string;
@@ -49,7 +49,8 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({ isOpen, onClose 
     { id: 'proj-emr', title: 'EMR Healthcare (aNquest Media)', category: 'Projects', icon: <Code2 className="w-4 h-4 text-emerald-400" />, action: () => handleScrollTo('projects'), keywords: 'anquest emr healthcare patient react node' },
     { id: 'proj-vobiz', title: 'In-App & Bridge Calling (Vobiz API)', category: 'Projects', icon: <Code2 className="w-4 h-4 text-cyan-400" />, action: () => handleScrollTo('projects'), keywords: 'vobiz voice calling bridge masked telephony' },
     { id: 'proj-whatsapp', title: 'WhatsApp Lead Automation', category: 'Projects', icon: <Code2 className="w-4 h-4 text-purple-400" />, action: () => handleScrollTo('projects'), keywords: 'meta whatsapp business api automation leads' },
-    { id: 'proj-erp', title: 'ERP Website System', category: 'Projects', icon: <Code2 className="w-4 h-4 text-blue-400" />, action: () => handleOpenLink('https://github.com/ThakurAyushRaj'), keywords: 'mern typescript dashboard finance hr' },
+    { id: 'proj-erp', title: 'ERP Website System (Live App)', category: 'Projects', icon: <ExternalLink className="w-4 h-4 text-emerald-400" />, action: () => handleOpenLink('https://erp-website-gamma.vercel.app/'), keywords: 'mern typescript dashboard finance hr erp website live' },
+    { id: 'proj-erp-gh', title: 'ERP Website System (GitHub Repo)', category: 'Projects', icon: <Github className="w-4 h-4 text-zinc-300" />, action: () => handleOpenLink('https://github.com/ThakurAyushRaj/ERP-Website'), keywords: 'erp website github repo code clone' },
     { id: 'proj-slack', title: 'Slack Attendance Bot', category: 'Projects', icon: <Code2 className="w-4 h-4 text-emerald-400" />, action: () => handleOpenLink('https://github.com/ThakurAyushRaj'), keywords: 'node express slack api sheets' },
     { id: 'proj-attendance', title: 'Attendance Tracker Mobile App', category: 'Projects', icon: <Code2 className="w-4 h-4 text-purple-400" />, action: () => handleOpenLink('https://github.com/ThakurAyushRaj'), keywords: 'react native firebase fcm notifications' },
     { id: 'proj-blog', title: 'Animated Blog Website', category: 'Projects', icon: <Code2 className="w-4 h-4 text-amber-400" />, action: () => handleOpenLink('https://github.com/ThakurAyushRaj'), keywords: 'react tailwind framer motion' },

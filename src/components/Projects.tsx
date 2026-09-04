@@ -19,6 +19,7 @@ interface ProjectCaseStudy {
   metrics: { label: string; value: string }[];
   contribution: string;
   github: string;
+  cloneUrl?: string;
   liveUrl?: string;
   category: 'Production / aNquest' | 'Full Stack' | 'Automation / Bot' | 'Mobile App' | 'Frontend';
   colorFrom: string;
@@ -226,7 +227,31 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, onOpenModal }) => {
         <div className="card-info">
           <span className="card-title">{project.title}</span>
           <p>{project.subtitle}</p>
-          <button onClick={() => onOpenModal(project)} className="challengeButton">More Info</button>
+          <div className="flex items-center gap-2 mt-1">
+            <button onClick={() => onOpenModal(project)} className="challengeButton">More Info</button>
+            {project.liveUrl && (
+              <a
+                href={project.liveUrl}
+                target="_blank"
+                rel="noreferrer"
+                className="p-2 rounded-xl bg-white/10 hover:bg-emerald-500/30 text-white hover:text-emerald-300 border border-white/20 hover:border-emerald-500/40 transition-colors inline-flex items-center justify-center"
+                title="Live Demo"
+                onClick={(e) => e.stopPropagation()}
+              >
+                <ExternalLink className="w-3.5 h-3.5" />
+              </a>
+            )}
+            <a
+              href={project.github}
+              target="_blank"
+              rel="noreferrer"
+              className="p-2 rounded-xl bg-white/10 hover:bg-white/20 text-white border border-white/20 transition-colors inline-flex items-center justify-center"
+              title="GitHub Repository"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <Github className="w-3.5 h-3.5" />
+            </a>
+          </div>
         </div>
       </div>
     </>
@@ -258,7 +283,8 @@ const ProjectDetailModal: React.FC<{
 
   const handleCopyClone = () => {
     if (!project) return;
-    navigator.clipboard.writeText(`git clone ${project.github}`);
+    const targetClone = project.cloneUrl || (project.github.endsWith('.git') ? project.github : `${project.github}.git`);
+    navigator.clipboard.writeText(`git clone ${targetClone}`);
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
   };
@@ -587,7 +613,8 @@ export const Projects: React.FC = () => {
       ],
       contribution: 'Sole author of the unified ERP platform architecture, frontend modules, and data interfaces.',
       github: 'https://github.com/ThakurAyushRaj/ERP-Website',
-      liveUrl: 'https://github.com/ThakurAyushRaj/ERP-Website',
+      cloneUrl: 'https://github.com/ThakurAyushRaj/ERP-Website.git',
+      liveUrl: 'https://erp-website-gamma.vercel.app/',
       category: 'Full Stack',
       colorFrom: '#78350f',
       colorTo: '#451a03'
