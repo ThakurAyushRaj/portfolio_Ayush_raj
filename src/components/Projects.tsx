@@ -700,7 +700,8 @@ export const Projects: React.FC = () => {
         'Clean, accessible mobile interface optimized for single-handed use'
       ],
       contribution: 'Built the mobile user interface, Google Calendar API synchronization, and notification handlers.',
-      github: 'https://github.com/ThakurAyushRaj/Google_Calendar_To-Do_App-React_Native',
+      github: 'https://github.com/ThakurAyushRaj/Google-Calender-Intregeted-To-Do-App-React-Native-',
+      cloneUrl: 'https://github.com/ThakurAyushRaj/Google-Calender-Intregeted-To-Do-App-React-Native-.git',
       category: 'Mobile App',
       colorFrom: '#881337',
       colorTo: '#4c0519'
