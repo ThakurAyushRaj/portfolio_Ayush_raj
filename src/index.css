@@ -2,6 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Shared seasonal palette; final surface overrides live at the end. */
+
 @layer base {
   :root {
     color-scheme: dark;
@@ -159,6 +161,131 @@ section[id] {
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
   }
+}
+
+/* ------------------------------------------------------------------
+   Classic portfolio theme
+   A restrained ink, navy, and brass palette that suits a professional
+   software-engineering portfolio while retaining the existing components.
+   ------------------------------------------------------------------ */
+:root {
+  --classic-ink: #090d16;
+  --classic-navy: #111b2e;
+  --classic-slate: #1b2940;
+  --classic-blue: #78aec3;
+  --classic-brass: #d2aa69;
+  --classic-paper: #edf1f4;
+}
+
+.dark body,
+body:has(.dark) {
+  background-color: var(--classic-ink);
+  background-image:
+    radial-gradient(ellipse at 14% -8%, rgba(72, 119, 148, 0.14), transparent 33rem),
+    radial-gradient(ellipse at 88% 9%, rgba(210, 170, 105, 0.08), transparent 29rem),
+    linear-gradient(180deg, #090d16 0%, #0c1320 48%, #090d16 100%);
+}
+
+.dark .glass-panel {
+  background: linear-gradient(145deg, rgba(21, 32, 50, 0.78), rgba(10, 16, 28, 0.72));
+  border-color: rgba(169, 192, 205, 0.14);
+  box-shadow: 0 18px 42px -32px rgba(0, 0, 0, 0.95);
+}
+
+.dark .glass-panel:hover {
+  border-color: rgba(120, 174, 195, 0.5);
+  box-shadow: 0 20px 38px -24px rgba(35, 82, 109, 0.45);
+}
+
+.dark .wrap {
+  --color-primary: #111b2e;
+  --color-secondary: #d2aa69;
+  --muted: #2a3b56;
+  border-color: rgba(210, 170, 105, 0.2);
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.28);
+}
+
+.dark .label {
+  color: #a8b7c7;
+}
+
+.dark .wrap input[class*="rd-"]:checked + label {
+  color: #fffaf0;
+}
+
+.dark .fanned-glass-container .glass-card {
+  background:
+    linear-gradient(145deg, rgba(33, 48, 70, 0.93), rgba(10, 16, 28, 0.95));
+  border-color: rgba(163, 187, 201, 0.18);
+  box-shadow:
+    inset 0 1px 1px rgba(255, 255, 255, 0.12),
+    0 18px 36px rgba(0, 0, 0, 0.4),
+    0 0 16px var(--glow-color, rgba(120, 174, 195, 0.1));
+}
+
+.dark .fanned-glass-container .glass-card .glass-footer {
+  background: rgba(7, 13, 23, 0.42);
+  border-top-color: rgba(210, 170, 105, 0.14);
+}
+
+.dark .resume-3d-card {
+  background: linear-gradient(135deg, #253d59 0%, #172a42 52%, #0e1b2e 100%);
+  border-color: #314f6e;
+  box-shadow: -12px 20px 30px -10px rgba(0, 0, 0, 0.65), 0 0 22px rgba(120, 174, 195, 0.16);
+}
+
+.dark .resume-3d-card:hover {
+  border-color: var(--classic-brass);
+  box-shadow: 0 18px 38px -12px rgba(0, 0, 0, 0.72), 0 0 24px rgba(210, 170, 105, 0.16);
+}
+
+.dark .resume-3d-btn {
+  background: #f5efe3;
+  color: #24384f;
+}
+
+.dark .resume-3d-btn:hover {
+  background: #d2aa69;
+  color: #101927;
+  border-color: #f4d39b;
+  box-shadow: 0 0 16px rgba(210, 170, 105, 0.28);
+}
+
+.dark .glitch-card {
+  --bg-color: #101a2a;
+  --primary-color: #8cc0d1;
+  --secondary-color: #d2aa69;
+  border-color: rgba(140, 192, 209, 0.24);
+  box-shadow: 0 18px 36px rgba(0, 0, 0, 0.28), inset 0 0 22px rgba(0, 0, 0, 0.35);
+}
+
+.dark .glitch-card-header {
+  background-color: rgba(8, 13, 23, 0.6);
+  border-bottom-color: rgba(210, 170, 105, 0.18);
+}
+
+.dark .text-gradient-blue,
+.dark .text-gradient-emerald,
+.dark .text-gradient-multi {
+  background: linear-gradient(120deg, #f7f3ea 0%, #b9d8e4 50%, #d2aa69 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.dark ::-webkit-scrollbar-track {
+  background: #090d16;
+}
+
+.dark ::-webkit-scrollbar-thumb {
+  background: #29415a;
+}
+
+.dark ::-webkit-scrollbar-thumb:hover {
+  background: #d2aa69;
+}
+
+.dark :focus-visible {
+  outline-color: var(--classic-brass);
 }
 
 /* -------------------------------------------------------------
@@ -2953,6 +3080,218 @@ html.light .fanned-glass-container .glass-card:hover {
   }
 }
 
+/* ------------------------------------------------------------------
+   Responsive UX enhancement layer
+   Keeps the existing component system intact while improving reading,
+   touch interaction, and layout balance across viewports.
+   ------------------------------------------------------------------ */
+html {
+  text-size-adjust: 100%;
+}
+
+body {
+  min-width: 320px;
+  line-height: 1.5;
+  text-rendering: optimizeLegibility;
+}
+
+main {
+  isolation: isolate;
+}
+
+section[id] {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 900px;
+}
+
+button,
+a,
+input,
+textarea {
+  touch-action: manipulation;
+}
+
+input,
+textarea {
+  font-size: max(16px, 1em);
+}
+
+.glass-panel,
+.browser,
+.glitch-card,
+.fanned-glass-container .glass-card,
+.flip-card-front,
+.flip-card-back {
+  -webkit-backdrop-filter: blur(14px);
+  backdrop-filter: blur(14px);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .glass-panel:hover {
+    transform: translateY(-3px);
+  }
+
+  .fanned-glass-container .glass-card:hover {
+    transform: translateY(-10px) scale(1.025) !important;
+  }
+}
+
+@media (max-width: 1024px) {
+  .fanned-glass-container {
+    gap: 0.5rem;
+  }
+
+  .fanned-glass-container .glass-card {
+    max-width: 310px;
+    padding: 1.15rem;
+  }
+
+  .browser-content {
+    padding: 1.25rem;
+  }
+}
+
+@media (max-width: 767px) {
+  body {
+    background-image:
+      radial-gradient(circle at 30% -8%, rgba(6, 182, 212, 0.12), transparent 20rem),
+      radial-gradient(circle at 100% 16%, rgba(99, 102, 241, 0.1), transparent 18rem);
+  }
+
+  section[id] {
+    scroll-margin-top: 5.5rem;
+  }
+
+  section[id]:not(#hero) {
+    padding-top: 4.5rem !important;
+    padding-bottom: 4.5rem !important;
+  }
+
+  #hero {
+    min-height: auto;
+    padding-top: 7.5rem !important;
+    padding-bottom: 4.5rem !important;
+  }
+
+  #hero h1 {
+    font-size: clamp(2.45rem, 12vw, 3.65rem);
+    line-height: 1.04;
+  }
+
+  #hero .max-w-3xl {
+    gap: 1.5rem;
+  }
+
+  header > div {
+    gap: 0.45rem;
+  }
+
+  header a[aria-label="Ayush Raj Portfolio Home"] {
+    gap: 0.45rem;
+  }
+
+  header a[aria-label="Ayush Raj Portfolio Home"] img {
+    width: 2.6rem;
+    height: 2.6rem;
+  }
+
+  header a[aria-label="Ayush Raj Portfolio Home"] span {
+    font-size: 1.1rem;
+  }
+
+  .resume-3d-wrapper,
+  .resume-3d-card {
+    width: min(100%, 19rem);
+  }
+
+  .resume-3d-card {
+    height: 12.5rem;
+  }
+
+  .browser-content {
+    padding: 1rem;
+  }
+
+  .tabs-head {
+    padding-left: 0.75rem;
+  }
+
+  .tabs-head .tab-open {
+    width: min(9rem, 55vw);
+  }
+
+  .head-browser {
+    padding: 0.35rem;
+  }
+
+  .head-browser button:nth-of-type(2),
+  .head-browser button:nth-of-type(3),
+  .head-browser .star {
+    display: none;
+  }
+
+  .flip-card {
+    height: 23rem;
+  }
+
+  .flip-card-front,
+  .flip-card-back {
+    padding: 1.25rem;
+  }
+
+  .fanned-glass-container .glass-card {
+    min-height: 13.5rem;
+    padding: 1.2rem;
+  }
+
+  .glitch-card-body {
+    padding: 1.25rem;
+  }
+
+  .glitch-card-header {
+    padding: 0.8rem 1rem;
+  }
+
+  footer {
+    padding-top: 3.5rem !important;
+    padding-bottom: 2rem !important;
+  }
+}
+
+@media (max-width: 420px) {
+  main {
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
+  }
+
+  #hero .flex.flex-wrap.items-center.gap-4 {
+    gap: 0.75rem;
+  }
+
+  #hero .flex.flex-wrap.items-center.gap-4 > a {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .glass-card .text-\[9px\],
+  .fanned-glass-container .glass-card .text-\[9px\] {
+    font-size: 0.58rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  section[id] {
+    content-visibility: visible;
+  }
+
+  .glass-panel,
+  .fanned-glass-container .glass-card,
+  .resume-3d-card,
+  .flip-card-inner {
+    transform: none !important;
+  }
+}
+
 
 
 
@@ -3285,3 +3624,88 @@ html.light .fanned-glass-container .glass-card:hover {
     opacity: 0;
   }
 }
+
+/* Finishing palette for both reading environments. */
+html.dark { color-scheme: dark; }
+html.light { color-scheme: light; }
+html.dark body {
+  background: #131210;
+  color: #f2ede5;
+}
+html.dark #root > div {
+  background: radial-gradient(ellipse at 15% 0%, rgba(169,130,79,.07), transparent 36rem), #131210;
+}
+html.dark header { background-color: rgba(19,18,16,.92); }
+html.dark footer { background-color: #181613; }
+html.dark .wrap {
+  --color-primary: #211e19;
+  --color-secondary: #c5a476;
+  --muted: #40392e;
+  border-color: #494034;
+}
+html.dark .glass-panel,
+html.dark .browser,
+html.dark .fanned-glass-container .glass-card,
+html.dark .flip-card-front,
+html.dark .flip-card-back {
+  background: linear-gradient(145deg, #29251f, #1b1916);
+  border-color: rgba(197,164,118,.22);
+  box-shadow: 0 14px 32px -18px #000;
+}
+html.dark .glass-panel:hover { border-color: #8e7553; box-shadow: 0 16px 34px -22px #000; }
+html.dark .svgContainer { background-color: rgba(40,36,30,.94); }
+html.dark .BG { box-shadow: 0 0 10px rgba(197,164,118,.12); }
+html.dark .resume-3d-card {
+  background: linear-gradient(135deg, #504331, #29231c 65%, #1d1a15);
+  border-color: #796448;
+}
+html.dark .resume-3d-btn { color: #352b1f; }
+html.dark .glitch-card {
+  --bg-color: #211e19;
+  --primary-color: #d0b48b;
+  --secondary-color: #a88d67;
+  background: #211e19;
+  border-color: #514535;
+}
+html.dark .glitch-card-header { background: #191713; border-color: #514535; }
+html.dark .fanned-glass-container .glass-card .glass-footer { background: #1a1713; }
+html.dark .text-gradient-blue,
+html.dark .text-gradient-emerald,
+html.dark .text-gradient-multi {
+  background-image: linear-gradient(120deg, #f4eee4, #d4b88f, #b3956b);
+}
+html.dark ::selection { background: #645137; color: #fff8ef; }
+html.dark ::-webkit-scrollbar-track { background: #131210; }
+html.dark ::-webkit-scrollbar-thumb { background: #655741; }
+
+html.light, html.light body, html.light #root > div,
+html.light .light {
+  background-color: #f6f1e7 !important;
+  color: #302e29 !important;
+}
+html.light body { background-image: none; }
+html.light header { background-color: rgba(246,241,231,.94) !important; }
+html.light footer { background-color: #eee6d7 !important; }
+html.light .glass-panel,
+html.light .browser,
+html.light .flip-card-front,
+html.light .flip-card-back,
+html.light .glitch-card,
+html.light .fanned-glass-container .glass-card {
+  background: linear-gradient(145deg, #fffdf7, #f0e8da) !important;
+  border-color: #d9cdb9 !important;
+  box-shadow: 0 14px 32px -22px rgba(83,65,35,.25) !important;
+}
+html.light .wrap { --color-primary: #eee5d6; --color-secondary: #906e38; --muted: #d8c9ae; }
+html.light .svgContainer,
+html.light .glitch-card-header { background-color: #eee5d6 !important; border-color: #d9cdb9 !important; }
+html.light .text-white,
+html.light .text-zinc-100,
+html.light .text-zinc-200 { color: #302e29 !important; }
+html.light .text-zinc-300,
+html.light .text-zinc-400 { color: #635c50 !important; }
+html.light .glitch-card { --primary-color: #426579; --text-color: #302e29; }
+html.light input, html.light textarea { color: #302e29; }
+html.light ::selection { background: #d8c49f; color: #302e29; }
+html.light ::-webkit-scrollbar-track { background: #f6f1e7; }
+html.light ::-webkit-scrollbar-thumb { background: #c6b697; }
