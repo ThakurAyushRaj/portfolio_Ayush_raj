@@ -347,15 +347,16 @@ export const Experience: React.FC = () => {
       company: 'aNquest Media',
       location: 'Greater Noida, India',
       period: 'May 2026 – Present',
-      description: 'Develop full-stack features for aNquest Media’s CRM and EMR products, building high-responsiveness user interfaces in React.js and robust scalable backend microservices with Node.js and Express.js.',
+      description: 'Develop full-stack features for aNquest Media’s CRM, EMR, and HRMS products, building interfaces in React.js and backend services with Node.js and Express.js.',
       achievements: [
         'Architected in-app direct calling connecting agents straight to lead phone numbers via Vobiz’s Voice API.',
         'Engineered number-masked bridge calling (agent calls in, Vobiz calls back, then bridges to lead securely) ensuring total privacy for both sides.',
         'Automated lead follow-ups and broadcast notifications on WhatsApp, built on Meta’s WhatsApp Business API via a Facebook Developer App.',
         'Designed and optimized MongoDB & MySQL schemas powering real-time lead pipelines and healthcare patient record workflows.',
+        'Contribute to the full-stack development of aNquest Media’s Human Resource Management System (HRMS).',
         'Collaborate within an agile engineering team through code reviews, sprint planning, and daily stand-ups.'
       ],
-      skills: ['React.js', 'Node.js', 'Express.js', 'MongoDB', 'MySQL', 'TypeScript', 'Vobiz Voice API', 'WhatsApp Business API', 'RESTful APIs', 'AWS']
+      skills: ['React.js', 'Node.js', 'Express.js', 'MongoDB', 'MySQL', 'TypeScript', 'HRMS', 'Vobiz Voice API', 'WhatsApp Business API', 'RESTful APIs', 'AWS']
     },
     {
       role: 'Software Development Engineer Intern',
@@ -387,7 +388,7 @@ export const Experience: React.FC = () => {
               Professional <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-indigo-400">Experience</span>
             </h2>
             <p className="text-zinc-400 text-base leading-relaxed">
-              Software Development Engineer at <strong className="text-zinc-200 font-semibold">aNquest Media</strong> building production CRM & EMR systems, telecommunication APIs, and mobile applications.
+              Software Development Engineer at <strong className="text-zinc-200 font-semibold">aNquest Media</strong> building production CRM, EMR, and HRMS products alongside communication API integrations.
             </p>
           </div>
 
@@ -427,13 +428,13 @@ export const Experience: React.FC = () => {
                 </span>
               </div>
               <div>
-                <h3 className="text-base font-bold font-display text-white tracking-tight">CRM & EMR Systems</h3>
+                <h3 className="text-base font-bold font-display text-white tracking-tight">CRM, EMR & HRMS Systems</h3>
                 <p className="text-[11px] text-zinc-300 leading-relaxed mt-1">
-                  Specialized in enterprise data pipelines, patient/client management workflows, and secure medical/customer record systems at aNquest Media.
+                  Building full-stack products for lead, patient, and HR workflows at aNquest Media.
                 </p>
               </div>
               <div className="flex flex-wrap gap-1 pt-1">
-                {['MongoDB', 'MySQL', 'REST APIs', 'Vobiz Voice'].map((tag) => (
+                {['CRM', 'EMR', 'HRMS', 'REST APIs'].map((tag) => (
                   <span key={tag} className="text-[9px] font-mono px-2 py-0.5 rounded bg-zinc-900/80 border border-white/10 text-zinc-300">
                     {tag}
                   </span>

@@ -480,15 +480,15 @@ export const Projects: React.FC = () => {
       subtitle: 'Lead Management & Deal Pipeline Architecture',
       company: 'aNquest Media',
       isProduction: true,
-      description: 'Production CRM platform developed for real estate brokerages and property enterprises. Features comprehensive lead pipelines, automated status transitions, multi-agent assignment workflows, and dual MySQL/MongoDB storage.',
+      description: 'Professional CRM platform for real-estate workflows, with lead-management APIs and MongoDB/MySQL schema design.',
       problem: 'Handling hundreds of incoming property leads across diverse ad campaigns with manual tracking caused missed client interactions, duplicate contacts, and delayed agent follow-ups.',
-      solution: 'Engineered high-throughput RESTful APIs with Express.js and structured MongoDB/MySQL schemas for rapid lead querying, status filtering, stage automation, and multi-agent assignment.',
+      solution: 'Built RESTful lead-management APIs with Express.js and structured MongoDB/MySQL schemas to support real-estate workflows.',
       tags: ['React.js', 'Node.js', 'Express.js', 'MongoDB', 'MySQL', 'RESTful APIs'],
       metrics: [
-        { label: 'Workflows', value: 'Lead Matrix' },
-        { label: 'Latency', value: '<40ms' },
-        { label: 'DB Schemas', value: 'Mongo + MySQL' },
-        { label: 'Status', value: 'Production' }
+        { label: 'Domain', value: 'Real Estate' },
+        { label: 'Frontend', value: 'React.js' },
+        { label: 'Backend', value: 'Node.js' },
+        { label: 'Data', value: 'MongoDB + MySQL' }
       ],
       features: [
         'Dynamic lead capture, status tagging, and automated agent assignment',
@@ -509,15 +509,15 @@ export const Projects: React.FC = () => {
       subtitle: 'Clinical Patient Record & Medical Management System',
       company: 'aNquest Media',
       isProduction: true,
-      description: 'Production Electronic Medical Record (EMR) platform developed for clinical healthcare clients to manage patient profiles, medical histories, diagnosis notes, and appointment schedules with utmost security.',
-      problem: 'Healthcare providers required strict data integrity, fast retrieval of longitudinal patient treatment histories, and HIPAA-ready access controls without interface latency.',
-      solution: 'Architected robust RESTful API endpoints and indexed MongoDB/MySQL patient record databases with role-based medical permissions and instantaneous search.',
+      description: 'Professional EMR platform for healthcare workflows, with patient-record APIs and MongoDB/MySQL schema design.',
+      problem: 'Healthcare workflows require reliable patient-record management with clear, structured data handling.',
+      solution: 'Built RESTful APIs and structured MongoDB/MySQL schemas to support healthcare patient-record workflows.',
       tags: ['React.js', 'Node.js', 'Express.js', 'MongoDB', 'MySQL', 'Healthcare EMR'],
       metrics: [
-        { label: 'Records', value: 'Clinical Data' },
-        { label: 'Query Speed', value: 'Sub-35ms' },
-        { label: 'Security', value: 'Role-Based' },
-        { label: 'Uptime', value: '99.99%' }
+        { label: 'Domain', value: 'Healthcare' },
+        { label: 'Frontend', value: 'React.js' },
+        { label: 'Backend', value: 'Node.js' },
+        { label: 'Data', value: 'MongoDB + MySQL' }
       ],
       features: [
         'Secure patient profile management, vital signs recording, and history tracking',
@@ -532,8 +532,36 @@ export const Projects: React.FC = () => {
       colorTo: '#042f2e'
     },
     {
-      id: 'in-app-calling-bridge',
+      id: 'hrms',
       indexNum: '03',
+      title: 'HRMS',
+      subtitle: 'Human Resource Management System',
+      company: 'aNquest Media',
+      isProduction: true,
+      description: 'Professional Human Resource Management System currently being developed at aNquest Media to streamline HR workflows.',
+      problem: 'HR workflows benefit from a dedicated full-stack product instead of disconnected, manual processes.',
+      solution: 'Contribute to the HRMS product’s full-stack development with React.js, Node.js, and Express.js.',
+      tags: ['React.js', 'Node.js', 'Express.js', 'HRMS'],
+      metrics: [
+        { label: 'Domain', value: 'Human Resources' },
+        { label: 'Frontend', value: 'React.js' },
+        { label: 'Backend', value: 'Node.js' },
+        { label: 'Status', value: 'In Development' }
+      ],
+      features: [
+        'Full-stack product development for HR workflows',
+        'React.js interfaces and Node.js services',
+        'Built as part of aNquest Media’s product suite'
+      ],
+      contribution: 'Contributing to the full-stack development of aNquest Media’s HRMS product.',
+      github: 'https://github.com/ThakurAyushRaj',
+      category: 'Production / aNquest',
+      colorFrom: '#312e81',
+      colorTo: '#172554'
+    },
+    {
+      id: 'in-app-calling-bridge',
+      indexNum: '04',
       title: 'In-App & Bridge Calling',
       subtitle: 'Number-Masked Telephony & Direct Voice System',
       company: 'aNquest Media',
@@ -543,10 +571,10 @@ export const Projects: React.FC = () => {
       solution: 'Built two voice engines: direct in-app WebRTC dialing and masked bridge calling where Vobiz calls the agent back and bridges to the lead so neither party sees the real phone number.',
       tags: ['Vobiz Voice API', 'Node.js', 'Express.js', 'Webhooks', 'Telephony', 'REST APIs'],
       metrics: [
-        { label: 'Voice API', value: 'Vobiz Telephony' },
-        { label: 'Privacy', value: '100% Masked' },
-        { label: 'Call Delay', value: '<800ms' },
-        { label: 'Bridge Mode', value: 'Dual-Leg' }
+        { label: 'Voice API', value: 'Vobiz' },
+        { label: 'Mode', value: 'Direct + Bridge' },
+        { label: 'Privacy', value: 'Number Masking' },
+        { label: 'Backend', value: 'Node.js + Express' }
       ],
       features: [
         'In-app direct click-to-call straight to lead phone numbers via Vobiz API',
@@ -562,7 +590,7 @@ export const Projects: React.FC = () => {
     },
     {
       id: 'whatsapp-automation',
-      indexNum: '04',
+      indexNum: '05',
       title: 'WhatsApp Automation',
       subtitle: 'Meta WhatsApp Business API Lead Engagement Engine',
       company: 'aNquest Media',
@@ -573,9 +601,9 @@ export const Projects: React.FC = () => {
       tags: ['Meta WhatsApp API', 'Facebook Dev App', 'Node.js', 'Express', 'Webhooks'],
       metrics: [
         { label: 'Delivery', value: 'Meta WhatsApp' },
-        { label: 'Open Rate', value: '98%' },
         { label: 'Automation', value: 'Real-Time' },
-        { label: 'Engine', value: 'Webhook Sync' }
+        { label: 'Engine', value: 'Webhook Sync' },
+        { label: 'Integration', value: 'Facebook Dev App' }
       ],
       features: [
         'Automated lead follow-ups and broadcast notifications on WhatsApp',
@@ -591,7 +619,7 @@ export const Projects: React.FC = () => {
     },
     {
       id: 'erp-website',
-      indexNum: '05',
+      indexNum: '06',
       title: 'ERP Website System',
       subtitle: 'Unified Finance, HR, Inventory & Sales Dashboard',
       isProduction: false,
@@ -601,9 +629,9 @@ export const Projects: React.FC = () => {
       tags: ['React', 'TypeScript', 'Node.js', 'Tailwind CSS', 'ERP Architecture'],
       metrics: [
         { label: 'Modules', value: 'Finance • HR • Sales' },
-        { label: 'Latency', value: '38ms' },
         { label: 'Type Safety', value: 'TypeScript' },
-        { label: 'Uptime', value: '99.98%' }
+        { label: 'Frontend', value: 'React' },
+        { label: 'Styling', value: 'Tailwind CSS' }
       ],
       features: [
         'Unified ERP platform replacing manual spreadsheet-based workflows',
@@ -621,7 +649,7 @@ export const Projects: React.FC = () => {
     },
     {
       id: 'slack-bot',
-      indexNum: '06',
+      indexNum: '07',
       title: 'Slack Attendance Bot',
       subtitle: 'Entry/Exit Tracking & Google Sheets API Automation',
       isProduction: false,
@@ -630,9 +658,9 @@ export const Projects: React.FC = () => {
       solution: 'Engineered a Node.js/Express bot integrated with Slack Webhooks and Google Sheets API via OAuth 2.0 to automate time tracking directly from team channels.',
       tags: ['Node.js', 'Express', 'Google Sheets API', 'Slack API', 'Webhooks'],
       metrics: [
-        { label: 'Response', value: '<200ms' },
-        { label: 'Sync Rate', value: '100% Live' },
-        { label: 'Time Saved', value: '5 hrs/wk' },
+        { label: 'Platform', value: 'Slack' },
+        { label: 'Backend', value: 'Node.js + Express' },
+        { label: 'Integration', value: 'Google Sheets API' },
         { label: 'Status', value: 'Automated' }
       ],
       features: [
@@ -650,7 +678,7 @@ export const Projects: React.FC = () => {
     },
     {
       id: 'attendance-tracker-app',
-      indexNum: '07',
+      indexNum: '08',
       title: 'Attendance Tracker App',
       subtitle: 'Cross-Platform React Native Mobile App with FCM',
       isProduction: false,
@@ -660,9 +688,9 @@ export const Projects: React.FC = () => {
       tags: ['React Native', 'TypeScript', 'Firebase Auth', 'FCM Push', 'Firestore'],
       metrics: [
         { label: 'Platforms', value: 'iOS + Android' },
-        { label: 'Push Delay', value: '<1.2s' },
         { label: 'Auth', value: 'Google OAuth' },
-        { label: 'Crash Rate', value: '0.00%' }
+        { label: 'Data', value: 'Firebase' },
+        { label: 'Alerts', value: 'FCM Notifications' }
       ],
       features: [
         'Google OAuth 2.0 single sign-on authentication flow',
@@ -679,7 +707,7 @@ export const Projects: React.FC = () => {
     },
     {
       id: 'calendar-todo-app',
-      indexNum: '08',
+      indexNum: '09',
       title: 'Google Calendar To-Do App',
       subtitle: 'Mobile Task Manager with Calendar Synchronization',
       isProduction: false,
@@ -691,7 +719,7 @@ export const Projects: React.FC = () => {
         { label: 'Sync', value: 'Google Calendar' },
         { label: 'Updates', value: 'Real-Time' },
         { label: 'Platform', value: 'React Native' },
-        { label: 'Speed', value: '60 FPS' }
+        { label: 'Reminders', value: 'Scheduled' }
       ],
       features: [
         'Task manager with bi-directional Google Calendar synchronization',
@@ -708,7 +736,7 @@ export const Projects: React.FC = () => {
     },
     {
       id: 'blog-website',
-      indexNum: '09',
+      indexNum: '10',
       title: 'Animated Blog Website',
       subtitle: 'Modern Immersive Reading Platform with Framer Motion',
       isProduction: false,
@@ -718,7 +746,7 @@ export const Projects: React.FC = () => {
       tags: ['React', 'TypeScript', 'Tailwind CSS', 'Framer Motion', 'UI/UX'],
       metrics: [
         { label: 'Transitions', value: 'Framer Motion' },
-        { label: 'Performance', value: '100 Lighthouse' },
+        { label: 'Motion', value: 'Framer Motion' },
         { label: 'Styling', value: 'Tailwind CSS' },
         { label: 'UX', value: 'Immersive' }
       ],

@@ -5,8 +5,8 @@ import { SocialLinksGroup } from '@/components/ui/SocialButton';
 
 const ROLES = [
   'Software Development Engineer @ aNquest Media',
-  'Full Stack MERN & MEAN Developer',
-  'CRM & EMR System Architect',
+  'Full-Stack MERN & MEAN Developer',
+  'CRM, EMR & HRMS Product Engineer',
   'React Native & Flutter Mobile Engineer',
   'Voice & WhatsApp API Integration Specialist',
 ];
@@ -93,7 +93,7 @@ export const Hero: React.FC = () => {
             transition={{ duration: 0.6, delay: 0.3 }}
             className="text-zinc-300 text-base sm:text-lg leading-relaxed max-w-xl font-sans"
           >
-            Full-stack developer experienced in building and shipping production features across the MERN and MEAN stacks, React Native, and Flutter. Currently at <span className="text-white font-semibold">aNquest Media</span>, developing CRM and EMR products that power lead and patient workflows for real estate and healthcare clients. Strong foundation in REST API design and both relational and NoSQL databases, with an expanding focus on AWS and system design.
+            Full-stack developer experienced in building and shipping production features across the MERN and MEAN stacks, React Native, and Flutter. Currently at <span className="text-white font-semibold">aNquest Media</span>, developing CRM, EMR, and HRMS products for real estate, healthcare, and HR workflows. Strong foundation in REST API design and relational and NoSQL databases, with an expanding focus on AWS and system design.
           </motion.p>
 
           {/* Core Tech Stack Chips from CV */}
@@ -108,6 +108,7 @@ export const Hero: React.FC = () => {
               { name: 'Node.js & Express', cls: 'border-emerald-500/30 text-emerald-300 bg-emerald-950/40' },
               { name: 'TypeScript', cls: 'border-purple-500/30 text-purple-300 bg-purple-950/40' },
               { name: 'MongoDB & MySQL', cls: 'border-amber-500/30 text-amber-300 bg-amber-950/40' },
+              { name: 'CRM, EMR & HRMS', cls: 'border-indigo-500/30 text-indigo-300 bg-indigo-950/40' },
               { name: 'React Native & Flutter', cls: 'border-pink-500/30 text-pink-300 bg-pink-950/40' },
               { name: 'Voice & WhatsApp APIs', cls: 'border-blue-500/30 text-blue-300 bg-blue-950/40' },
               { name: 'AWS & Cloud', cls: 'border-teal-500/30 text-teal-300 bg-teal-950/40' },

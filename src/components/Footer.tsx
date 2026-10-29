@@ -31,7 +31,7 @@ export const Footer: React.FC = () => {
               </span>
             </div>
             <p className="text-zinc-300 text-sm max-w-sm leading-relaxed">
-              Software Development Engineer & Full Stack Developer building production MERN platforms, React Native mobile solutions, and enterprise CRM/EMR tools.
+              Software Development Engineer and full-stack developer building MERN platforms, React Native solutions, and CRM, EMR, and HRMS products.
             </p>
             <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-zinc-900/90 border border-zinc-800 text-xs font-mono text-zinc-300 shadow-sm backdrop-blur-md">
               <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
