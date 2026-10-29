@@ -3674,6 +3674,21 @@ html.dark .text-gradient-emerald,
 html.dark .text-gradient-multi {
   background-image: linear-gradient(120deg, #f4eee4, #d4b88f, #b3956b);
 }
+html.dark #hero h1 span {
+  background-image: linear-gradient(110deg, #f4e8d4, #c2a16c) !important;
+}
+html.dark #hero .text-cyan-300 { color: #d4bd97; }
+html.dark #hero a[href="#projects"] {
+  background: linear-gradient(120deg, #b89a6c, #d6ba8e);
+  color: #201b14;
+  box-shadow: 0 8px 24px -12px rgba(202,169,113,.45);
+}
+html.dark #hero a[download] { background: #24211c; border-color: #66553c; }
+html.dark .glass-panel { background: linear-gradient(145deg, #25231f, #191815); }
+html.dark header { border-bottom-color: rgba(197,164,118,.15); }
+html.dark section[id] { border-top-color: rgba(197,164,118,.14); }
+html.dark .text-zinc-300 { color: #d3ccc0; }
+html.dark .text-zinc-400 { color: #aaa294; }
 html.dark ::selection { background: #645137; color: #fff8ef; }
 html.dark ::-webkit-scrollbar-track { background: #131210; }
 html.dark ::-webkit-scrollbar-thumb { background: #655741; }
