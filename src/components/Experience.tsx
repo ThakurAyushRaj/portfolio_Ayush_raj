@@ -396,7 +396,7 @@ export const Experience: React.FC = () => {
             <ResumeCard
               nameMonogram="AR"
               role="Software Development Engineer"
-              resumeUrl="https://github.com/ThakurAyushRaj"
+              resumeUrl="/Ayush_Raj_CV.docx"
             />
           </div>
         </div>

@@ -35,6 +35,16 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({ isOpen, onClose 
     window.open(url, '_blank', 'noopener,noreferrer');
   };
 
+  const handleDownloadResume = () => {
+    onClose();
+    const link = document.createElement('a');
+    link.href = '/Ayush_Raj_CV.docx';
+    link.download = 'Ayush_Raj_CV.docx';
+    document.body.appendChild(link);
+    link.click();
+    link.remove();
+  };
+
   const items: CommandItem[] = [
     // Navigation
     { id: 'nav-hero', title: 'Go to Top / Hero', category: 'Navigation', icon: <User className="w-4 h-4 text-blue-400" />, action: () => handleScrollTo('hero'), keywords: 'home top intro bio' },
@@ -61,7 +71,7 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({ isOpen, onClose 
     { id: 'link-github', title: 'GitHub Profile (ThakurAyushRaj)', category: 'Links & Actions', icon: <Github className="w-4 h-4 text-zinc-300" />, action: () => handleOpenLink('https://github.com/ThakurAyushRaj'), keywords: 'code repos thakurayushraj' },
     { id: 'link-linkedin', title: 'LinkedIn Profile (Ayush Raj)', category: 'Links & Actions', icon: <User className="w-4 h-4 text-blue-400" />, action: () => handleOpenLink('https://www.linkedin.com/in/ayush-raj-8348a9260'), keywords: 'linkedin network profile' },
     { id: 'link-email', title: 'Send Direct Email (rajayush226@gmail.com)', category: 'Links & Actions', icon: <Mail className="w-4 h-4 text-cyan-400" />, action: () => handleOpenLink('mailto:rajayush226@gmail.com'), keywords: 'mail message contact rajayush226' },
-    { id: 'link-resume', title: 'Download Official Resume / CV', category: 'Links & Actions', icon: <FileText className="w-4 h-4 text-emerald-400" />, action: () => handleScrollTo('experience'), keywords: 'cv resume pdf download' },
+    { id: 'link-resume', title: 'Download Official Resume / CV', category: 'Links & Actions', icon: <FileText className="w-4 h-4 text-emerald-400" />, action: handleDownloadResume, keywords: 'cv resume docx download' },
   ];
 
   const filteredItems = items.filter(item => {

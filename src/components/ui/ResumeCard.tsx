@@ -11,7 +11,7 @@ export const ResumeCard: React.FC<ResumeCardProps> = ({
   nameMonogram = 'AR',
   role = 'Full Stack Developer & SDE',
   className = '',
-  resumeUrl = 'https://github.com/ThakurAyushRaj'
+  resumeUrl = '/Ayush_Raj_CV.docx'
 }) => {
   return (
     <div className={`resume-3d-wrapper inline-block ${className}`}>
@@ -30,9 +30,7 @@ export const ResumeCard: React.FC<ResumeCardProps> = ({
         {/* Download Action Button */}
         <a
           href={resumeUrl}
-          target="_blank"
-          rel="noreferrer"
-          download="Ayush_Raj_Resume.pdf"
+          download="Ayush_Raj_CV.docx"
           className="resume-3d-btn"
           title="Download Ayush Raj's Resume / CV"
         >

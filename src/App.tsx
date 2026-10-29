@@ -51,7 +51,7 @@ function App() {
   useEffect(() => {
     const timer = setTimeout(() => {
       setAppLoaded(true);
-    }, 3000);
+    }, 900);
     return () => clearTimeout(timer);
   }, []);
 
@@ -83,7 +83,7 @@ function App() {
       />
 
       {/* Main Page Layout Container */}
-      <main className="max-w-6xl mx-auto px-4 md:px-6 relative z-10 space-y-12">
+      <main className="max-w-7xl mx-auto px-4 md:px-6 relative z-10 space-y-10 md:space-y-14">
         <Hero />
         <Experience />
         <Projects />

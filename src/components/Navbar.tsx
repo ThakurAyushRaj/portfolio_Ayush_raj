@@ -247,9 +247,8 @@ export const Navbar: React.FC<NavbarProps> = ({
 
           {/* Uiverse Emerald Rotating Download/Resume Button (Gaurang7717) */}
           <a
-            href="https://github.com/ThakurAyushRaj"
-            target="_blank"
-            rel="noreferrer"
+            href="/Ayush_Raj_CV.docx"
+            download="Ayush_Raj_CV.docx"
             className="Btn hidden sm:inline-flex"
             aria-label="Download Official Resume"
             title="Download Official Resume"
@@ -317,9 +316,8 @@ export const Navbar: React.FC<NavbarProps> = ({
               Open Command Menu (⌘K)
             </button>
             <a
-              href="https://github.com/ThakurAyushRaj"
-              target="_blank"
-              rel="noreferrer"
+              href="/Ayush_Raj_CV.docx"
+              download="Ayush_Raj_CV.docx"
               className="w-full flex items-center justify-center gap-2 px-4 py-3 rounded-lg bg-cyan-500 hover:bg-cyan-400 text-zinc-950 text-sm font-bold min-h-[44px]"
             >
               <FileText className="w-4 h-4" />

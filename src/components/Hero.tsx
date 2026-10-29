@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ArrowRight, Code2 } from 'lucide-react';
+import { ArrowRight, Code2, Download } from 'lucide-react';
 import { SocialLinksGroup } from '@/components/ui/SocialButton';
 
 const ROLES = [
@@ -135,6 +135,15 @@ export const Hero: React.FC = () => {
             >
               <span>Explore Case Studies</span>
               <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+            </a>
+
+            <a
+              href="/Ayush_Raj_CV.docx"
+              download="Ayush_Raj_CV.docx"
+              className="inline-flex items-center gap-2.5 px-6 py-3.5 rounded-xl border border-zinc-700/90 bg-zinc-900/70 hover:bg-zinc-800 text-zinc-100 font-semibold text-sm transition-all hover:-translate-y-0.5 hover:border-cyan-400/60 shadow-lg shadow-black/10 min-h-[46px]"
+            >
+              <Download className="w-4 h-4 text-cyan-300" />
+              <span>Download CV</span>
             </a>
 
             {/* Social Buttons */}

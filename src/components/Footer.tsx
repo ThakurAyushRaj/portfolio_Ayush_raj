@@ -81,9 +81,8 @@ export const Footer: React.FC = () => {
               </a>
 
               <a
-                href="https://github.com/ThakurAyushRaj"
-                target="_blank"
-                rel="noreferrer"
+                href="/Ayush_Raj_CV.docx"
+                download="Ayush_Raj_CV.docx"
                 className="inline-flex items-center gap-3 p-3 rounded-xl bg-zinc-900/60 hover:bg-zinc-900 border border-zinc-800/80 text-xs font-mono text-zinc-300 hover:text-white transition-all w-max min-h-[42px]"
               >
                 <FileText className="w-4 h-4 text-emerald-400" />
